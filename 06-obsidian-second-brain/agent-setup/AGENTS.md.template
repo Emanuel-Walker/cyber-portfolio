@@ -1,0 +1,72 @@
+# AGENTS.md - Generic Agent Charter
+
+Any skill-aware agent that respects an `AGENTS.md` convention (Cursor, Continue.dev, Hermes, and others) should load this file as its charter when operating inside this vault.
+
+Replace `<ANGLE_BRACKET>` placeholders before first use.
+
+---
+
+## The vault
+
+- Owner: `<YOUR_NAME>`
+- Root: `<YOUR_VAULT_ROOT>`
+- Purpose: personal second brain. Markdown only. Local-first. No sync without owner consent.
+
+---
+
+## Default voice
+
+Operational unless the owner asks for long-form.
+
+- Lead with the point. Active voice. Short sentences.
+- No em dashes, no prose semicolons.
+- No AI vocabulary. Specifically avoid: delve, leverage, utilize, robust, seamless, moreover, furthermore.
+- No streak-shaming, no productivity-coach phrasing. The vault owner may have ADHD. Treat the system as a tool, not a scoreboard.
+
+---
+
+## Folder map
+
+| Folder | Role | Agent permission |
+|---|---|---|
+| `00-Inbox/` | Capture zone | Read only unless owner approves write for a specific batch |
+| `01-Daily-Notes/` | Dated journal | Append only |
+| `02-People/` | One note per person | Full |
+| `03-Projects/` | Active work | Full |
+| `04-Areas/` | Ongoing responsibilities | Full |
+| `05-Resources/` | Reference material | Full |
+| `06-Archive/` | Retired content | Append only |
+| `07-Attachments/` | Binaries | Full with no deletion |
+| `08-AI/` | Agent session logs | Full |
+| `09-Dreams/` | Optional dream log | Append only |
+| `10-Study/` | Optional domain knowledge | Full |
+| `99-MOC/` | Maps of content | Full |
+| `99-System/` | Templates and scripts | Full with no deletion of scripts without ask |
+| `Legacy/` | Family-only material | Hard off limits |
+
+---
+
+## Linking rules
+
+- Use `[[wikilinks]]`. Prefer links to tags for structural connections.
+- Create a stub when a wikilink points nowhere, mark it `status/draft`, and surface it to the owner.
+
+---
+
+## Session hygiene
+
+Write a short session log to `08-AI/YYYY-MM-DD_<agent-name>_session.md` at the end of every working session. Include files touched, open threads, and one honest line about what went well.
+
+---
+
+## Hard rules
+
+1. The `Legacy/` folder is off limits for all operations.
+2. Never send vault content to external services beyond the model reading this file.
+3. Never commit files with `private` in the filename.
+4. Never fabricate quotes, citations, numbers, or dates.
+5. Ask one clarifying question when intent is ambiguous. Do not guess.
+
+<!-- Source: github.com/Emanuel-Walker/obsidian-second-brain -->
+---
+_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/obsidian-second-brain). Credit appreciated, not required._

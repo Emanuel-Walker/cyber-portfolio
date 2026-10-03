@@ -60,6 +60,15 @@ Ten modular skill files that teach AI assistants how to do specialized work. Con
 
 **Resume line:** Published 10 modular skill files for AI assistants covering content generation, voice calibration, diagram authoring, OCR, prompt optimization, and more. Each skill scoped with trigger conditions, scope boundaries, and output contracts.
 
+### 6. Obsidian Second Brain Template
+`06-obsidian-second-brain/`
+
+A template for running Obsidian as a second brain with any AI agent (Claude Code, Codex, Hermes, Cursor). PARA structure, 8 ready templates, 6 workflows, 5 security guides, agent setup files, and an ADHD guide. Built for busy professionals and security people who want local-first thinking with a thought partner.
+
+**You read this if:** you want to see what a working second brain + AI thought partner setup actually looks like, security included.
+
+**Resume line:** Published an open-source Obsidian second-brain template with agent-ready instructions (Claude Code, Codex, Hermes), 8 Obsidian templates, 6 workflows, 5 security guides covering local-first setup through encrypted sync, and a dedicated ADHD guide.
+
 ## How to read this portfolio
 
 Every project has a `QUICKSTART.md` with a 5-minute demo. Start there if you want to see something run before you read the writeup.
@@ -88,9 +97,7 @@ I teach what I learn. I write about what I build. I publish what I ship.
 - **M.S., Cybersecurity and Information Assurance,** Western Governors University, 2026.
 - **Certifications:** CompTIA Security+, CySA+, SecurityX (CASP+).
 - **Writing cadence:** essays on detection engineering, cloud security, and AI-in-the-loop defense. Reach out if a piece in this repo sparks something.
-- **Also on my GitHub:**
-  - *Good Deeds Coin* - a cryptocurrency project I shipped before the AI boom. Receipt for building ahead of the wave.
-  - [*obsidian-second-brain*](https://github.com/Emanuel-Walker/obsidian-second-brain) - a template for running Obsidian as a second brain with any AI agent. Built for ADHD minds, busy professionals, and security people who want local-first thinking.
+- **Also on my GitHub:** *Good Deeds Coin* - a cryptocurrency project I shipped before the AI boom. Receipt for building ahead of the wave.
 
 ## For hiring managers
 
