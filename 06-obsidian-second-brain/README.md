@@ -23,11 +23,12 @@ This is not another "productivity system." It is the scaffolding behind a daily 
 | `README.md` | This page. The pitch and the quick start. |
 | `STRUCTURE.md` | The folder layout. PARA plus a few additions that earn their keep. |
 | `ADHD-GUIDE.md` | How to run the system when your focus is not on your side. |
+| `COMPANION-AGENTS.md` | Using the vault as the memory layer for personal AI agents (Grok, Muse-style chief of staff, Dot and journal-pattern agents). |
 | `agent-setup/` | Templates for Claude Code, Codex, and any skill-aware agent, plus install steps. |
 | `workflows/` | Six concrete workflows: brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP. |
 | `security/` | Local-first argument, encryption at rest, encrypted sync options, PII rules, legacy folder for your family. |
 | `templates/` | Drop-in Obsidian templates for daily notes, weekly reviews, projects, people, meetings, brain dumps, book notes, idea incubator. |
-| `examples/` | Four worked examples including a knowledge graph tour and a fitness tracking recipe. |
+| `examples/` | Worked examples including a knowledge graph tour, fitness tracking recipe, and `companion-vaults/` templates for three different personal AI agent patterns. |
 
 ---
 
