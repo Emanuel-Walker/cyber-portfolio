@@ -1,18 +1,20 @@
 # Detection-as-Code with ADS Discipline
 
-A detection pack that refuses to merge until the rule proves itself.
+Picture a Monday morning. The weekend on-call is wrecked. Ten thousand alerts hit the queue from a rule that shipped Friday afternoon. Nobody trusts the detection pack anymore.
 
-Every rule in this repo ships with a written spec, a positive test that must trigger it, and a benign test that must not. CI blocks the PR if any of the three are missing. The point is not more rules. The point is rules you can trust at 3 a.m.
+This repo is the answer to that Monday. A detection pack that refuses to merge until the rule proves itself.
+
+Every rule here ships with a written spec, a positive test that must trigger it, and a benign test that must not. CI blocks the PR if any of the three are missing. The point is not more rules. The point is rules you can trust at 3 a.m.
 
 Built after I watched a single PowerShell rule generate 10,000 false positives over a weekend. Full story in `WRITEUP.md`.
 
 ## What it does
 
-- Lints Sigma rules on every pull request
-- Requires a Palantir-style ADS spec file next to every rule
-- Runs an Atomic Red Team style positive test (the rule must fire)
+- Lints Sigma rules (vendor-agnostic detection logic you can convert into Elastic KQL or Splunk SPL) on every pull request
+- Requires a Palantir-style ADS spec (Alerting and Detection Strategy, a documentation format that answers "why does this rule exist and what does it miss") next to every rule
+- Runs an Atomic Red Team style positive test (Atomic Red Team is an open-source library of attack technique tests you can run against your own detections). The rule must fire.
 - Runs a benign test (the rule must not fire)
-- Converts validated Sigma to Elastic KQL as an artifact
+- Converts validated Sigma to Elastic KQL (Kibana Query Language, used in Elastic) as an artifact
 
 ## Quick start
 
@@ -26,7 +28,9 @@ python code/converters/sigma_to_elastic.py code/rules/suspicious_powershell_down
 
 See `diagrams/detection_pipeline.drawio`.
 
-A pull request opens against `main`. The CI job walks `code/rules/`, pairs each `.yml` with its `.ads.md`, and fails fast if either is missing. For every pair, pytest loads the matching atomic test from `code/tests/atomic_tests/` and the matching benign file from `code/tests/benign/`. Each telemetry event is evaluated against the rule logic. The rule must match every positive event and zero benign events. Only then does the converter emit the backend query artifact. Reviewers see the test results inline on the PR. Nothing merges on a red build.
+A pull request opens against `main`. The CI job walks `code/rules/`, pairs each `.yml` with its `.ads.md`, and fails fast if either is missing. For every pair, pytest loads the matching atomic test from `code/tests/atomic_tests/` and the matching benign file from `code/tests/benign/`. Each telemetry event runs against the rule logic. The rule must match every positive event and zero benign events. Only then does the converter emit the backend query artifact. Reviewers see test results inline on the PR. Nothing merges on a red build.
+
+Why this matters. One rule, three SIEMs. If your shop ever migrates vendors, the detection content moves with you.
 
 ## What I learned
 

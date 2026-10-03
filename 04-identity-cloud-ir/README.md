@@ -1,12 +1,12 @@
 # Identity-First AWS Incident Response Lab
 
-Every cloud breach in 2026 looks the same. No malware. No ransomware payload. No shellcode on disk. Just a stolen OAuth refresh token, a non-human identity with too much power, and gigabytes of customer data walking out through a legitimate API call. GuardDuty watches it happen and stays quiet.
+Every cloud breach in 2026 looks the same. No malware. No ransomware payload. No shellcode on disk. Just a stolen OAuth refresh token (a long-lived credential an app uses to get fresh access tokens without re-prompting the user), a non-human identity (service account, API key, or workload credential, often shortened to NHI) with too much power, and gigabytes of customer data walking out through a legitimate API call. GuardDuty (AWS's built-in threat detection service that reads CloudTrail and VPC flow logs) watches it happen and stays quiet.
 
 This lab proves it. Then it ships the detections that catch it.
 
 ## What it does
 
-- Builds a deliberately weak AWS tenant with Terraform (over-privileged IAM role, OAuth app with excess scopes, cross-account trust with a weak condition, misconfigured S3 lifecycle).
+- Builds a deliberately weak AWS tenant with Terraform (infrastructure-as-code tool. You describe cloud resources in HCL files, Terraform makes them exist). Includes an over-privileged IAM role, OAuth app with excess scopes, cross-account trust with a weak condition, and misconfigured S3 lifecycle.
 - Runs 5 attacker scenarios drawn from real 2024-2026 breach patterns (Scattered Spider, Snowflake customer compromises, Okta token theft).
 - Shows exactly what GuardDuty catches, what it misses, and names the finding types involved.
 - Ships custom detections in three flavors (Athena SQL, Elastic Detection Engine, Panther Python) that close the gaps.

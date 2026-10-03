@@ -13,7 +13,7 @@ If you lead a SOC and this reads like your Tuesday, open an issue or email me.
 - Defines a 6-tier **Key Asset** model that maps every asset to a business function, data class, blast radius, and recovery cost
 - Scores alerts against that model so an alert on your payment gateway outranks a High on a marketing laptop
 - Ships a **tier-based playbook library** (Crown Jewels, High-Trust Identity, Build and Deploy, SaaS Data Paths, Lateral Stepping Stones, Noise) with concrete first-15-minute actions
-- Includes a Grafana dashboard JSON that measures **MTTD, MTTR, queue depth, and SLA conformance by tier**, not by severity
+- Includes a Grafana dashboard JSON that measures **MTTD, MTTR, queue depth, and SLA conformance by tier**, not by severity (MTTD and MTTR are Mean Time to Detect and Mean Time to Respond, the two metrics SOC leaders live by)
 - Comes with synthetic data (10 assets, 6 alerts) so you can run it in two minutes
 
 ## Quick start
