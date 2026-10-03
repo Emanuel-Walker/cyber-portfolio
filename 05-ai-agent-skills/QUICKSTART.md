@@ -1,5 +1,8 @@
 # Quickstart - AI Agent Skills
 
+> [!info] Plain English
+> A "skill" is a small markdown file that teaches an AI assistant how to do one job well. You will install one skill (the humanizer, which rewrites AI-sounding text), then watch it transform a paragraph of corporate filler into something readable. Takes about 5 minutes.
+
 ## 5-minute demo
 
 BLUF. You will install one skill (the humanizer), invoke it inside Claude Code, and watch it rewrite an AI-sounding paragraph into something that reads like a person wrote it. If the before and after differ in the expected ways, the skill works.

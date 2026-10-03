@@ -73,6 +73,8 @@ A template for running Obsidian as a second brain with any AI agent (Claude Code
 
 Every project has a `QUICKSTART.md` with a 5-minute demo. Start there if you want to see something run before you read the writeup.
 
+If you want to actually run something, every project has a QUICKSTART. Project 6 has a full WALKTHROUGH that starts from installing Obsidian.
+
 Start with whichever project speaks to the role you're hiring for. Each project has its own README that tells you what to run first. None of these need a cluster or a lab setup. A laptop and an afternoon are enough.
 
 ## What this is not

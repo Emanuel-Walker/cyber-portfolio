@@ -1,5 +1,7 @@
 # Obsidian Second Brain
 
+**Start here: [WALKTHROUGH.md](WALKTHROUGH.md)** — zero to a working vault + AI agent in about 90 minutes. Written for a total beginner.
+
 ### For ADHD minds, security people, and busy builders who want AI as a thought partner without giving up privacy.
 
 If your head is a browser with 94 open tabs, this repo is for you. It is a working template for an Obsidian vault that an AI coding agent helps you maintain. Local files, markdown everywhere, no SaaS lock-in, no analytics. You own every byte. The agent cleans up after you so your brain can go back to the real work.
@@ -21,12 +23,14 @@ This is not another "productivity system." It is the scaffolding behind a daily 
 | File or folder | What you get |
 |---|---|
 | `README.md` | This page. The pitch and the quick start. |
+| `WALKTHROUGH.md` | Full beginner walkthrough. Install Obsidian, pick an AI agent, set up the vault, run your first prompts. ~90 minutes. |
+| `starter-prompts.md` | Copy-paste prompt library grouped by job (daily notes, meeting prep, project kickoff, agent self-audit). |
 | `STRUCTURE.md` | The folder layout. PARA plus a few additions that earn their keep. |
 | `ADHD-GUIDE.md` | How to run the system when your focus is not on your side. |
 | `COMPANION-AGENTS.md` | Using the vault as the memory layer for personal AI agents (Grok, Muse-style chief of staff, Dot and journal-pattern agents). |
 | `agent-setup/` | Templates for Claude Code, Codex, and any skill-aware agent, plus install steps. |
-| `workflows/` | Six concrete workflows: brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP. |
-| `security/` | Local-first argument, encryption at rest, encrypted sync options, PII rules, legacy folder for your family. |
+| `workflows/` | Seven concrete workflows: brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP, importing past ChatGPT and Claude.ai conversations. |
+| `security/` | Local-first argument, encryption at rest, encrypted sync options, PII rules, legacy folder for your family, and plain-English everyday good practices. |
 | `templates/` | Drop-in Obsidian templates for daily notes, weekly reviews, projects, people, meetings, brain dumps, book notes, idea incubator. |
 | `examples/` | Worked examples including a knowledge graph tour, fitness tracking recipe, and `companion-vaults/` templates for three different personal AI agent patterns. |
 

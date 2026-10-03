@@ -1,5 +1,8 @@
 # Quickstart - Crown Jewel Triage
 
+> [!info] Plain English
+> Most security teams rank alerts by a severity dropdown. This project ranks alerts by what each one puts at risk. A payment processor at the top. A marketing laptop at the bottom. You will see the scoring run and a prioritized queue written to a markdown file. Takes about 5 minutes.
+
 ## 5-minute demo
 
 BLUF. You will score a sample asset inventory, run alerts through the prioritization engine, and open the generated queue. The payment processor should rank P1. A marketing laptop should rank P6. If that ordering holds, the model works.

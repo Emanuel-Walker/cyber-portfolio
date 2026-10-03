@@ -1,5 +1,8 @@
 # Quickstart - Identity-First AWS Incident Response Lab
 
+> [!info] Plain English
+> This project builds a small AWS cloud environment with deliberate identity weaknesses, then runs attack scripts and detection rules against it. The 5-minute demo stops at the preview step (`terraform plan`) so you do not get charged. Actually spinning it up costs a few dollars and must be torn down the same day. Takes about 5 minutes for the safe demo.
+
 ## 5-minute demo
 
 BLUF. You will run `terraform plan` to confirm the lab builds cleanly, then run a detection rule against a sample CloudTrail event. The demo stops at `plan`. Running `apply` creates real AWS resources and real charges. Do that only in a sandboxed account you own.

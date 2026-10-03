@@ -1,5 +1,8 @@
 # Quickstart - Prompt-Injection-Hardened LLM Triage
 
+> [!info] Plain English
+> This project runs a local AI model (an LLM, large language model) to triage security alerts. You will also run 16 attack prompts that try to trick the AI into breaking its rules. 12 of the 16 attacks fail (as designed). 4 still slip through, and the project documents each one honestly. Takes about 5 minutes once the local model is installed.
+
 ## 5-minute demo
 
 BLUF. You will run the triage agent on a clean alert and a poisoned alert, then run the 16-payload attack harness. The agent should return structured P-levels on both alerts and the harness should block 12 of 16 attacks.

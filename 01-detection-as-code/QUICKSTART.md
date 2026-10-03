@@ -1,5 +1,8 @@
 # Quickstart - Detection-as-Code
 
+> [!info] Plain English
+> This project treats security detection rules like software. You write a rule, write two tests (one that proves it catches the bad thing, one that proves it stays quiet on normal activity), and a pipeline blocks the merge if either test fails. You will see six tests pass and a detection rule convert into a working Elastic query. Takes about 5 minutes.
+
 ## 5-minute demo
 
 BLUF. You will run the dual-gate pytest suite and the Sigma to Elastic converter. If the tests go green and the converter prints a KQL query, the project works.
