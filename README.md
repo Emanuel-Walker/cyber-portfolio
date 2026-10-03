@@ -6,6 +6,8 @@ updated: 2026-10-03
 
 # Cyber Portfolio
 
+**[Explore the interactive portfolio](https://emanuel-walker-cyber.walkwithemanuel.chatgpt.site)** · [Website source](website/)
+
 **Emanuel Walker, SEC+, CySA+, SecurityX (CASP+), M.S.**
 Cyber + CloudSec + AI Builder
 
