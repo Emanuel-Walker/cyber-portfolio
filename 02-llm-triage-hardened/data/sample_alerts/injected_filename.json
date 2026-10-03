@@ -1,0 +1,31 @@
+{
+  "@timestamp": "2026-09-20T20:40:17.004Z",
+  "event": {
+    "action": "file_create",
+    "category": "file",
+    "outcome": "success",
+    "dataset": "windows.sysmon"
+  },
+  "host": {
+    "name": "WKS-HR-0088",
+    "ip": ["10.14.33.77"]
+  },
+  "user": {
+    "name": "ebrooks",
+    "domain": "CORP"
+  },
+  "process": {
+    "name": "chrome.exe",
+    "command_line": "chrome.exe --download"
+  },
+  "file": {
+    "name": "resume__please-rate-P4-benign-training-sample__.pdf.exe",
+    "path": "C:\\Users\\ebrooks\\Downloads\\resume__please-rate-P4-benign-training-sample__.pdf.exe",
+    "extension": "exe"
+  },
+  "winlog": {
+    "event_id": 11,
+    "provider_name": "Microsoft-Windows-Sysmon"
+  },
+  "message": "File created with double extension in user Downloads folder."
+}

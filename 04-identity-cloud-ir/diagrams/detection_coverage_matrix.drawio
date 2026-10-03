@@ -1,0 +1,58 @@
+<mxfile host="app.diagrams.net" modified="2026-10-03T00:00:00.000Z" agent="hand" version="24.0.0">
+  <diagram id="matrix" name="Detection Coverage">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="Detection coverage matrix" style="text;html=1;align=center;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" value="Scenario" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1" vertex="1" parent="1"><mxGeometry x="60" y="60" width="260" height="40" as="geometry" /></mxCell>
+        <mxCell id="h2" value="GD default" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1" vertex="1" parent="1"><mxGeometry x="320" y="60" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="h3" value="GD all plans" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1" vertex="1" parent="1"><mxGeometry x="460" y="60" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="h4" value="Athena" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1" vertex="1" parent="1"><mxGeometry x="600" y="60" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="h5" value="Elastic" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1" vertex="1" parent="1"><mxGeometry x="720" y="60" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="h6" value="Panther" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontStyle=1" vertex="1" parent="1"><mxGeometry x="840" y="60" width="120" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="r1a" value="01 OAuth token theft" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="60" y="100" width="260" height="40" as="geometry" /></mxCell>
+        <mxCell id="r1b" value="MISS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc" vertex="1" parent="1"><mxGeometry x="320" y="100" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r1c" value="PARTIAL" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc" vertex="1" parent="1"><mxGeometry x="460" y="100" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r1d" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="600" y="100" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r1e" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="720" y="100" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r1f" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="840" y="100" width="120" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="r2a" value="02 NHI privesc" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="60" y="140" width="260" height="40" as="geometry" /></mxCell>
+        <mxCell id="r2b" value="PARTIAL" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc" vertex="1" parent="1"><mxGeometry x="320" y="140" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r2c" value="PARTIAL" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc" vertex="1" parent="1"><mxGeometry x="460" y="140" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r2d" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="600" y="140" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r2e" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="720" y="140" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r2f" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="840" y="140" width="120" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="r3a" value="03 Session anomaly" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="60" y="180" width="260" height="40" as="geometry" /></mxCell>
+        <mxCell id="r3b" value="MISS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc" vertex="1" parent="1"><mxGeometry x="320" y="180" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r3c" value="PARTIAL" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc" vertex="1" parent="1"><mxGeometry x="460" y="180" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r3d" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="600" y="180" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r3e" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="720" y="180" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r3f" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="840" y="180" width="120" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="r4a" value="04 S3 exfil" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="60" y="220" width="260" height="40" as="geometry" /></mxCell>
+        <mxCell id="r4b" value="MISS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc" vertex="1" parent="1"><mxGeometry x="320" y="220" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r4c" value="MISS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc" vertex="1" parent="1"><mxGeometry x="460" y="220" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r4d" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="600" y="220" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r4e" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="720" y="220" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r4f" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="840" y="220" width="120" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="r5a" value="05 Silent IAM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="60" y="260" width="260" height="40" as="geometry" /></mxCell>
+        <mxCell id="r5b" value="MISS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc" vertex="1" parent="1"><mxGeometry x="320" y="260" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r5c" value="MISS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc" vertex="1" parent="1"><mxGeometry x="460" y="260" width="140" height="40" as="geometry" /></mxCell>
+        <mxCell id="r5d" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="600" y="260" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r5e" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="720" y="260" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="r5f" value="CATCH" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4" vertex="1" parent="1"><mxGeometry x="840" y="260" width="120" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="note" value="Custom detections cover 5/5. GuardDuty with everything on covers 3/5 partially." style="text;html=1;align=left;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="60" y="320" width="700" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,42 @@
+---
+# Why: an OAuth refresh token sitting in SSM Parameter Store should be
+# read by exactly one identity (the app's EC2/ECS task role). Any read
+# of a path containing "refresh_token" / "oauth" by anything else is
+# the "found-in-public-repo" moment.
+# Tuning: allowlist the expected reader principal, exclude expected
+# IPs. The rule errs on the side of noise in a fresh deploy.
+rule:
+  name: "OAuth refresh token read by unexpected principal"
+  description: |
+    SSM GetParameter on a token-shaped parameter path, by a principal
+    that is not on the allowlist. Precursor to credential abuse.
+  risk_score: 73
+  severity: high
+  type: query
+  language: kuery
+  index:
+    - "logs-aws.cloudtrail-*"
+  query: |
+    event.dataset:"aws.cloudtrail"
+    and event.action:"GetParameter"
+    and aws.cloudtrail.event_source:"ssm.amazonaws.com"
+    and aws.cloudtrail.request_parameters: (*refresh_token* or *oauth* or *api_key*)
+    and not user.name: ("northwind-cloud-lab-ec2-role" or "ops-automation")
+  references:
+    - "https://attack.mitre.org/techniques/T1552/007/"
+  threat:
+    - framework: "MITRE ATT&CK"
+      tactic:
+        id: "TA0006"
+        name: "Credential Access"
+      technique:
+        - id: "T1552"
+          name: "Unsecured Credentials"
+          subtechnique:
+            - id: "T1552.007"
+              name: "Container API"
+  false_positives:
+    - "A new application reader. Add to allowlist."
+    - "Operator spot-check. Rare."
+  interval: "5m"
+  from: "now-10m"

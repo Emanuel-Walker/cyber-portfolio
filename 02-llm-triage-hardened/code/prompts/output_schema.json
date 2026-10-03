@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TriageVerdict",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "severity",
+    "attack_patterns",
+    "confidence",
+    "suggested_actions",
+    "similar_cases"
+  ],
+  "properties": {
+    "severity": {
+      "type": "string",
+      "enum": ["P1", "P2", "P3", "P4"]
+    },
+    "attack_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$"
+      },
+      "maxItems": 10
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "suggested_actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 240
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "similar_cases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^CASE-[0-9]{4}$"
+      },
+      "maxItems": 10
+    }
+  }
+}

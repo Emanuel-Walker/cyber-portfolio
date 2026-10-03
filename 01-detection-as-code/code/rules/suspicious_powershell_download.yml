@@ -1,0 +1,45 @@
+title: Suspicious PowerShell In-Memory Download Cradle
+id: 7f3a1c2e-5b4d-4e8f-9a1b-2c3d4e5f6a7b
+status: experimental
+description: Detects PowerShell command lines consistent with in-memory download and execution cradles used to stage second-stage payloads.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+  - https://attack.mitre.org/techniques/T1105/
+author: Emanuel Walker
+date: 2026/09/14
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.command_and_control
+  - attack.t1105
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_powershell:
+    process.name:
+      - 'powershell.exe'
+      - 'pwsh.exe'
+  selection_cradle:
+    process.command_line|contains:
+      - 'DownloadString'
+      - 'DownloadFile'
+      - 'Invoke-WebRequest'
+      - 'IEX ('
+      - 'Invoke-Expression'
+      - 'Net.WebClient'
+  filter_internal_artifact_server:
+    process.command_line|contains:
+      - 'https://internal-artifacts.corp.local'
+      - 'https://repo.internal.corp.local'
+  condition: selection_powershell and selection_cradle and not filter_internal_artifact_server
+fields:
+  - process.name
+  - process.command_line
+  - process.parent.name
+  - user.name
+  - host.name
+falsepositives:
+  - Internal configuration management agents pulling signed modules from the enterprise artifact server. These are filtered by hostname. Any other internal cradle use case must be added to the filter block with a review.
+  - Red team engagements. Coordinate with the engagement calendar before suppressing.
+level: high

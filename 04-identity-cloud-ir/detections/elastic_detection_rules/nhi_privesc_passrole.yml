@@ -1,0 +1,39 @@
+---
+# Why: iam:PassRole on wildcard is the single most abused IAM privilege
+# in AWS breaches. Watching for PassRole from one role to a higher-
+# privilege role catches most Lambda/EC2 escalation chains.
+# Tuning: maintain an allowlist of "role A can PassRole role B" pairs.
+rule:
+  name: "Non-human identity PassRole to higher-privilege role"
+  description: |
+    An AssumedRole session performs PassRole (via CreateFunction,
+    UpdateFunctionConfiguration, RunInstances, or similar) and the
+    role being passed is tagged or named as higher-privilege.
+  risk_score: 85
+  severity: high
+  type: query
+  language: kuery
+  index:
+    - "logs-aws.cloudtrail-*"
+  query: |
+    event.dataset:"aws.cloudtrail"
+    and aws.cloudtrail.user_identity.type:"AssumedRole"
+    and event.action: ("CreateFunction" or "UpdateFunctionConfiguration" or "RunInstances")
+    and aws.cloudtrail.request_parameters: (*role* or *iamInstanceProfile*)
+    and aws.cloudtrail.request_parameters: (*admin* or *power-user* or *cross-account* or *root-emulation*)
+  references:
+    - "https://attack.mitre.org/techniques/T1548/005/"
+    - "https://bishopfox.com/blog/privilege-escalation-in-aws"
+  threat:
+    - framework: "MITRE ATT&CK"
+      tactic:
+        id: "TA0004"
+        name: "Privilege Escalation"
+      technique:
+        - id: "T1548"
+          name: "Abuse Elevation Control Mechanism"
+  false_positives:
+    - "Approved Lambda deployment attaching a standard role."
+    - "Autoscaling event. Allowlist by instance profile."
+  interval: "5m"
+  from: "now-10m"

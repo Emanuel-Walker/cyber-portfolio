@@ -1,0 +1,56 @@
+# Atomic test fixture for T1003.001 - LSASS memory access.
+# Events model Sysmon Event ID 10 (ProcessAccess) with winlog field names.
+attack_technique: T1003.001
+matched_rule: credential_dump_lsass
+description: >
+  Six variants of a process opening lsass.exe with credential-dumping access
+  masks. Every event MUST match credential_dump_lsass.yml. Each event uses a
+  SourceImage path that is NOT in the EDR filter list.
+events:
+  - name: mimikatz_default
+    winlog.event_data.SourceImage: "C:\\Users\\Public\\mimikatz.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1438"
+    winlog.event_data.SourceProcessId: "4852"
+    host.name: WIN-LAB-01
+    user.name: attacker
+
+  - name: procdump_full_memory
+    winlog.event_data.SourceImage: "C:\\Users\\Public\\procdump.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1fffff"
+    winlog.event_data.SourceProcessId: "7320"
+    host.name: WIN-LAB-02
+    user.name: attacker
+
+  - name: custom_tool_vm_read
+    winlog.event_data.SourceImage: "C:\\Users\\Public\\dumper.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1010"
+    winlog.event_data.SourceProcessId: "1024"
+    host.name: WIN-LAB-03
+    user.name: attacker
+
+  - name: dup_handle_variant
+    winlog.event_data.SourceImage: "C:\\Users\\Public\\redteam.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1410"
+    winlog.event_data.SourceProcessId: "2048"
+    host.name: WIN-LAB-04
+    user.name: attacker
+
+  - name: mimikatz_tickets
+    winlog.event_data.SourceImage: "C:\\Users\\Public\\mk.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x143a"
+    winlog.event_data.SourceProcessId: "3131"
+    host.name: WIN-LAB-05
+    user.name: attacker
+
+  - name: powershell_based_dump
+    winlog.event_data.SourceImage: "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1010"
+    winlog.event_data.SourceProcessId: "5050"
+    host.name: WIN-LAB-06
+    user.name: attacker

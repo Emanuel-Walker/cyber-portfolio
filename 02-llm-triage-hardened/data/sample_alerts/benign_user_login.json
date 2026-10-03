@@ -1,0 +1,30 @@
+{
+  "@timestamp": "2026-09-20T14:22:10.512Z",
+  "event": {
+    "action": "logged-in",
+    "category": "authentication",
+    "outcome": "success",
+    "dataset": "windows.security"
+  },
+  "host": {
+    "name": "WKS-ENG-0442",
+    "os": {"family": "windows", "version": "11 23H2"},
+    "ip": ["10.14.22.187"]
+  },
+  "user": {
+    "name": "jlane",
+    "domain": "CORP"
+  },
+  "source": {
+    "ip": "10.14.22.187",
+    "geo": {"country_name": "United States"}
+  },
+  "user_agent": {
+    "original": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  },
+  "winlog": {
+    "event_id": 4624,
+    "logon_type": 2
+  },
+  "message": "Interactive logon succeeded for CORP\\jlane on WKS-ENG-0442."
+}

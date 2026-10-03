@@ -1,0 +1,223 @@
+# Example Asset Inventory
+#
+# 10 synthetic assets for demonstration. All names, IDs, and owners are fictional.
+# Scores are illustrative. In production you would walk every asset with the
+# business owner before publishing a tier.
+
+assets:
+
+  - asset_id: "ast-00001"
+    name: "prod-payment-settlement-01"
+    business_function: "Processes all customer card transactions. Direct revenue."
+    data_classification: "regulated"
+    dependencies: ["ast-00004", "ast-00006"]
+    recovery_time_objective: "15m"
+    owner_team: "Payments Platform"
+    owner_business_sponsor: "VP Payments"
+    cloud_provider: "aws"
+    compliance_scopes: ["PCI-DSS"]
+    detection_coverage: "bespoke"
+    scores:
+      business_impact: 5
+      data_sensitivity: 5
+      blast_radius: 4
+      recovery_cost: 5
+    # total: 19 -> tier 1
+
+  - asset_id: "ast-00002"
+    name: "corp-hr-workday-tenant"
+    business_function: "Employee records, payroll, benefits."
+    data_classification: "confidential"
+    dependencies: ["ast-00004"]
+    recovery_time_objective: "4h"
+    owner_team: "HRIT"
+    owner_business_sponsor: "CHRO"
+    cloud_provider: "saas-workday"
+    compliance_scopes: ["SOX"]
+    detection_coverage: "generic"
+    scores:
+      business_impact: 3
+      data_sensitivity: 4
+      blast_radius: 3
+      recovery_cost: 3
+    # total: 13 -> tier 4
+
+  - asset_id: "ast-00003"
+    name: "ci-jenkins-prod-orchestrator"
+    business_function: "Builds and deploys all production services."
+    data_classification: "regulated"
+    dependencies: ["ast-00006", "ast-00007"]
+    recovery_time_objective: "2h"
+    owner_team: "Platform Engineering"
+    owner_business_sponsor: "VP Engineering"
+    cloud_provider: "aws"
+    compliance_scopes: ["SOX"]
+    detection_coverage: "generic"
+    scores:
+      business_impact: 4
+      data_sensitivity: 4
+      blast_radius: 5
+      recovery_cost: 4
+    # total: 17 -> tier 3
+
+  - asset_id: "ast-00004"
+    name: "sso-okta-primary-tenant"
+    business_function: "Primary identity provider for all employees and most apps."
+    data_classification: "regulated"
+    dependencies: []
+    recovery_time_objective: "30m"
+    owner_team: "Identity Engineering"
+    owner_business_sponsor: "CISO"
+    cloud_provider: "saas-okta"
+    compliance_scopes: ["SOX", "SOC2"]
+    detection_coverage: "bespoke"
+    scores:
+      business_impact: 5
+      data_sensitivity: 5
+      blast_radius: 5
+      recovery_cost: 4
+    # total: 19 -> tier 1 by score, routed to tier 2 playbook (identity)
+
+  - asset_id: "ast-00005"
+    name: "mkt-laptop-chen-l"
+    business_function: "Marketing content creator laptop."
+    data_classification: "internal"
+    dependencies: []
+    recovery_time_objective: "24h"
+    owner_team: "Marketing"
+    owner_business_sponsor: "CMO"
+    cloud_provider: "on-prem"
+    compliance_scopes: []
+    detection_coverage: "generic"
+    scores:
+      business_impact: 1
+      data_sensitivity: 2
+      blast_radius: 1
+      recovery_cost: 2
+    # total: 6 -> tier 6
+
+  - asset_id: "ast-00006"
+    name: "aws-admin-saas-console"
+    business_function: "AWS org-level admin console. Root for every production account."
+    data_classification: "regulated"
+    dependencies: ["ast-00004"]
+    recovery_time_objective: "1h"
+    owner_team: "Cloud Platform"
+    owner_business_sponsor: "CISO"
+    cloud_provider: "aws"
+    compliance_scopes: ["SOC2", "PCI-DSS", "SOX"]
+    detection_coverage: "bespoke"
+    scores:
+      business_impact: 5
+      data_sensitivity: 5
+      blast_radius: 5
+      recovery_cost: 5
+    # total: 20 -> tier 1 by score, routed to tier 2 playbook (identity)
+
+  - asset_id: "ast-00007"
+    name: "customer-data-warehouse-snowflake"
+    business_function: "All customer analytics, 7 years of transaction history."
+    data_classification: "regulated"
+    dependencies: ["ast-00004"]
+    recovery_time_objective: "8h"
+    owner_team: "Data Platform"
+    owner_business_sponsor: "Chief Data Officer"
+    cloud_provider: "saas-snowflake"
+    compliance_scopes: ["PCI-DSS", "GDPR"]
+    detection_coverage: "generic"
+    scores:
+      business_impact: 4
+      data_sensitivity: 5
+      blast_radius: 3
+      recovery_cost: 5
+    # total: 17 -> tier 2/3 band, routed to tier 4 (SaaS regulated data)
+
+  - asset_id: "ast-00008"
+    name: "dev-sandbox-k8s-cluster"
+    business_function: "Engineering experimentation. No prod data."
+    data_classification: "internal"
+    dependencies: []
+    recovery_time_objective: "72h"
+    owner_team: "Platform Engineering"
+    owner_business_sponsor: "VP Engineering"
+    cloud_provider: "aws"
+    compliance_scopes: []
+    detection_coverage: "generic"
+    scores:
+      business_impact: 1
+      data_sensitivity: 2
+      blast_radius: 2
+      recovery_cost: 1
+    # total: 6 -> tier 6
+
+  - asset_id: "ast-00009"
+    name: "corp-email-gateway-proofpoint"
+    business_function: "Inbound and outbound mail routing, DLP, phish filtering."
+    data_classification: "confidential"
+    dependencies: []
+    recovery_time_objective: "1h"
+    owner_team: "Messaging"
+    owner_business_sponsor: "CIO"
+    cloud_provider: "saas-proofpoint"
+    compliance_scopes: ["SOC2"]
+    detection_coverage: "bespoke"
+    scores:
+      business_impact: 4
+      data_sensitivity: 4
+      blast_radius: 3
+      recovery_cost: 3
+    # total: 14 -> tier 4
+
+  - asset_id: "ast-00010"
+    name: "jump-host-bastion-prod-east"
+    business_function: "SSH jump host used by on-call DBAs to reach prod databases."
+    data_classification: "regulated"
+    dependencies: ["ast-00004"]
+    recovery_time_objective: "2h"
+    owner_team: "Database Reliability"
+    owner_business_sponsor: "VP Infrastructure"
+    cloud_provider: "aws"
+    compliance_scopes: ["PCI-DSS", "SOX"]
+    detection_coverage: "generic"
+    scores:
+      business_impact: 3
+      data_sensitivity: 3
+      blast_radius: 3
+      recovery_cost: 2
+    # total: 11 -> tier 4/5 band, routed to tier 5 (lateral)
+
+  - asset_id: "ast-00011"
+    name: "siem-splunk-indexer-cluster"
+    business_function: "Primary log aggregation and detection platform."
+    data_classification: "confidential"
+    dependencies: ["ast-00004"]
+    recovery_time_objective: "2h"
+    owner_team: "Security Engineering"
+    owner_business_sponsor: "CISO"
+    cloud_provider: "aws"
+    compliance_scopes: ["SOC2"]
+    detection_coverage: "bespoke"
+    scores:
+      business_impact: 4
+      data_sensitivity: 4
+      blast_radius: 3
+      recovery_cost: 3
+    # total: 14 -> tier 4
+
+  - asset_id: "ast-00012"
+    name: "honeypot-corp-dmz-01"
+    business_function: "Deception. Not business-critical. Alerts on first touch."
+    data_classification: "public"
+    dependencies: []
+    recovery_time_objective: "24h"
+    owner_team: "Threat Intel"
+    owner_business_sponsor: "CISO"
+    cloud_provider: "on-prem"
+    compliance_scopes: []
+    detection_coverage: "bespoke"
+    scores:
+      business_impact: 1
+      data_sensitivity: 1
+      blast_radius: 1
+      recovery_cost: 1
+    # total: 4 -> tier 6, but any alert on this asset escalates (deception rule)

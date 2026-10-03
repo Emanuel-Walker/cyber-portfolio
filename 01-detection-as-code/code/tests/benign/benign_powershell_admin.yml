@@ -1,0 +1,44 @@
+# Benign activity fixture. These events represent normal admin and app behavior.
+# The paired rules MUST NOT fire on any event here. If one does, the rule
+# has a false-positive design flaw and CI blocks the PR.
+description: >
+  Benign PowerShell admin tasks and legitimate LSASS reads by endpoint
+  protection products. Covers the "false positive" cases documented in the
+  ADS specs for both rules.
+events:
+  - name: admin_get_service
+    process.name: powershell.exe
+    process.command_line: "powershell.exe -NoProfile -Command Get-Service -Name Spooler"
+    process.parent.name: explorer.exe
+    user.name: admin
+    host.name: WIN-ADMIN-01
+
+  - name: admin_restart_iis
+    process.name: powershell.exe
+    process.command_line: "powershell -Command Restart-Service W3SVC"
+    process.parent.name: mmc.exe
+    user.name: admin
+    host.name: WIN-WEB-01
+
+  - name: config_mgmt_internal_pull
+    process.name: powershell.exe
+    process.command_line: "powershell -Command (New-Object Net.WebClient).DownloadString('https://internal-artifacts.corp.local/modules/baseline.ps1')"
+    process.parent.name: ccmexec.exe
+    user.name: SYSTEM
+    host.name: WIN-WORKSTATION-01
+
+  - name: defender_lsass_scan
+    winlog.event_data.SourceImage: "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.24090.11-0\\MsMpEng.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1410"
+    winlog.event_data.SourceProcessId: "844"
+    host.name: WIN-WORKSTATION-01
+    user.name: SYSTEM
+
+  - name: mde_edr_lsass_read
+    winlog.event_data.SourceImage: "C:\\Program Files\\Windows Defender Advanced Threat Protection\\MsSense.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1fffff"
+    winlog.event_data.SourceProcessId: "920"
+    host.name: WIN-WORKSTATION-02
+    user.name: SYSTEM

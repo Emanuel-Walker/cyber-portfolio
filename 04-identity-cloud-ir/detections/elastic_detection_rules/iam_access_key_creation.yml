@@ -1,0 +1,51 @@
+---
+# Why: CreateAccessKey for an existing user is step one of about half
+# of all AWS IAM breach writeups. Default GuardDuty does not alert on
+# it. This 30-line rule would have caught Scattered Spider at MGM.
+# Tuning: allowlist your break-glass automation principal. Everyone else
+# gets a ticket.
+rule:
+  name: "IAM access key created, policy attached, or password policy touched"
+  description: |
+    CreateAccessKey, AttachUserPolicy of a high-privilege managed
+    policy, or any touch of UpdateAccountPasswordPolicy or
+    DeleteAccountPasswordPolicy. None of these alert in default
+    GuardDuty.
+  risk_score: 75
+  severity: high
+  type: query
+  language: kuery
+  index:
+    - "logs-aws.cloudtrail-*"
+  query: |
+    event.dataset:"aws.cloudtrail"
+    and (
+      event.action:"CreateAccessKey"
+      or (
+        event.action: ("AttachUserPolicy" or "AttachRolePolicy")
+        and aws.cloudtrail.request_parameters: (
+          *AdministratorAccess* or *PowerUserAccess* or *IAMFullAccess*
+        )
+      )
+      or event.action: ("UpdateAccountPasswordPolicy" or "DeleteAccountPasswordPolicy")
+    )
+    and not user.name: ("iam-break-glass" or "terraform-ci")
+  references:
+    - "https://attack.mitre.org/techniques/T1098/001/"
+    - "https://www.crowdstrike.com/blog/scattered-spider-attempts-to-avoid-detection-with-bring-your-own-vulnerable-driver-tactic/"
+  threat:
+    - framework: "MITRE ATT&CK"
+      tactic:
+        id: "TA0003"
+        name: "Persistence"
+      technique:
+        - id: "T1098"
+          name: "Account Manipulation"
+          subtechnique:
+            - id: "T1098.001"
+              name: "Additional Cloud Credentials"
+  false_positives:
+    - "Approved new engineer onboarding. Allowlist by user tag."
+    - "Terraform-managed IAM user creation. Allowlist by useragent."
+  interval: "5m"
+  from: "now-10m"

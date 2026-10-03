@@ -1,0 +1,80 @@
+# Key Asset Schema
+#
+# Why this exists:
+# Every alert needs to be routed by what the attacker is reaching for.
+# The attacker is reaching for an asset. So we need a schema that
+# describes assets in terms a priority engine can read.
+#
+# How to use it:
+# One YAML document per asset. Fill out every required field.
+# Optional fields help the scorer but will not block it.
+
+schema_version: "1.0"
+
+required_fields:
+  asset_id:
+    type: string
+    description: "Stable unique ID. Prefer CMDB ID. Never hostname (hostnames change)."
+    example: "ast-00042"
+
+  name:
+    type: string
+    description: "Human-readable name used in alerts and playbooks."
+    example: "prod-payment-settlement-01"
+
+  business_function:
+    type: string
+    description: "Plain English. What business process depends on this asset."
+    example: "Processes all customer card transactions. Direct revenue."
+
+  data_classification:
+    type: enum
+    allowed_values:
+      - "public"
+      - "internal"
+      - "confidential"
+      - "regulated"       # PCI, PHI, HIPAA, SOX, GDPR special category
+    description: "Highest class of data this asset touches, stores, or has credentials to reach."
+
+  dependencies:
+    type: list[string]
+    description: "Other asset_ids this asset depends on (upstream) or that depend on it (downstream)."
+    example: ["ast-00017", "ast-00099"]
+
+  recovery_time_objective:
+    type: string
+    description: "RTO as declared by the business owner. Not an IT guess."
+    example: "15m"
+
+  cj_tier:
+    type: integer
+    allowed_values: [1, 2, 3, 4, 5, 6]
+    description: "Computed by the scorer. Do not hand-edit unless overriding."
+
+optional_fields:
+  owner_team:
+    type: string
+    description: "The team that gets paged first."
+
+  owner_business_sponsor:
+    type: string
+    description: "Named business leader. Not a mailing list. This is who the CISO calls."
+
+  cloud_provider:
+    type: string
+    description: "aws | azure | gcp | on-prem | hybrid"
+
+  compliance_scopes:
+    type: list[string]
+    description: "PCI-DSS, HIPAA, SOX, GDPR, FedRAMP, etc."
+
+  detection_coverage:
+    type: enum
+    allowed_values: ["bespoke", "generic", "none"]
+    description: "How much detection content is tuned specifically for this asset."
+
+# Why these fields and not others:
+# business_function and data_classification cover the first two scoring factors.
+# dependencies drives blast radius.
+# recovery_time_objective drives recovery cost.
+# Everything else is nice to have for the playbook, not required for the score.

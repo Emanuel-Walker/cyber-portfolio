@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" modified="2026-10-03T00:00:00.000Z" agent="hand" version="24.0.0">
+  <diagram id="lab_arch" name="Lab Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="northwind-cloud lab (us-east-1)" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc" value="VPC 10.42.0.0/16" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="420" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet" value="Public subnet 10.42.1.0/24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="110" y="140" width="360" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2" value="EC2 t3.micro&#xa;instance profile:&#xa;data-pipeline-trust" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00" vertex="1" parent="1">
+          <mxGeometry x="140" y="200" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="flowlogs" value="VPC Flow Logs&#xa;-&gt; CloudWatch" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iam" value="IAM: deliberately weak&#xa;- data-pipeline role (iam:PassRole *)&#xa;- oauth-app user (excess scopes)&#xa;- cross-account-reader (weak ExternalId)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450" vertex="1" parent="1">
+          <mxGeometry x="560" y="100" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="S3 customer-data bucket&#xa;20 fake customer JSONs" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="560" y="230" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ssm" value="SSM Parameter Store&#xa;- fake OAuth refresh token&#xa;- predictable ExternalId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="560" y="320" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="trail" value="CloudTrail multi-region&#xa;S3 data events ON&#xa;-&gt; trail bucket" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="880" y="100" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="gd" value="GuardDuty detector&#xa;default + S3 Protection&#xa;(no Malware, no Lambda)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="880" y="220" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="athena" value="Athena -&gt; CloudTrail&#xa;5 hunting queries" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="880" y="340" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="endArrow=classic;html=1;" edge="1" parent="1" source="ec2" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="endArrow=classic;html=1;" edge="1" parent="1" source="ec2" target="ssm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="endArrow=classic;html=1;" edge="1" parent="1" source="trail" target="athena">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

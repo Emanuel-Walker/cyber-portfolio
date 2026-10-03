@@ -1,0 +1,255 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Crown Jewel Triage: SOC prioritization by asset tier instead of alert severity.",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
+  "id": null,
+  "iteration": 1696348800000,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "SIEM",
+      "description": "Rolling 7-day percentage of alerts closed inside the tier SLA. This is the panel the CISO sees first.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 90 },
+              { "color": "green", "value": 95 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 24, "x": 0, "y": 0 },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.0",
+      "targets": [
+        {
+          "expr": "100 * sum by (tier) (rate(soc_alerts_closed_in_sla_total[7d])) / sum by (tier) (rate(soc_alerts_closed_total[7d]))",
+          "legendFormat": "Tier {{tier}}",
+          "refId": "A"
+        }
+      ],
+      "title": "SLA Conformance by Tier (7d)",
+      "type": "stat"
+    },
+    {
+      "datasource": "SIEM",
+      "description": "Median time from alert fired to first human acknowledgment, grouped by tier. Tier 1 target is under 15 minutes 95% of the time.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineWidth": 2
+          },
+          "unit": "s"
+        }
+      },
+      "gridPos": { "h": 10, "w": 12, "x": 0, "y": 6 },
+      "id": 2,
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom" },
+        "tooltip": { "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (tier, le) (rate(soc_mttd_seconds_bucket[1h])))",
+          "legendFormat": "Tier {{tier}} - p50",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum by (tier, le) (rate(soc_mttd_seconds_bucket[1h])))",
+          "legendFormat": "Tier {{tier}} - p95",
+          "refId": "B"
+        }
+      ],
+      "title": "MTTD by Tier",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "SIEM",
+      "description": "Median and p95 time from alert fired to incident closure, grouped by tier.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineWidth": 2
+          },
+          "unit": "s"
+        }
+      },
+      "gridPos": { "h": 10, "w": 12, "x": 12, "y": 6 },
+      "id": 3,
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom" },
+        "tooltip": { "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (tier, le) (rate(soc_mttr_seconds_bucket[1h])))",
+          "legendFormat": "Tier {{tier}} - p50",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum by (tier, le) (rate(soc_mttr_seconds_bucket[1h])))",
+          "legendFormat": "Tier {{tier}} - p95",
+          "refId": "B"
+        }
+      ],
+      "title": "MTTR by Tier",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "SIEM",
+      "description": "Current count of open alerts grouped by tier. Tier 1 queue depth > 0 for more than 15 minutes is a page-worthy event.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "custom": {
+            "align": "center",
+            "displayMode": "color-background"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 1 },
+              { "color": "red", "value": 10 }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Tier 6" },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "green", "value": null },
+                    { "color": "orange", "value": 100 },
+                    { "color": "red", "value": 500 }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+      "id": 4,
+      "options": {
+        "showHeader": true
+      },
+      "targets": [
+        {
+          "expr": "sum by (tier) (soc_alerts_open_count)",
+          "legendFormat": "Tier {{tier}}",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "Queue Depth by Tier",
+      "type": "table"
+    },
+    {
+      "datasource": "SIEM",
+      "description": "Rolling 24-hour false positive rate per tier. High FP on Tier 1 is a detection-engineering emergency.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 10 },
+              { "color": "red", "value": 30 }
+            ]
+          },
+          "unit": "percent"
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "orientation": "horizontal",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "expr": "100 * sum by (tier) (rate(soc_alerts_fp_total[24h])) / sum by (tier) (rate(soc_alerts_closed_total[24h]))",
+          "legendFormat": "Tier {{tier}}",
+          "refId": "A"
+        }
+      ],
+      "title": "False Positive Rate by Tier (24h)",
+      "type": "stat"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": ["soc", "crown-jewel", "prioritization"],
+  "templating": {
+    "list": [
+      {
+        "current": { "selected": false, "text": "All", "value": "$__all" },
+        "datasource": "SIEM",
+        "definition": "label_values(soc_alerts_closed_total, tier)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Tier",
+        "multi": true,
+        "name": "tier",
+        "options": [],
+        "query": { "query": "label_values(soc_alerts_closed_total, tier)", "refId": "StandardVariableQuery" },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": { "from": "now-24h", "to": "now" },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Crown Jewel Triage - SOC Prioritization",
+  "uid": "crown-jewel-soc-prio",
+  "version": 1
+}
