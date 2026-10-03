@@ -88,7 +88,9 @@ I teach what I learn. I write about what I build. I publish what I ship.
 - **M.S., Cybersecurity and Information Assurance,** Western Governors University, 2026.
 - **Certifications:** CompTIA Security+, CySA+, SecurityX (CASP+).
 - **Writing cadence:** essays on detection engineering, cloud security, and AI-in-the-loop defense. Reach out if a piece in this repo sparks something.
-- **Also on my GitHub:** *Good Deeds Coin* - a cryptocurrency project I shipped before the AI boom. Receipt for building ahead of the wave.
+- **Also on my GitHub:**
+  - *Good Deeds Coin* - a cryptocurrency project I shipped before the AI boom. Receipt for building ahead of the wave.
+  - [*obsidian-second-brain*](https://github.com/Emanuel-Walker/obsidian-second-brain) - a template for running Obsidian as a second brain with any AI agent. Built for ADHD minds, busy professionals, and security people who want local-first thinking.
 
 ## For hiring managers
 
