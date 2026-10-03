@@ -4,6 +4,9 @@ Your old chats are a goldmine. Months of context about what you care about, how 
 
 This workflow takes about 30 minutes once your exports land in your email.
 
+> [!warning] Vendor export formats drift
+> Instructions and schemas below reflect what ChatGPT and Claude.ai exports looked like **as of 2026-10-03**. Vendors change these without notice. If the Python script in Step 3 fails, your export format probably moved. The LLM-based option in Step 3 (Option B) is the safer path for most people and does not care about the schema.
+
 ---
 
 ## Why bother
@@ -43,6 +46,39 @@ This workflow takes about 30 minutes once your exports land in your email.
 ---
 
 ## Step 3 - Convert JSON to markdown
+
+You have two ways to do this. Pick whichever you are comfortable with.
+
+### Option A - Have an LLM do it (easiest, no coding)
+
+Open a fresh ChatGPT, Claude.ai, or Gemini chat. Attach your `conversations.json` file. Paste this prompt:
+
+```
+I am importing my past AI conversations into my Obsidian vault.
+
+Attached is my export file (conversations.json).
+
+Please do the following:
+
+1. Read every conversation in the file.
+2. For each conversation, create ONE markdown file with this format:
+   - Filename: YYYY-MM-DD_short-topic-slug.md (lowercase, hyphens, no spaces)
+   - Top of file: YAML frontmatter with title, date, source platform (ChatGPT or Claude), tags (based on topic), and a one-sentence summary
+   - Body: the full conversation, with "## User" and "## Assistant" headers for each turn
+   - Preserve code blocks with their language fences
+3. Group conversations by month into folders: 2025-11/, 2025-12/, 2026-01/, etc.
+4. At the end, give me ONE index file called INDEX.md that lists every conversation with its date, title, and one-line summary, grouped by month.
+5. If any conversation contains what looks like sensitive personal info (financial, medical, legal, intimate), add the tag `#private` to its frontmatter so I can review and move it out of any synced folder.
+
+Zip everything into a single download when done.
+```
+
+Download the zip, extract into your vault at `08-AI-History/`, and you are done. Skip to Step 4.
+
+> [!tip] Why Option A often beats the script
+> If your export format changes (vendors do this), a code script breaks. An LLM reads whatever structure the file actually has and adapts. The tradeoff is you are feeding your export back to a cloud LLM. If that is a dealbreaker, use Option B.
+
+### Option B - Run the Python script locally (private, no data leaves your machine)
 
 Save the script below as `convert_chats.py` next to your `conversations.json`.
 

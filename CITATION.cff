@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use or reference this portfolio, please cite it as below."
+title: "Cyber Portfolio: Thought Partner + Cybersecurity Tooling"
+abstract: "Six projects: an Obsidian second brain template with AI agent setups, detection-as-code, prompt-injection-hardened LLM triage, crown jewel alert prioritization, identity-first AWS incident response lab, and reusable AI agent skills."
+authors:
+  - family-names: "Walker"
+    given-names: "Emanuel"
+    email: "emanuelwalkerco@gmail.com"
+url: "https://github.com/Emanuel-Walker/cyber-portfolio"
+repository-code: "https://github.com/Emanuel-Walker/cyber-portfolio"
+license: MIT
+date-released: 2026-10-03
+keywords:
+  - cybersecurity
+  - detection-engineering
+  - cloud-security
+  - ai-agents
+  - obsidian
+  - second-brain
+  - threat-detection
+  - llm-security
