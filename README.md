@@ -63,11 +63,11 @@ Ten modular skill files that teach AI assistants how to do specialized work. Con
 ### 6. Obsidian Second Brain Template
 `06-obsidian-second-brain/`
 
-A template for running Obsidian as a second brain with any AI agent (Claude Code, Codex, Hermes, Cursor). PARA structure, 8 ready templates, 6 workflows, 5 security guides, agent setup files, and an ADHD guide. Built for busy professionals and security people who want local-first thinking with a thought partner.
+Your notes, ideas, and research live on your own laptop. An AI agent you choose helps you sort, link, and recall what matters. Setup files for Claude Code, Codex, Hermes, and Cursor. Example vaults for three companion agents (Grok, Muse, Dot). A full beginner walkthrough from installing Obsidian to running your first prompts. 8 workflows (brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP, importing past ChatGPT and Claude.ai conversations, and NotebookLM for podcasts, video overviews, mind maps, and briefing docs). 8 Obsidian templates. 6 security guides. An Obsidian tips cheat sheet.
 
-**You read this if:** you want to see what a working second brain + AI thought partner setup actually looks like, security included.
+**You read this if:** you want a working second brain plus AI thought partner setup, security included, that you can set up in an afternoon.
 
-**Resume line:** Published an open-source Obsidian second-brain template with agent-ready instructions (Claude Code, Codex, Hermes), 8 Obsidian templates, 6 workflows, 5 security guides covering local-first setup through encrypted sync, and a dedicated ADHD guide.
+**Resume line:** Published an open-source Obsidian second-brain template with agent-ready instructions (Claude Code, Codex, Hermes, Cursor), a full beginner walkthrough, 8 workflows including NotebookLM output generation and past-conversation import, 8 Obsidian templates, 6 security guides from local-first setup through encrypted sync and everyday good practices, companion-vault examples for three personal AI agents (Grok, Muse, Dot), an Obsidian tips cheat sheet, and a dedicated ADHD guide.
 
 ## How to read this portfolio
 

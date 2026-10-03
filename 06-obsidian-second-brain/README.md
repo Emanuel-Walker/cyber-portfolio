@@ -29,7 +29,8 @@ This is not another "productivity system." It is the scaffolding behind a daily 
 | `ADHD-GUIDE.md` | How to run the system when your focus is not on your side. |
 | `COMPANION-AGENTS.md` | Using the vault as the memory layer for personal AI agents (Grok, Muse-style chief of staff, Dot and journal-pattern agents). |
 | `agent-setup/` | Templates for Claude Code, Codex, and any skill-aware agent, plus install steps. |
-| `workflows/` | Seven concrete workflows: brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP, importing past ChatGPT and Claude.ai conversations. |
+| `workflows/` | Eight concrete workflows: brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP, importing past ChatGPT and Claude.ai conversations, and NotebookLM (turn your notes into podcasts, video overviews, mind maps, briefing docs). |
+| `OBSIDIAN-TIPS.md` | Cheat sheet. Callouts, plugins to install, keyboard shortcuts, graph view, wikilinks, tags vs folders, properties, Canvas, Templater snippets. |
 | `security/` | Local-first argument, encryption at rest, encrypted sync options, PII rules, legacy folder for your family, and plain-English everyday good practices. |
 | `templates/` | Drop-in Obsidian templates for daily notes, weekly reviews, projects, people, meetings, brain dumps, book notes, idea incubator. |
 | `examples/` | Worked examples including a knowledge graph tour, fitness tracking recipe, and `companion-vaults/` templates for three different personal AI agent patterns. |
