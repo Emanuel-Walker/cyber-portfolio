@@ -9,11 +9,15 @@ updated: 2026-10-03
 **Emanuel Walker, SEC+, CySA+, SecurityX (CASP+), M.S.**
 Cyber + CloudSec + AI Builder
 
-Four projects. One answer to "what do you actually do."
+> **Built by Emanuel Walker.** If this helps you, star the repo. If it changes your work, send a note.
 
-I build detection content, triage tooling, SOC operating models, and cloud IR labs. Every project here is runnable, honestly limited, and documented like a blog post I would want to read.
+Most people don't need another security tool. They need a thought partner they can workshop with, not a stranger that knows them.
 
-## The four
+Six projects. Two audiences. One repo.
+
+I spent the last 6 months building both sides of that problem. The thought partner side (an Obsidian second brain plus AI agent setups you own on your own machine). And the security tooling side (detection content, triage frameworks, hardened LLM pipelines, cloud IR labs). Every project is runnable, honestly limited, and documented like a blog post I would want to read.
+
+## The six
 
 ### 1. Detection-as-Code with Discipline
 `01-detection-as-code/`
