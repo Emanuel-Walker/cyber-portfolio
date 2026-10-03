@@ -62,6 +62,8 @@ Ten modular skill files that teach AI assistants how to do specialized work. Con
 
 ## How to read this portfolio
 
+Every project has a `QUICKSTART.md` with a 5-minute demo. Start there if you want to see something run before you read the writeup.
+
 Start with whichever project speaks to the role you're hiring for. Each project has its own README that tells you what to run first. None of these need a cluster or a lab setup. A laptop and an afternoon are enough.
 
 ## What this is not
