@@ -439,7 +439,7 @@ Each time you catch the agent doing something you did not want, add a rule. The 
 ## Where to go next
 
 - **[`STRUCTURE.md`](STRUCTURE.md)** - the full folder layout and the reasoning behind it.
-- **[`workflows/`](workflows/)** - six specific workflows (brain dump cleanup, daily notes, document conversion, retroactive review, callouts, skills and MCP, past conversation import).
+- **[`workflows/`](workflows/)** - eight specific workflows (brain dump cleanup, daily notes, document conversion, retroactive review, callouts, skills and MCP, past conversation import, NotebookLM).
 - **[`security/`](security/)** - local-first setup, encryption, PII rules, backup habits.
 - **[`starter-prompts.md`](starter-prompts.md)** - longer prompt library by category.
 - **[`examples/`](examples/)** - worked examples including the knowledge graph tour.

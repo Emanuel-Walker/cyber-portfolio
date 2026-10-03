@@ -37,7 +37,7 @@ Operational unless the owner asks for long-form.
 | `05-Resources/` | Reference material | Full |
 | `06-Archive/` | Retired content | Append only |
 | `07-Attachments/` | Binaries | Full with no deletion |
-| `08-AI/` | Agent session logs | Full |
+| `08-AI-History/` | Agent session logs plus chat/NotebookLM imports | Full |
 | `09-Dreams/` | Optional dream log | Append only |
 | `10-Study/` | Optional domain knowledge | Full |
 | `99-MOC/` | Maps of content | Full |
@@ -55,7 +55,7 @@ Operational unless the owner asks for long-form.
 
 ## Session hygiene
 
-Write a short session log to `08-AI/YYYY-MM-DD_<agent-name>_session.md` at the end of every working session. Include files touched, open threads, and one honest line about what went well.
+Write a short session log to `08-AI-History/sessions/YYYY-MM-DD_<agent-name>_session.md` at the end of every working session. Include files touched, open threads, and one honest line about what went well.
 
 ---
 
@@ -67,6 +67,6 @@ Write a short session log to `08-AI/YYYY-MM-DD_<agent-name>_session.md` at the e
 4. Never fabricate quotes, citations, numbers, or dates.
 5. Ask one clarifying question when intent is ambiguous. Do not guess.
 
-<!-- Source: github.com/Emanuel-Walker/obsidian-second-brain -->
+<!-- Source: github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain -->
 ---
-_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/obsidian-second-brain). Credit appreciated, not required._
+_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain). Credit appreciated, not required._

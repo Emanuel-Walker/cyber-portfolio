@@ -272,7 +272,7 @@ Your vault stays the system of record. NotebookLM is the mill, not the warehouse
 
 ## The one-notebook-per-project habit
 
-The highest-leverage use of NotebookLM is one notebook per active project. You feed it:
+The best use of NotebookLM is one notebook per active project. You feed it:
 
 - The project README
 - The project WRITEUP

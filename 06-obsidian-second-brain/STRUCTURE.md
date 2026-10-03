@@ -40,9 +40,9 @@ _Example: `06-Archive/2025-Projects/Old_Site_Rebuild/`_
 Binary files. PDFs, images, voice memos, screenshots. Keep them out of your writing folders so your text stays greppable.
 _Example: `07-Attachments/screenshots/2026-10-03_dashboard.png`_
 
-### `08-AI/`
-Session logs from your agent. When a long agent session produces useful output, save a transcript here. Useful for post-mortems and for refining your agent instructions over time.
-_Example: `08-AI/2026-10-03_vault_cleanup_session.md`_
+### `08-AI-History/`
+Everything your agent produces or imports. Session logs, exported ChatGPT and Claude.ai conversations, and NotebookLM source files. Keep platforms and purposes in subfolders (`sessions/`, `chatgpt/`, `claude/`, `notebooklm-exports/`).
+_Example: `08-AI-History/sessions/2026-10-03_vault_cleanup_session.md`_
 
 ### `09-Dreams/` (optional)
 If you track dreams, keep them separate. They are useful for pattern work with the agent but should not pollute your main project graph.

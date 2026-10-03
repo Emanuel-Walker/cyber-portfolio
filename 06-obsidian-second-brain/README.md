@@ -63,9 +63,9 @@ The current wave of discourse around AI coding agents working inside knowledge b
 Five commands to go from zero to a working vault with an agent plugged in.
 
 ```bash
-# 1. Clone this template
-git clone https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain.git my-vault
-cd my-vault
+# 1. Clone the portfolio (the template lives in 06-obsidian-second-brain/)
+git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
+cd cyber-portfolio/06-obsidian-second-brain
 
 # 2. Open the folder in Obsidian (File > Open vault > this folder)
 #    Enable community plugins. Install Templater and Dataview to start.

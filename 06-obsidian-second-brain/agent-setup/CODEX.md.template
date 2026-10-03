@@ -40,7 +40,7 @@ Use the operational voice described below for all notes unless I ask for long-fo
 | `02-People/` through `05-Resources/` | Full read and write. |
 | `06-Archive/` | Append only. |
 | `07-Attachments/` | Place new files here. No deletions without approval. |
-| `08-AI/` | Full read and write. Your session logs land here. |
+| `08-AI-History/` | Full read and write. Session logs land in `sessions/`, imports in sibling subfolders. |
 | `Legacy/` | Hard off limits. No reads, no writes. |
 
 ---
@@ -57,7 +57,7 @@ Use the operational voice described below for all notes unless I ask for long-fo
 
 ## Session output format
 
-End every working session with a short summary at `08-AI/YYYY-MM-DD_session.md`:
+End every working session with a short summary at `08-AI-History/sessions/YYYY-MM-DD_session.md`:
 
 ```markdown
 # Session - YYYY-MM-DD
@@ -83,6 +83,6 @@ One honest sentence about the session.
 4. Never fabricate scripture, citations, quotes, numbers, or dates.
 5. Never apply long-form voice to operational notes.
 
-<!-- Source: github.com/Emanuel-Walker/obsidian-second-brain -->
+<!-- Source: github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain -->
 ---
-_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/obsidian-second-brain). Credit appreciated, not required._
+_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain). Credit appreciated, not required._

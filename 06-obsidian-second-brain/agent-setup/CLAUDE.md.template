@@ -54,7 +54,7 @@ Vault root is `<YOUR_VAULT_ROOT>`. The folders below are safe to read and modify
 | `05-Resources/` | Yes |
 | `06-Archive/` | Append only. Never rewrite history. |
 | `07-Attachments/` | Place new attachments here. Do not delete without asking. |
-| `08-AI/` | Yes. This is where session logs live. |
+| `08-AI-History/` | Yes. Session logs live in `sessions/`, chat exports and NotebookLM sources in sibling subfolders. |
 | `09-Dreams/` | Append only. Never reorganize. |
 | `99-MOC/` | Yes |
 | `99-System/` | Yes, but ask before deleting scripts. |
@@ -106,7 +106,7 @@ If you support skill files, they live in `99-System/skills/`. Read `99-System/sk
 
 ## Session close
 
-When I say "wrap up," "we're done," or similar, write a short session log to `08-AI/YYYY-MM-DD_session.md` with:
+When I say "wrap up," "we're done," or similar, write a short session log to `08-AI-History/sessions/YYYY-MM-DD_session.md` with:
 
 - Files created or modified
 - Open threads for next time
@@ -114,6 +114,6 @@ When I say "wrap up," "we're done," or similar, write a short session log to `08
 
 That is the whole file. Replace the placeholders. Add your own rules at the bottom if you need to. Keep it short.
 
-<!-- Source: github.com/Emanuel-Walker/obsidian-second-brain -->
+<!-- Source: github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain -->
 ---
-_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/obsidian-second-brain). Credit appreciated, not required._
+_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain). Credit appreciated, not required._
