@@ -31,6 +31,7 @@ This is not another "productivity system." It is the scaffolding behind a daily 
 | `agent-setup/` | Templates for Claude Code, Codex, and any skill-aware agent, plus install steps. |
 | `workflows/` | Eight concrete workflows: brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP, importing past ChatGPT and Claude.ai conversations, and NotebookLM (turn your notes into podcasts, video overviews, mind maps, briefing docs). |
 | `OBSIDIAN-TIPS.md` | Cheat sheet. Callouts, plugins to install, keyboard shortcuts, graph view, wikilinks, tags vs folders, properties, Canvas, Templater snippets. |
+| `UNDERRATED-AI-TOOLS.md` | 12 AI tools most people miss (Ollama, Aider, Fabric, MCP servers, Granola, OpenInterpreter, more). What they do, how to try one this week. |
 | `security/` | Local-first argument, encryption at rest, encrypted sync options, PII rules, legacy folder for your family, and plain-English everyday good practices. |
 | `templates/` | Drop-in Obsidian templates for daily notes, weekly reviews, projects, people, meetings, brain dumps, book notes, idea incubator. |
 | `examples/` | Worked examples including a knowledge graph tour, fitness tracking recipe, and `companion-vaults/` templates for three different personal AI agent patterns. |
