@@ -1,6 +1,6 @@
 # Obsidian Second Brain
 
-**Start here: [WALKTHROUGH.md](WALKTHROUGH.md)** — zero to a working vault + AI agent in about 90 minutes. Written for a total beginner.
+**Start here: [WALKTHROUGH.md](WALKTHROUGH.md)**. Zero to a working vault plus AI agent in about 90 minutes. Written for a total beginner. The cheat sheet for callouts, plugins, and shortcuts is in [OBSIDIAN-TIPS.md](OBSIDIAN-TIPS.md).
 
 ### For ADHD minds, security people, and busy builders who want AI as a thought partner without giving up privacy.
 
