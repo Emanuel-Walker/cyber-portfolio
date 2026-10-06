@@ -2,7 +2,7 @@
 
 [Visit the public portfolio](https://emanuel-walker-cyber.walkwithemanuel.chatgpt.site)
 
-Responsive, static HTML/CSS/JavaScript portfolio with an interactive six-project map, project filters and detail views, career timeline, and two downloadable resumes.
+Responsive, static HTML/CSS/JavaScript portfolio with an interactive six-project map, project filters and detail views, career timeline, and GitHub and LinkedIn profile links.
 
 ## Preview locally
 
@@ -17,9 +17,8 @@ Open http://localhost:8000 in your browser. No package installation or build ste
 ## Edit
 
 - `index.html`: introduction, career history, education, and contact links.
-- `app.js`: project content, filters, project dialogs, and resume selection.
+- `app.js`: project content, filters, and project dialogs.
 - `style.css`: visual design and responsive layouts.
-- `assets/`: resume PDF location used by the hosted site. The PDFs are not included in this repository pending explicit publication approval. Local resume download buttons require those files.
 
 The website uses Google Fonts, with local fallback fonts. Project links point to this repository.
 
