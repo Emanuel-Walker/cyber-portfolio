@@ -54,7 +54,7 @@ Built a Terraform-deployed AWS security lab with identity-focused attack scenari
 
 **Expanded**
 
-Built a disposable AWS incident-response lab with intentional identity weaknesses, five controlled attack scenarios, GuardDuty comparison testing, and custom Athena, Elastic, and Panther detections. Added teardown and resource checks to keep the lab repeatable and low cost.
+Built a disposable AWS incident-response lab with intentional identity weaknesses, five controlled attack scenarios, GuardDuty comparison testing, and custom Elastic and Panther detections. Added teardown and resource checks to keep the lab repeatable and low cost.
 
 **Skills shown**
 
