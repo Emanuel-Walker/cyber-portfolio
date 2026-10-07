@@ -9,7 +9,7 @@ This lab proves it. Then it ships the detections that catch it.
 - Builds a deliberately weak AWS tenant with Terraform (infrastructure-as-code tool. You describe cloud resources in HCL files, Terraform makes them exist). Includes an over-privileged IAM role, OAuth app with excess scopes, cross-account trust with a weak condition, and misconfigured S3 lifecycle.
 - Runs 5 attacker scenarios drawn from real 2024-2026 breach patterns (Scattered Spider, Snowflake customer compromises, Okta token theft).
 - Shows exactly what GuardDuty catches, what it misses, and names the finding types involved.
-- Ships custom detections in three flavors (Athena SQL, Elastic Detection Engine, Panther Python) that close the gaps.
+- Ships custom detections in Elastic and Panther, with a coverage matrix that compares those results against native GuardDuty behavior.
 - Includes a tabletop exercise good enough to run with an actual SOC team.
 
 ## Quick start
@@ -43,7 +43,7 @@ GuardDuty is useful. It is not sufficient. The findings I expected to fire did n
 2. **`AssumeRole` from a stolen session token looks identical to a legitimate assume-role until you correlate ASN, user-agent, and prior session geography.** None of that correlation happens in GuardDuty default.
 3. **S3 data exfiltration via `GetObject` loops under a normal baseline rate does not fire `Exfiltration:S3/MaliciousIPCaller.Custom` unless the source IP is on a known-bad list.** Low-and-slow pulls from a clean VPS stay invisible.
 
-The detection matrix in `detections/detection_matrix.md` lays out every attack scenario against every tool, honestly.
+The detection matrix in `detections/detection_matrix.md` lays out every attack scenario against the tested coverage, honestly.
 
 ## What's next
 
