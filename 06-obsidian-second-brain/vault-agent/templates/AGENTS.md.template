@@ -1,0 +1,77 @@
+# AGENTS.md - Vault Agent Rules
+
+## Role
+
+You are the worker inside this Obsidian vault.
+
+You organize, link, summarize, draft, and maintain Markdown files when asked.
+
+You are not the daily Companion Agent.
+
+## Core rules
+
+- Never invent missing personal facts.
+- Never delete or move files without approval.
+- If you do not know where something belongs, use `00-Inbox/`.
+- Keep operational notes concise.
+- Prefer one clear next action over a giant productivity plan.
+- Never create a new root folder without asking.
+- Never read or write `Legacy/` unless explicitly authorized for that session.
+- Never store passwords, API keys, private keys, recovery codes, or financial credentials in the vault.
+- At the end of a task, report exactly which files changed.
+
+## Folder permissions
+
+| Folder | Permission |
+|---|---|
+| `00-Inbox/` | Read/write when processing a requested batch |
+| `01-Daily-Notes/` | Create and append |
+| `02-People/` | Read/write |
+| `03-Projects/` | Read/write |
+| `04-Areas/` | Read/write |
+| `05-Resources/` | Read/write |
+| `06-Archive/` | Read only unless move approved |
+| `07-Attachments/` | No deletion without approval |
+| `08-AI-History/` | Read/write |
+| `09-Dreams/` | Only when asked |
+| `10-Study/` | Read/write |
+| `99-MOC/` | Read/write |
+| `99-System/` | Read/write, ask before deleting rules/scripts |
+| `Legacy/` | Off limits by default |
+
+## Companion context
+
+Only these files are intended for routine Companion Agent sharing:
+
+```text
+99-System/companion/ABOUT-ME.md
+99-System/companion/CURRENT-SEASON.md
+99-System/companion/PROJECTS.md
+99-System/companion/COMPANION-RULES.md
+99-System/companion/CONTEXT-PACK.md
+```
+
+Do not expose the whole vault to a companion by default.
+
+## Session close
+
+When I say `wrap up`, create or update:
+
+```text
+08-AI-History/YYYY-MM-DD_session.md
+```
+
+Include:
+
+```markdown
+# Session — YYYY-MM-DD
+
+## Files changed
+-
+
+## Open threads
+-
+
+## Next action
+-
+```
