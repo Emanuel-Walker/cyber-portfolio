@@ -1,49 +1,72 @@
 # Start here
 
-You do not need to understand every tool in this repo.
+You do not need Git to understand or try this portfolio.
 
-Pick one project. Run its quickstart. See the result. Then read the deeper writeup.
+Each project has two paths:
+
+1. **Read / follow the walkthrough** in GitHub.
+2. **Run the actual project files** by downloading the ZIP or, if you already use Git, cloning the repository.
+
+Git is a developer convenience here, not the front door.
 
 ## If you are a recruiter or hiring manager
 
 Start here:
 
-1. **Crown Jewel Triage** if you want to see how I frame security problems.
-2. **Detection-as-Code** if you want to see engineering discipline.
-3. **AWS Incident Response Lab** if you want cloud security.
-4. **LLM Triage** if you want applied AI security.
-5. **AI Agent Skills** if you want reusable agent workflows.
-6. **Obsidian Second Brain** if you want the human side of AI systems.
+1. **Crown Jewel Triage** for security judgment and prioritization.
+2. **Detection-as-Code** for engineering discipline.
+3. **AWS Incident Response Lab** for cloud security.
+4. **LLM Triage** for applied AI security.
+5. **AI Agent Skills** for reusable agent workflows.
+6. **Obsidian Second Brain** for human-centered AI systems.
 
-Resume-ready summaries live in:
+Resume-ready summaries:
 
 ```text
 RESUME_PROJECTS.md
 ```
 
-## If you want to run something
+## If you want to try a project
 
-Clone the repo:
+Open its quickstart directly on GitHub.
+
+| Project | Plain English | Start here |
+|---|---|---|
+| 01 Detection-as-Code | Test security rules before they reach production | `01-detection-as-code/QUICKSTART.md` |
+| 02 LLM Triage | Test whether attacker-controlled text can manipulate a SOC AI assistant | `02-llm-triage-hardened/QUICKSTART.md` |
+| 03 Crown Jewel Triage | Rank alerts by what they threaten, not only severity | `03-crown-jewel-triage/QUICKSTART.md` |
+| 04 AWS IR Lab | Test identity-focused cloud detections | `04-identity-cloud-ir/QUICKSTART.md` |
+| 05 Agent Skills | Install one reusable instruction module into an AI agent | `05-ai-agent-skills/QUICKSTART.md` |
+| 06 Second Brain | Build a local notes system with an AI thought partner | `06-obsidian-second-brain/WALKTHROUGH.md` |
+
+## When a project needs files
+
+### Beginner option: Download ZIP
+
+On the repository page:
+
+```text
+Code -> Download ZIP
+```
+
+Extract it.
+
+Open only the project folder you want.
+
+### Developer option: Git clone
+
+If you already use Git:
 
 ```bash
 git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
 cd cyber-portfolio
 ```
 
-Then pick a project:
-
-| Project | Plain English | Start here |
-|---|---|---|
-| 01 Detection-as-Code | Test security rules before they reach production | `01-detection-as-code/QUICKSTART.md` |
-| 02 LLM Triage | See whether attacker-controlled text can trick a SOC AI assistant | `02-llm-triage-hardened/QUICKSTART.md` |
-| 03 Crown Jewel Triage | Rank alerts by what they threaten, not just severity | `03-crown-jewel-triage/QUICKSTART.md` |
-| 04 AWS IR Lab | Build a small cloud lab and test identity-focused detections | `04-identity-cloud-ir/QUICKSTART.md` |
-| 05 Agent Skills | Install one reusable instruction module into an AI coding agent | `05-ai-agent-skills/QUICKSTART.md` |
-| 06 Second Brain | Build a local notes system with an AI thought partner | `06-obsidian-second-brain/QUICKSTART.md` |
+You do not need to learn Git just to understand the portfolio.
 
 ## The rule for every project
 
-Each project should answer five questions:
+Each project should answer:
 
 1. What problem does this solve?
 2. What did I build?
@@ -51,25 +74,10 @@ Each project should answer five questions:
 4. What should I see when it works?
 5. What does this **not** prove?
 
-If a project does not answer all five, open an issue.
-
 ## Safety
 
-- Cloud labs belong in accounts you own.
+- Cloud labs belong in accounts you own or are authorized to use.
 - Attack simulations belong in labs you control.
-- Data in this repo is synthetic.
+- Included sample data is synthetic.
 - AI outputs still need human review.
 - Local notes do not automatically mean local AI processing.
-
-## First recommendation
-
-If you only run one project today:
-
-```bash
-cd 03-crown-jewel-triage
-python3 code/crown_jewel_scorer.py \
-  --inventory code/example_asset_inventory.yaml \
-  --alert code/example_alerts.jsonl
-```
-
-It is fast, local, and shows the portfolio's core idea: context changes what matters.
