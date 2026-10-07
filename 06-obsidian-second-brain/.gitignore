@@ -1,0 +1,6 @@
+.upstream/
+CLAUDE.md
+CODEX.md
+AGENTS.md
+99-System/skills/local/
+.DS_Store
