@@ -57,7 +57,7 @@ Both gates green means merge is allowed. If either fails, the PR blocks. That is
 
 - Detection engineering treated like software with CI gates, not a wiki page of regexes.
 - Dual-gate testing (positive + benign) catches rules that fire on legitimate admin work before prod does.
-- Portable rule format with automated backend conversion means one source of truth across Elastic, Splunk, and Panther.
+- Sigma keeps the source detection logic portable while this project demonstrates automated conversion to Elastic KQL.
 
 ## Add screenshots here
 
@@ -73,4 +73,4 @@ Capture these while running the demo and drop them in a `screenshots/` folder ne
 
 - `ModuleNotFoundError: No module named 'yaml'`. The `pyyaml` install did not land in the active interpreter. Run `python -m pip install pyyaml` instead of plain `pip`.
 - Pytest reports `collected 0 items`. You ran it from the repo root. Either run from `01-detection-as-code/` or pass the full path `pytest 01-detection-as-code/code/tests/ -v`.
-- Converter prints a Sigma field name with no translation. The field is not in the mapping table. Add it to the converter's `FIELD_MAP` dict and rerun.
+- Converter prints a Sigma field name with no translation. The field is not in the Elastic mapping table. Add it to the converter's `FIELD_MAP` dict and rerun.
