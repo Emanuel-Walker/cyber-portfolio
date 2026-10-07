@@ -159,14 +159,6 @@ I teach what I learn. I write about what I build. I publish what I ship.
 
 GitHub and LinkedIn are linked from the interactive portfolio.
 
-## Credits
-
-Some projects use or learn from open-source work.
-
-Third-party attribution stays with the relevant project.
-
-AI tools helped with pair-programming and drafting. I own the project choices, testing, claims, and final published work.
-
 ## License
 
 MIT unless a project or third-party file says otherwise.
