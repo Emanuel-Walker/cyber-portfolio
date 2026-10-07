@@ -1,184 +1,183 @@
 # Obsidian Second Brain
 
-## Plain English
+A beginner-friendly way to build a local Markdown knowledge system with:
 
-This project is a folder of Markdown notes plus a rulebook for an AI agent.
-
-The notes are the memory.
-
-The agent helps you search, summarize, connect, and organize that memory when you ask.
-
-You can change the agent later without rebuilding the notes.
-
-That is the whole idea.
+- Obsidian
+- Codex or Claude Code as the **Vault Agent**
+- an optional **Companion Agent** for daily use
+- reusable workflows and templates
+- clear privacy boundaries
+- optional Obsidian Sync later
 
 ## Start here
 
-If you want to try it:
+If you are starting from zero:
 
 ```text
-QUICKSTART.md
+start-here/README.md
 ```
 
-The quickstart gets you to:
-- a working vault structure
-- an agent charter
-- one agent-created project note
-
-without making you read the whole repo first.
-
-For the longer beginner guide:
+That walkthrough starts with:
 
 ```text
-WALKTHROUGH.md
+what to Google
+-> what to download
+-> what account to create
+-> where to click
+-> what command to type
+-> what prompt to paste
+-> what files should appear
+-> how to test the result
 ```
 
-## What problem this solves
+You do **not** need Git.
 
-Useful context gets scattered across:
-- chat histories
-- browser tabs
-- random documents
-- meeting notes
-- screenshots
-- your own memory
-
-AI assistants make that worse when the important context exists only inside one vendor's chat history.
-
-This project gives the human a canonical source of truth:
-
-```text
-plain Markdown files on disk
-```
-
-The agent reads the files you choose.
-
-## What is included
-
-| Area | What it gives you |
-|---|---|
-| `setup/` | bootstrap scripts for macOS/Linux and Windows |
-| `agent-setup/` | charters for Claude Code, Codex, and AGENTS.md-aware tools |
-| `templates/` | daily notes, projects, meetings, people, books, and reviews |
-| `workflows/` | repeatable jobs such as brain-dump cleanup and conversation import |
-| `security/` | privacy, PII, encryption, backup, and sync guidance |
-| `ADHD-GUIDE.md` | low-friction operating rules for people who lose systems when they become too complicated |
-| `COMPANION-AGENTS.md` | how to use the vault as an inspectable memory layer for a persistent assistant |
-| `starter-prompts.md` | prompts you can paste directly into an agent |
+You do **not** need to clone this repo to build the system.
 
 ## The architecture
 
 ```text
-Your notes
-   |
-   v
-Obsidian vault
-   |
-   v
-Agent charter
-   |
-   v
-AI agent you choose
-   |
-   v
-Search / summarize / draft / organize
+OBSIDIAN VAULT
+Your local Markdown memory
+        |
+        v
+VAULT AGENT
+Codex / Claude Code
+Organizes and maintains files
+        |
+        v
+CURATED CONTEXT PACK
+Small reviewed context
+        |
+        v
+COMPANION AGENT
+Muse / Dot / ChatGPT / Claude / other
+Daily conversation and capture
 ```
 
-The vault is not the model.
+## Repo map
 
-The model is not the memory.
+```text
+start-here/
+  README.md              Zero-to-hero walkthrough
 
-Keeping them separate is the point.
+vault-agent/
+  README.md              Worker-agent architecture
+  PROMPTS.md             Copy-paste maintenance prompts
+  templates/             AGENTS / CLAUDE / CODEX examples
+  scripts/               Optional bootstrap automation
 
-## What "local-first" means here
+companion-agent/
+  README.md              Daily-use companion architecture and prompts
 
-Your notes are normal local files.
+guides/
+  adhd-friendly-use.md
+  vault-structure.md
 
-That does **not** mean every AI agent runs locally.
+templates/               Note templates
+workflows/               Repeatable Vault Agent workflows
+security/                Privacy and sync guidance
+examples/                Example use cases
+images/                  Example visuals
+```
 
-If you use a hosted AI service, content you send to that service leaves your computer.
+## Vault Agent vs Companion Agent
 
-Read:
+### Vault Agent
+
+Use Codex, Claude Code, or another file-aware coding agent.
+
+It is the worker.
+
+It can:
+- create notes
+- organize Inbox items
+- update projects
+- link notes
+- build summaries
+- generate the Companion Context Pack
+
+Open:
+
+```text
+vault-agent/README.md
+```
+
+### Companion Agent
+
+Use Muse, Dot, ChatGPT, Claude, or another conversational assistant.
+
+It is the daily interface.
+
+It should normally receive a **small curated context pack**, not unrestricted access to your entire vault.
+
+Open:
+
+```text
+companion-agent/README.md
+```
+
+## Why Obsidian
+
+The vault is a normal folder containing Markdown files.
+
+That means:
+- you can inspect your memory
+- you can edit it without the AI
+- you can change AI providers later
+- you can back it up with normal file tools
+- the model is not the only place your history exists
+
+## Accounts and Sync
+
+A local Obsidian vault works without an account.
+
+The walkthrough still recommends creating an Obsidian account early so you are ready if you later choose **Obsidian Sync** or Publish.
+
+Obsidian Sync is optional and requires its own subscription.
+
+Sync is not a backup.
+
+See:
 
 ```text
 security/
+start-here/README.md
 ```
-
-before adding sensitive material.
-
-## Agent boundaries
-
-The included charters show one way to define:
-- which folders are read-only
-- which folders the agent may edit
-- what requires approval
-- what the agent must never read
-- how to handle missing facts
-- when to create session notes
-
-You should change those rules for your own vault.
-
-## Companion-agent pattern
-
-A useful persistent assistant needs more than chat history.
-
-At minimum it needs:
-
-1. an `ABOUT-ME` file
-2. a rules file
-3. a current-priorities file
-4. a projects index
-5. context for recurring people or topics
-
-The vault keeps those files visible and editable by the human.
-
-Read:
-
-```text
-COMPANION-AGENTS.md
-```
-
-for the deeper pattern.
 
 ## What this project refuses to do
 
-- no streaks
-- no mandatory daily ritual
-- no hidden database you cannot inspect
-- no assumption that one AI vendor should own your long-term context
-- no silent writes to protected folders
-- no claim that an agent "knows you" better than the files and permissions you actually give it
+- no hidden memory database you cannot inspect
+- no forced streaks
+- no "you missed a day" guilt
+- no assumption that every assistant needs the whole vault
+- no silent mass file moves
+- no claim that local notes automatically make a cloud AI private
 
-## What this proves
+## Want my templates?
 
-This project demonstrates:
-- local-first knowledge organization
-- portable agent instructions
-- workflow design
-- privacy boundaries
-- human-readable memory
-- beginner-focused documentation
+You can simply browse and copy the individual files you want.
 
-## What this does not prove
-
-It does not prove:
-- an AI agent will always follow the charter
-- local files make a cloud model private
-- more notes automatically create better reasoning
-- a companion agent should have unrestricted access to your life
-
-Human review still matters.
-
-## Next
-
-Start with:
+Or download the repository as a ZIP:
 
 ```text
-QUICKSTART.md
+Code -> Download ZIP
 ```
 
-Then choose one workflow.
+Git clone is for people who already use Git.
 
-Not eight.
+It is not a prerequisite for the system.
 
-One.
+## First recommendation
+
+Do not read the entire repo.
+
+Open:
+
+```text
+start-here/README.md
+```
+
+Build the first working version.
+
+Then come back for templates and workflows.
