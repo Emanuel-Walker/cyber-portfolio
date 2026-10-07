@@ -1,452 +1,338 @@
-# Walkthrough: From Zero to a Working Vault + AI Agent
+# Walkthrough: from zero to a working Second Brain
 
-Start here. This file is written for a total beginner. If you have never installed Obsidian, never used an AI coding tool, and never written a line of markdown, you are the target reader.
+## What you are building
 
-By the end you will have a working second brain on your laptop, an AI agent that reads it, and a daily habit that scales.
+By the end, you will have:
 
----
+- an Obsidian vault made of local Markdown files
+- a clear folder structure
+- an AI-agent charter
+- one project note created by the agent
+- a safe place to add more workflows later
 
-## BLUF
+This guide assumes no Obsidian experience.
 
-- You will install Obsidian (a free note app), pick an AI agent, and point the agent at your notes.
-- You will copy a ready-made folder structure and a charter file (CLAUDE.md) that teaches the agent your rules.
-- You will paste five starter prompts to prove the agent is working.
-- At the end you will have a repeatable daily workflow and a path to import your past AI chats.
+## Time
 
----
+Plan for about 30 minutes for the first working version.
 
-## Before you start
+You can stop after Step 5.
 
-- **Time:** about 90 minutes end to end. 20 minutes for install, 20 for structure, 20 for the agent, 30 for the first real pass.
-- **Cost:** $0 if you use the free tiers. If you want unlimited agent usage, budget $20 a month for Claude or ChatGPT.
-- **Skill level:** zero. If you can download an app and copy a folder, you can finish this walkthrough.
-- **What you need:** a laptop (macOS, Windows, or Linux), an internet connection for the install, and a free hour.
+Everything after that is optional.
 
-> [!info] Plain English
-> A **vault** is a folder of plain text files on your computer. An **AI agent** is a program that reads and writes those files when you ask it to. That is the entire mental model. No cloud account required.
+## 1. Get the repo
 
----
-
-## Step 1 - Install Obsidian
-
-Obsidian is a free app that opens a folder of markdown files and shows them like a wiki. It does not upload your notes anywhere.
-
-### Download
-
-Go to [obsidian.md](https://obsidian.md) and click the download button for your operating system.
-
-### macOS
-
-1. Open the downloaded `.dmg` file.
-2. Drag the Obsidian icon into Applications.
-3. Open Launchpad, click Obsidian. On first launch, macOS may ask if you trust the app. Click Open.
-
-### Windows
-
-1. Run the downloaded `.exe` installer.
-2. Follow the prompts. Default install path is fine.
-3. Obsidian opens automatically when install finishes. If not, find it in the Start menu.
-
-### Linux
-
-1. Download the AppImage or `.deb` for your distro.
-2. For AppImage, `chmod +x Obsidian-*.AppImage` then run it.
-3. For `.deb`, `sudo dpkg -i Obsidian-*.deb`.
-
-### First launch and create your vault
-
-1. Obsidian opens to a welcome screen.
-2. Click **Create new vault**.
-3. Name it something you will recognize. `my-brain` is fine. `second-brain-2026` is fine.
-4. Pick a location you will remember. Your Documents folder is a safe default.
-5. Click **Create**.
-
-You now have an empty vault. The folder exists on your disk. You could open it in Finder, File Explorer, or a terminal and see an empty directory with one hidden `.obsidian/` folder inside. That hidden folder stores Obsidian settings. Leave it alone.
-
-### Recommended first plugins
-
-In Obsidian, open **Settings → Community plugins**. Click **Turn on community plugins**. Then install these four:
-
-- **Templater** - lets the templates in this repo auto-fill dates and prompts.
-- **Dataview** - lets you query your notes like a database.
-- **Advanced Tables** - keeps markdown tables readable.
-- **Natural Language Dates** - type `@today` and get the date.
-
-That is enough. Do not install more until you miss something specific.
-
----
-
-## Step 2 - Pick your AI agent
-
-Three solid options. You only need one. Read all three paragraphs before you pick.
-
-### Option A: Claude Code (recommended for first-timers)
-
-Claude Code is a command-line tool from Anthropic. You run it inside your vault folder from a terminal. It reads a file called `CLAUDE.md` at the vault root and uses that as its rulebook.
-
-- **How to install:** `npm install -g @anthropic-ai/claude-code` or `pipx install claude-code`.
-- **How to pay:** needs an Anthropic API key (pay per use, cheap) or a paid Claude.ai plan ($20 a month, flat).
-- **Why pick this:** the charter format in this repo was built for Claude Code first. Everything in the `agent-setup/CLAUDE.md.template` just works. The CLI is text-only but the output is clean and the agent handles multi-file work well.
-- **Downside:** command-line only. If a terminal scares you, read Option C.
-
-### Option B: Codex (OpenAI's agent)
-
-Codex is OpenAI's coding agent. You can run it through ChatGPT Plus or through the API.
-
-- **How to install:** available in ChatGPT Plus web interface or via the OpenAI API.
-- **How to pay:** $20 a month for ChatGPT Plus, or pay-per-use with the API.
-- **Why pick this:** if you already have ChatGPT Plus, no new account needed. The agent is capable and the ecosystem is familiar.
-- **Downside:** uses `CODEX.md` or `AGENTS.md` instead of `CLAUDE.md`. We ship a template for both. Context handling with local files is less mature than Claude Code.
-
-### Option C: Cursor (visual IDE, generous free tier)
-
-Cursor is an editor that looks and feels like VS Code, with an AI chat built in. You open your vault folder in Cursor and talk to the agent in a sidebar.
-
-- **How to install:** download from [cursor.com](https://cursor.com).
-- **How to pay:** free tier is generous. Pro is $20 a month if you hit the free limit.
-- **Why pick this:** visual UI, no terminal needed. If you have never used a command line, start here.
-- **Downside:** Cursor is a full code editor. It can edit anything, which means you have to be more careful with the charter boundaries.
-
-**Recommendation.** If you have used a terminal before, pick Claude Code. If you have never used a terminal, pick Cursor. If you already pay for ChatGPT Plus, Codex is reasonable. All three work with the templates in this repo.
-
-The rest of this walkthrough uses Claude Code as the example. The steps map one-for-one to the others. Where they differ, there is a note.
-
----
-
-## Step 3 - Set up the vault structure
-
-You now have an empty Obsidian vault. Time to pour in the folder structure and the agent charter from this repo.
-
-### Grab this repo
+### Standalone version
 
 ```bash
-# Pick a convenient parent folder
-cd ~/Documents
+git clone https://github.com/Emanuel-Walker/obsidian-second-brain.git my-brain
+cd my-brain
+```
 
-# Clone the portfolio
+### Portfolio version
+
+```bash
 git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
-
-# The template lives in 06-obsidian-second-brain
-ls cyber-portfolio/06-obsidian-second-brain
+cd cyber-portfolio/06-obsidian-second-brain
 ```
 
-Do not have git? Download the repo as a ZIP from the GitHub page and unzip it.
+**PASS:** the folder contains `README.md`, `templates/`, and `agent-setup/`.
 
-### Copy the structure into your vault
+## 2. Build the vault structure
 
-Open your vault folder. Create the folders below. On macOS and Linux you can run this in a terminal from your vault root. On Windows, use File Explorer or the PowerShell equivalent.
+Do not create every folder by hand.
+
+### macOS or Linux
+
+For Codex:
 
 ```bash
-cd ~/Documents/my-brain   # or wherever your vault lives
-
-mkdir -p 00-Inbox
-mkdir -p 01-Daily-Notes
-mkdir -p 02-People
-mkdir -p 03-Projects
-mkdir -p 04-Areas
-mkdir -p 05-Resources
-mkdir -p 06-Archive
-mkdir -p 07-Attachments
-mkdir -p 08-AI-History
-mkdir -p 99-System
-mkdir -p Legacy
+bash setup/bootstrap-vault.sh codex
 ```
 
-> [!info] Plain English
-> This is the **PARA structure** (Projects, Areas, Resources, Archive) with a few extras. The numbered folders force them to sort in a sensible order. See `STRUCTURE.md` for the full explanation.
-
-### Copy the templates
+For Claude Code:
 
 ```bash
-# From the cloned repo, copy the ready-made templates
-cp -r ~/Documents/cyber-portfolio/06-obsidian-second-brain/templates ~/Documents/my-brain/99-System/templates
+bash setup/bootstrap-vault.sh claude
 ```
 
-On Windows PowerShell:
+For Cursor or another AGENTS.md-aware tool:
+
+```bash
+bash setup/bootstrap-vault.sh generic
+```
+
+### Windows PowerShell
+
+For Codex:
 
 ```powershell
-Copy-Item -Recurse "$HOME\Documents\cyber-portfolio\06-obsidian-second-brain\templates" "$HOME\Documents\my-brain\99-System\templates"
+Set-ExecutionPolicy -Scope Process Bypass
+.\setup\bootstrap-vault.ps1 -Agent codex
 ```
 
-### Put CLAUDE.md at the vault root
+Change `codex` to `claude` or `generic` if needed.
 
-This is the most important file. The agent reads it on every session.
+**PASS:** the script prints:
 
-```bash
-cp ~/Documents/cyber-portfolio/06-obsidian-second-brain/agent-setup/CLAUDE.md.template ~/Documents/my-brain/CLAUDE.md
+```text
+PASS: vault folders created.
+PASS: templates copied...
+PASS: agent charter ready...
 ```
 
-Then open `CLAUDE.md` in Obsidian and fill in the `<ANGLE_BRACKET>` placeholders. One line each. Short beats clever.
+## 3. Edit the charter
 
-> [!warning] Important
-> `CLAUDE.md` has to sit at the vault root, not inside a subfolder. Claude Code only auto-loads it from the current working directory root.
+The bootstrap created one of:
 
-For Codex users, use `CODEX.md.template` instead. For Cursor and other `AGENTS.md`-aware tools, use `AGENTS.md.template`.
-
----
-
-## Step 4 - Point your agent at the vault
-
-### Claude Code (recommended)
-
-Open a terminal.
-
-**macOS or Linux:**
-```bash
-cd ~/Documents/my-brain
-claude
+```text
+CODEX.md
+CLAUDE.md
+AGENTS.md
 ```
 
-**Windows (PowerShell):**
-```powershell
-Set-Location "$HOME\Documents\my-brain"
-claude
+Open that file.
+
+Replace every placeholder that looks like:
+
+```text
+<YOUR_NAME>
+<YOUR_VAULT_ROOT>
+<YOUR_PRIMARY_FOCUS>
 ```
 
-The first time you run `claude`, it will ask you to log in or paste an API key. Follow the prompts.
+Keep answers short.
 
-Once the agent is running, you should see a prompt. The agent has already read your `CLAUDE.md` because the file is at the current working directory root. That is the entire discovery mechanism. No config file, no path setting.
+Do not add:
+- passwords
+- API keys
+- private keys
+- bank information
+- government identifiers
 
-### Cursor
+The charter is a rulebook, not a secrets file.
 
-1. Open Cursor.
-2. **File → Open Folder** and pick your vault folder.
-3. Open the AI chat sidebar (keyboard shortcut varies, usually `Cmd/Ctrl + L`).
-4. Cursor reads `AGENTS.md` from the folder you opened. If it does not, paste the contents of your `AGENTS.md` into the system prompt field in Cursor settings.
+## 4. Open the vault in Obsidian
 
-### Codex / ChatGPT agent
+Install Obsidian from its official site.
 
-Launch the agent with your vault as the working directory. If you are using the web ChatGPT, drag your `CODEX.md` into the chat and tell the agent to use it as the charter for the session.
+Then choose:
 
----
-
-## Step 5 - First prompts (prove the agent is working)
-
-Paste these five prompts one at a time. Each one is a check that the agent is reading your vault correctly.
-
-### Prompt 1: Charter check
-
-```
-Summarize the voice rules you are operating under. Keep it to a bulleted list under 10 lines.
+```text
+Open folder as vault
 ```
 
-**What good looks like.** The agent lists the rules you put in `CLAUDE.md`. If it makes up rules you did not write, the charter is not loaded.
+Pick this repo folder.
 
-### Prompt 2: Folder boundary check
+You should see folders such as:
 
-```
-List the folders in this vault you are not allowed to write to without my explicit permission.
-```
-
-**What good looks like.** The agent names `Legacy/` and either `00-Inbox/` or `01-Daily-Notes/`, depending on which rules you kept. If it says "none," the boundary rules are not loaded.
-
-### Prompt 3: Structure check
-
-```
-Read the vault root. List the top-level folders and give a one-line description of what each one is for based on STRUCTURE.md.
-```
-
-**What good looks like.** The agent returns the numbered folders in order with short descriptions. If the folders are missing, go back to Step 3.
-
-### Prompt 4: Linking behavior check
-
-```
-If I mention a person named Jamie Rivera in a note and Jamie has no note yet, what do you do?
+```text
+00-Inbox
+01-Daily-Notes
+02-People
+03-Projects
+04-Areas
+05-Resources
+...
+99-System
 ```
 
-**What good looks like.** The agent says it would create a stub in `02-People/Jamie_Rivera.md` with a draft tag, link to it from the current note, and flag it for review. If it says it would just add the name as plain text, the linking rule is weak.
+**PASS:** the folders appear in the left sidebar.
 
-### Prompt 5: Voice check
+### Optional plugins
 
-```
-Write me a two-sentence description of what I had for breakfast this morning in my voice.
-```
+You do not need community plugins for the first agent test.
 
-**What good looks like.** The agent asks what you had for breakfast first (because it has no data). This confirms it will not fabricate. If it invents a breakfast, your charter needs a stronger "never fabricate" rule.
+Add plugins only when a workflow needs them.
 
-If all five pass, your setup is working. Move on.
+If you use the included Templater syntax later, install Templater at that point.
 
----
+## 5. Launch your agent from the vault
 
-## Step 6 - Daily usage (10 starter prompts)
+Install your chosen agent using its current official instructions.
 
-These are the prompts you will use again and again. Paste them straight into your agent.
+Then launch it with this folder as the working directory.
 
-### 1. Clean up a brain dump
+### First validation prompt
 
-```
-I just pasted a brain dump into 00-Inbox/raw.md. Read it, split it into separate notes by topic, place each one in the right folder based on STRUCTURE.md, and show me the list before you move anything.
-```
+Paste:
 
-### 2. Write today's daily note
+```text
+Summarize the rules in my agent charter.
 
-```
-Create today's daily note at 01-Daily-Notes/YYYY/MM-Month/YYYY-MM-DD.md using 99-System/templates/daily-note.md as the template. Prefill the date and leave the prompt sections empty for me.
+Keep it under 10 bullets.
+Do not edit any files.
 ```
 
-### 3. Review yesterday
+**PASS:** the answer matches the charter you edited.
 
-```
-Open yesterday's daily note and give me a three-bullet summary: what got done, what is still open, what I should carry forward into today.
-```
+### Permission check
 
-### 4. Prep for a meeting
+Paste:
 
-```
-I have a meeting with Jamie Rivera at 2pm about the Q4 launch. Pull everything from 02-People/Jamie_Rivera.md and anything tagged #q4-launch. Draft a one-page prep note with context, open threads, and three questions I should ask.
-```
+```text
+Which folders are you not allowed to edit freely?
 
-### 5. Weekly review
-
-```
-It is Friday. Read all daily notes from this week in 01-Daily-Notes. Produce a weekly summary with sections: wins, blockers, patterns I should notice, one thing to try next week.
+Answer only from my charter.
 ```
 
-### 6. Kick off a new project
+**PASS:** the agent names the protected folders.
 
-```
-Create a new project folder under 03-Projects called project-name using 99-System/templates/project-kickoff.md. Fill in the goal, success criteria, and first three next actions based on what I will paste below.
-```
+**STOP:** if it says it has unrestricted access.
 
-### 7. Convert a document
+Fix the charter before continuing.
 
-```
-I just pasted raw text from a PDF into 00-Inbox/doc.md. Clean it up: fix line breaks, add headings, pull out the key quotes into a callout block, and save the result to 05-Resources with a clear filename.
-```
+## 6. Create the first project note
 
-### 8. Research a topic
+Paste:
 
-```
-I want to learn about zero trust architecture. Search my vault for anything I already have on it. If nothing, tell me. Then build me a reading list of five concepts I should understand first.
-```
+```text
+Create a project note for "Second Brain Setup" under 03-Projects.
 
-### 9. Find missing links
+Include:
+- goal
+- current status
+- next three actions
 
-```
-Scan the last 10 daily notes. Find any mention of a person, project, or topic that is not wiki-linked but probably should be. Show me the list before you add any links.
+Do not edit any other folder.
+Show me the file path when you are done.
 ```
 
-### 10. Agent self-audit
+**PASS:** one new project note appears under `03-Projects/`.
 
-```
-Review the last three files you created in this vault. Audit them against the voice rules in CLAUDE.md. Flag any violations. Then flag any possible PII (phone numbers, SSNs, home addresses). Do not fix anything yet.
-```
+Open it in Obsidian.
 
-For a longer list by category, see `starter-prompts.md` in this folder.
+That is the first complete loop:
 
----
-
-## Step 7 - Import your past conversations
-
-Your old ChatGPT and Claude.ai chats contain months of context about you. Importing them gives your new vault-aware agent a running start.
-
-Full guide: [`workflows/07-import-past-conversations.md`](workflows/07-import-past-conversations.md).
-
-Short version:
-
-1. Export your data from ChatGPT (**Settings → Data Controls → Export data**).
-2. Export your data from Claude.ai (**Settings → Privacy → Export data**).
-3. Convert the JSON files into one markdown file per conversation. The workflow page includes a short Python script.
-4. Drop the markdown files into `08-AI-History/<platform>/`.
-5. Ask your agent:
-
-```
-Read everything in 08-AI-History. Give me a one-page summary of recurring themes, open questions, and projects I was working on. Flag anything sensitive that should move to a private folder.
+```text
+local memory -> agent instructions -> controlled write -> human review
 ```
 
-> [!warning] Privacy
-> These exports contain every chat you ever had. Review before you drop them anywhere that syncs to a cloud you do not control.
+## 7. Add one daily workflow
 
----
+Do not automate everything.
 
-## Step 8 - Make it yours
+Pick one workflow from:
 
-The template is a starting point. Over the first two weeks, customize `CLAUDE.md`.
-
-### Add your voice rules
-
-What phrases do you want the agent to never use? What phrases are yours? Add them under a `## Voice rules` section. Short bullets.
-
-Example:
-
-```markdown
-## Voice rules
-
-- Short sentences.
-- No AI vocabulary (delve, leverage, utilize, robust, seamless, moreover).
-- No em dashes.
-- Active voice.
-- "BLUF" (bottom line up front) at the top of any brief.
+```text
+workflows/
 ```
 
-### Add your focus areas
+Recommended first choice:
 
-What are you working on this quarter? Who are the people the agent should know about? What is off-limits? Add a `## Current focus` section.
-
-### Add your off-limits folders
-
-Any folder with private content gets a hands-off rule.
-
-```markdown
-## Never do
-
-- Never touch 00-Inbox/ without my per-file permission.
-- Never modify files in Legacy/ for any reason.
-- Never write to 01-Daily-Notes/ unless I ask for a new daily note.
+```text
+01-brain-dump-cleanup.md
 ```
 
-Each time you catch the agent doing something you did not want, add a rule. The charter is a living document.
+Use it for a week before adding another.
 
----
+## 8. Add companion-style context
 
-## Troubleshooting
+If you want the agent to carry useful context between sessions, read:
 
-### 1. The agent is not reading CLAUDE.md
+```text
+COMPANION-AGENTS.md
+```
 
-**Symptom.** It answers Step 5 prompts with generic advice instead of your rules.
+Start with four small files:
 
-**Fix.** Check three things.
-1. File is at the vault root, not nested in a subfolder.
-2. File is named exactly `CLAUDE.md`, not `claude.md` or `CLAUDE.md.txt`.
-3. You launched the agent from inside the vault folder (`cd` into it first).
+```text
+00-ABOUT-ME.md
+01-RULES.md
+02-CURRENT-SEASON.md
+04-Projects/_index.md
+```
 
-### 2. `claude: command not found`
+Then ask:
 
-**Symptom.** Terminal says the command does not exist.
+```text
+Based only on my current-season file and project index, what are my three active priorities?
 
-**Fix.** Node and npm have to be installed. On macOS, `brew install node`. On Windows, download from [nodejs.org](https://nodejs.org). Then rerun `npm install -g @anthropic-ai/claude-code`. If the install succeeds but the command still is not found, restart your terminal.
+Cite the files you used.
+```
 
-### 3. Agent wants to edit my Inbox
+The goal is not personality.
 
-**Symptom.** You said no-touch, but it keeps proposing changes in `00-Inbox/`.
+The goal is reliable context.
 
-**Fix.** Add the rule twice in your charter, once in `## Always do` and once in `## Never do`. Some agents need the rule reinforced. Also check for conflicting rules higher up in the file.
+## 9. Security before scale
 
-### 4. The templates do not expand variables
+Before importing old chats or sensitive notes, read:
 
-**Symptom.** You copied `daily-note.md`, but the `<% tp.date.now() %>` text is still raw instead of showing today's date.
+```text
+security/
+```
 
-**Fix.** The Templater plugin is not installed or not enabled. Open **Settings → Community plugins** and confirm Templater is on. Then **Settings → Templater → Template folder location** should point at `99-System/templates`.
+Important distinction:
 
-### 5. Obsidian cannot find my notes
+```text
+local notes != local AI
+```
 
-**Symptom.** You can see the files in your file manager but Obsidian shows an empty vault.
+A hosted agent may receive the content it reads.
 
-**Fix.** You opened the wrong folder. In Obsidian, click the vault switcher icon (bottom left), then **Open folder as vault**, and pick the exact folder that contains your `.md` files.
+Decide what you are willing to send before connecting private material.
 
----
+## 10. Import old AI conversations later
 
-## Where to go next
+The conversation-import workflow lives at:
 
-- **[`STRUCTURE.md`](STRUCTURE.md)** - the full folder layout and the reasoning behind it.
-- **[`workflows/`](workflows/)** - eight specific workflows (brain dump cleanup, daily notes, document conversion, retroactive review, callouts, skills and MCP, past conversation import, NotebookLM).
-- **[`security/`](security/)** - local-first setup, encryption, PII rules, backup habits.
-- **[`starter-prompts.md`](starter-prompts.md)** - longer prompt library by category.
-- **[`examples/`](examples/)** - worked examples including the knowledge graph tour.
-- **[`COMPANION-AGENTS.md`](COMPANION-AGENTS.md)** - using the vault as the memory layer for other personal AI agents.
+```text
+workflows/07-import-past-conversations.md
+```
 
----
+Do this only after the basic vault works.
 
-<!-- obsidian-second-brain by Emanuel Walker - github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain -->
+Old chat exports are high-context and high-privacy.
 
-_Template by Emanuel Walker. [github.com/Emanuel-Walker](https://github.com/Emanuel-Walker). Fork it. Adapt it. Credit appreciated, not required._
+Do not make them Step 1.
+
+## Definition of done
+
+Your first setup is complete when:
+
+- [ ] Obsidian opens the vault
+- [ ] the charter has no placeholders
+- [ ] the agent can summarize its rules
+- [ ] the agent identifies protected folders correctly
+- [ ] one project note exists
+- [ ] you know which workflow you will try first
+
+Stop there.
+
+A smaller system you use is better than a perfect system you keep redesigning.
+
+## If you get stuck
+
+### Agent ignores the charter
+
+Check:
+- the charter file is at the vault root
+- you launched the agent from the vault root
+- the filename matches the agent setup you chose
+
+### Templates show raw Templater syntax
+
+Install and enable the Templater plugin.
+
+Then point its template folder at:
+
+```text
+99-System/templates
+```
+
+### Obsidian looks empty
+
+You opened the wrong folder.
+
+Use **Open folder as vault** and select the folder containing `00-Inbox/`.
+
+### You stopped for a week
+
+Do not rebuild the system.
+
+Open the vault.
+
+Read `02-CURRENT-SEASON.md` if you created it.
+
+Continue with the next useful note.
