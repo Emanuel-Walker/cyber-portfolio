@@ -1,4 +1,87 @@
-# Zero to Hero — AI Agent Skills
+# Quickstart - AI Agent Skills
+
+## Zero-to-hero path
+
+A skill is a small instruction package that teaches an AI coding agent how to do one repeatable job.
+
+You need one coding agent first.
+
+Choose **Codex** or **Claude Code**.
+
+### Option A — Codex
+
+1. Make sure you can sign in to ChatGPT.
+2. Install Node.js LTS from:
+
+```text
+https://nodejs.org/
+```
+
+3. Open Terminal or PowerShell.
+4. Verify:
+
+```bash
+node --version
+npm --version
+```
+
+5. Install Codex:
+
+```bash
+npm install -g @openai/codex@latest
+codex --version
+```
+
+6. Run:
+
+```bash
+codex
+```
+
+Follow the sign-in flow.
+
+### Option B — Claude Code
+
+Create/sign in to your Claude account.
+
+Use Anthropic's current official installation instructions.
+
+macOS with Node.js available:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+claude --version
+claude doctor
+```
+
+On Windows, use Anthropic's supported Windows method or WSL/Git Bash according to the current Claude Code docs.
+
+### 2. Get the skill files
+
+You do not need Git.
+
+Beginner route:
+
+```text
+GitHub -> Code -> Download ZIP
+```
+
+Extract the ZIP.
+
+Open:
+
+```text
+cyber-portfolio/05-ai-agent-skills/
+```
+
+Developer route:
+
+```bash
+git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
+cd cyber-portfolio/05-ai-agent-skills
+```
+
+Then continue below.
 
 ## What you will learn
 
