@@ -117,10 +117,6 @@ If you want to see how I ship, open any project folder. Every one has a README, 
 
 Feel free to copy any of the resume lines above into your own evaluation notes. If you link this repo to a candidate review, mention the project that caught your attention. I like knowing which lane is working.
 
-## Credits
-
-Pair-programmed with Claude Code. The brand, the voice, and the opinions are mine. The semicolons it keeps trying to add are not.
-
 ## License
 
 MIT. Use it, remix it, teach from it.
