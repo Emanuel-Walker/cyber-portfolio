@@ -82,7 +82,7 @@ Built a local-first knowledge system that pairs plain Markdown notes with AI-age
 
 **Expanded**
 
-Published an Obsidian second-brain template with beginner bootstrap scripts, agent charters, reusable workflows, security guidance, ADHD-friendly operating rules, conversation-import tooling, and an optional least-privilege Muse Gadget SDK integration for Raspberry Pi.
+Published an Obsidian second-brain template with beginner bootstrap scripts, agent charters, reusable workflows, security guidance, ADHD-friendly operating rules, conversation-import tooling, and companion-agent memory patterns.
 
 **Skills shown**
 
