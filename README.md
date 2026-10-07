@@ -95,7 +95,7 @@ The first demo is offline and free. AWS deployment is optional.
 
 **What I built:** a local-first Obsidian template with agent charters, reusable workflows, security guidance, ADHD-friendly operating rules, and beginner setup scripts.
 
-**Try it:** `06-obsidian-second-brain/QUICKSTART.md`
+**Try it:** `06-obsidian-second-brain/start-here/README.md`
 
 **Shows:** knowledge systems, agent orchestration, privacy-aware design, documentation, human-centered AI.
 
@@ -104,7 +104,7 @@ The first demo is offline and free. AWS deployment is optional.
 If you have five minutes:
 
 1. Read `03-crown-jewel-triage/ESSAY.md`.
-2. Open one `QUICKSTART.md`.
+2. Open one project walkthrough (`QUICKSTART.md` or the Second Brain `start-here/README.md`).
 3. Read the **What this does not prove** or limitations section.
 
 I care about the third step.
@@ -119,17 +119,25 @@ RESUME_PROJECTS.md
 
 ## For builders
 
-Clone the repo:
+Start with:
+
+```text
+START_HERE.md
+```
+
+If you want to run project files without Git:
+
+```text
+Code -> Download ZIP
+```
+
+Extract the portfolio and open the project you want.
+
+If you already use Git, cloning is optional:
 
 ```bash
 git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
 cd cyber-portfolio
-```
-
-Then open:
-
-```text
-START_HERE.md
 ```
 
 Every project should give you:
