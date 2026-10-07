@@ -149,7 +149,6 @@ Stop here for today if that is enough.
 Choose **one**:
 
 - `ADHD-GUIDE.md` for low-friction daily use
-- `COMPANION-ARCHITECTURE.md` if you want a persistent personal agent
+- `COMPANION-AGENTS.md` if you want to understand companion-agent memory patterns
 - `workflows/` for repeatable jobs
 - `security/` before putting sensitive material in the vault
-- `MUSE-GADGET-SDK.md` if you want a Raspberry Pi to become a physical Muse tool
