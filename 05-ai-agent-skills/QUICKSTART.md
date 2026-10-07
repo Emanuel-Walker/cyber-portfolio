@@ -17,13 +17,18 @@ mkdir -p ~/.claude/skills
 ls ~/.claude/skills
 ```
 
-Step 1 - setup. Copy the humanizer skill into your Claude Code skills directory.
+Step 1 - setup. Install the humanizer skill.
 
 ```bash
 cd 05-ai-agent-skills
-mkdir -p ~/.claude/skills/humanizer
-cp skills/humanizer/SKILL.md ~/.claude/skills/humanizer/SKILL.md
-ls ~/.claude/skills/humanizer/
+bash scripts/install-skill.sh claude humanizer
+```
+
+On Windows PowerShell:
+
+```powershell
+Set-Location 05-ai-agent-skills
+.\scripts\install-skill.ps1 -Agent claude -Item humanizer
 ```
 
 What you see. The copy succeeds silently. `ls` prints `SKILL.md`. Claude Code auto-discovers skills in `~/.claude/skills/*/SKILL.md` on next launch.
