@@ -1,93 +1,146 @@
 # Quickstart - Identity-First AWS Incident Response Lab
 
-> [!info] Plain English
-> This project builds a small AWS cloud environment with deliberate identity weaknesses, then runs attack scripts and detection rules against it. The 5-minute demo stops at the preview step (`terraform plan`) so you do not get charged. Actually spinning it up costs a few dollars and must be torn down the same day. Takes about 5 minutes for the safe demo.
+## Plain English
 
-## 5-minute demo
+This project tests identity-focused cloud attacks and the detections that should catch them.
 
-BLUF. You will run `terraform plan` to confirm the lab builds cleanly, then run a detection rule against a sample CloudTrail event. The demo stops at `plan`. Running `apply` creates real AWS resources and real charges. Do that only in a sandboxed account you own.
+The first demo is **offline and free**.
 
-Warning. `terraform apply` costs money. GuardDuty alone is roughly $4 per day. If you apply, run `./terraform/teardown.sh` the same day. For the 5-minute demo, stop at `plan`.
+You do not need an AWS account to run it.
 
-Prerequisites.
+## 5-minute offline demo
 
-```bash
-terraform version          # need 1.5 or newer
-aws --version              # AWS CLI v2
-aws sts get-caller-identity  # confirms your creds are loaded
-python --version           # need 3.10 or newer
-pip install boto3
-```
+### 1. Enter the project
 
-Step 1 - setup.
+From the portfolio root:
 
 ```bash
-cd 04-identity-cloud-ir/terraform
-cp terraform.tfvars.example terraform.tfvars
-terraform init
+cd 04-identity-cloud-ir
 ```
 
-What you see. Terraform downloads the AWS provider and prints `Terraform has been successfully initialized!`. The `.terraform/` directory now exists.
-
-Step 2 - run plan (not apply).
+### 2. Run the IAM detection against a suspicious event
 
 ```bash
-terraform plan
+python3 detections/demo_iam_detection.py \
+  attacks/demo_events/create_access_key.json
 ```
 
-What you see. Terraform prints a diff and a final summary line close to `Plan: 15 to add, 0 to change, 0 to destroy`. The resource list includes a VPC, two IAM roles with intentional weaknesses, a GuardDuty detector, an S3 bucket with logging, Secrets Manager entries, and an EC2 instance. If the count is far off, the `.tfvars` file is missing values.
+Expected:
 
-STOP HERE unless you are in a sandbox account. Running `apply` creates billable resources.
+```text
+MATCH: IAM persistence / privilege-change detection
+```
 
-Step 3 - run a detection rule against sample CloudTrail JSON.
+This event simulates an IAM access key being created.
+
+### 3. Run the same logic against normal activity
 
 ```bash
-cd ../detections
-python elastic_detection_rules/run_rule.py \
-  --rule elastic_detection_rules/console_login_without_mfa.yml \
-  --event ../attacks/sample_events/console_login_no_mfa.json
+python3 detections/demo_iam_detection.py \
+  attacks/demo_events/list_buckets.json
 ```
 
-What you see. The rule evaluator loads the KQL-equivalent logic, feeds in the sample CloudTrail event, and prints a match. Something like:
+Expected:
 
-```
-MATCH: console_login_without_mfa
-  user: attacker-persona-01
-  sourceIP: 198.51.100.42
-  mfaUsed: false
-  severity: high
+```text
+NO MATCH
 ```
 
-Step 3b - validate.
+**PASS:** one event fires and the benign example stays quiet.
 
-Run the same rule against a benign event to confirm it stays quiet.
+The demo script mirrors the core conditions from:
+
+```text
+detections/elastic_detection_rules/iam_access_key_creation.yml
+```
+
+It is intentionally not a general KQL engine.
+
+## Optional: inspect the real AWS plan
+
+Only do this in an AWS account you own or are authorized to use.
+
+You need:
+- Terraform 1.5+
+- AWS CLI v2
+- working AWS credentials
+
+Check:
 
 ```bash
-python elastic_detection_rules/run_rule.py \
-  --rule elastic_detection_rules/console_login_without_mfa.yml \
-  --event ../attacks/sample_events/console_login_with_mfa.json
+terraform version
+aws --version
+aws sts get-caller-identity
 ```
 
-What you see. `NO MATCH`. The rule only fires on logins that lack MFA.
+**STOP:** if the last command shows the wrong AWS account.
+
+Then:
+
+```bash
+cp terraform/terraform.tfvars.example terraform/terraform.tfvars
+```
+
+Open:
+
+```text
+terraform/terraform.tfvars
+```
+
+Replace:
+
+```text
+you@example.com
+```
+
+with your email.
+
+For a **plan-only** review, you can leave the example CIDR in place.
+
+Before a real apply, replace it with your authorized source CIDR.
+
+Run:
+
+```bash
+terraform -chdir=terraform init
+terraform -chdir=terraform plan
+```
+
+**PASS:** Terraform produces a plan without creating resources.
+
+## Do not apply casually
+
+```text
+terraform apply
+```
+
+creates real AWS resources and can create charges.
+
+If you intentionally deploy the full lab, follow the project README and run the teardown script when finished:
+
+```bash
+./terraform/teardown.sh
+```
+
+Then verify the AWS console is clean.
 
 ## What this proves
 
-- Infrastructure-as-code lab that provisions real identity weaknesses safely and tears down cleanly.
-- Custom Elastic rules that close named GuardDuty gaps, with the gap list documented in `detections/detection_matrix.md`.
-- A Scattered Spider tabletop in `tabletop/` that ties attack paths to detection coverage, not just a checklist.
+- the project models identity-focused AWS detection gaps
+- the custom rules can express behavior GuardDuty may not alert on by default
+- the infrastructure is reproducible with Terraform
+- the lab includes explicit teardown and safety boundaries
 
-## Add screenshots here
+## What this does not prove
 
-Capture these while running the demo and drop them in a `screenshots/` folder next to this file.
+The offline demo does not prove GuardDuty behavior.
 
-- `screenshots/01-terraform-init.png` - init success
-- `screenshots/02-terraform-plan-summary.png` - the `Plan: 15 to add` line
-- `screenshots/03-rule-match.png` - detection rule firing on the no-MFA event
-- `screenshots/04-rule-no-match.png` - same rule staying quiet on the MFA-enabled event
-- `screenshots/05-detection-matrix.png` - `detection_matrix.md` open showing GuardDuty vs custom coverage
+That comparison requires the real disposable AWS lab.
 
-## Common issues
+See:
 
-- `Error: No valid credential sources`. The AWS CLI is not configured for this shell. Run `aws configure` or export `AWS_PROFILE`.
-- `terraform plan` prints `Error: Invalid value for variable`. The `.tfvars` file still has placeholder values. Fill them in or set them with `-var`.
-- You accidentally ran `apply`. Run `./terraform/teardown.sh` right now. Confirm with `terraform state list` returning empty, then check the AWS console for lingering GuardDuty detectors and NAT gateways. Those are the two that keep billing after a bad teardown.
+```text
+detections/detection_matrix.md
+```
+
+for the documented lab results.
