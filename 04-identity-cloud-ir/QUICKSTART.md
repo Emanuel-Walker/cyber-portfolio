@@ -1,4 +1,69 @@
-# Zero to Hero — Identity-First AWS Incident Response Lab
+# Quickstart - Identity-First AWS Incident Response Lab
+
+## Zero-to-hero path
+
+The first demo is offline and free.
+
+You do not need an AWS account until the optional cloud section.
+
+### 1. Install Python
+
+Use:
+
+```text
+https://www.python.org/downloads/
+```
+
+Install Python 3.10 or newer.
+
+Verify:
+
+```bash
+python --version
+```
+
+or:
+
+```bash
+python3 --version
+```
+
+### 2. Get the project files
+
+Beginner route:
+
+```text
+GitHub -> Code -> Download ZIP
+```
+
+Extract the ZIP.
+
+Open:
+
+```text
+cyber-portfolio/04-identity-cloud-ir/
+```
+
+Developer route:
+
+```bash
+git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
+cd cyber-portfolio/04-identity-cloud-ir
+```
+
+### 3. Open Terminal or PowerShell in that folder
+
+Verify:
+
+```text
+README.md
+QUICKSTART.md
+detections/
+attacks/
+terraform/
+```
+
+Then run the offline demo below.
 
 ## What you will learn
 
