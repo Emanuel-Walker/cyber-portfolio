@@ -42,19 +42,27 @@ Follow the sign-in flow.
 
 ### Option B — Claude Code
 
-Create/sign in to your Claude account.
+Claude Code requires an eligible account such as Claude Pro, Max, Team, Enterprise, or Anthropic Console.
 
-Use Anthropic's current official installation instructions.
+Use Anthropic's current native installer.
 
-macOS with Node.js available:
+macOS:
 
 ```bash
-npm install -g @anthropic-ai/claude-code
+curl -fsSL https://claude.ai/install.sh | bash
 claude --version
 claude doctor
 ```
 
-On Windows, use Anthropic's supported Windows method or WSL/Git Bash according to the current Claude Code docs.
+Windows PowerShell:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+claude --version
+claude doctor
+```
+
+WSL and Git Bash are optional. Native Windows is supported.
 
 ### 2. Get the skill files
 
@@ -198,47 +206,62 @@ codex --version
 
 # Part 2B — Install Claude Code
 
+Claude Code's recommended path is the native installer.
+
+You do not need Node.js for the recommended native installation.
+
 ## macOS
 
-Install Node.js 18+ first.
+Open Terminal.
 
-Then:
+Run:
 
 ```bash
-npm install -g @anthropic-ai/claude-code
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+Then verify:
+
+```bash
 claude --version
 claude doctor
 ```
 
-## Windows
+## Windows PowerShell
 
-Anthropic currently supports Windows through WSL or Git for Windows / Git Bash.
+Open PowerShell.
 
-### WSL route
-
-Open PowerShell as Administrator:
+Run:
 
 ```powershell
-wsl --install
+irm https://claude.ai/install.ps1 | iex
 ```
 
-Restart if prompted.
+Open a new PowerShell window.
 
-Open the Linux terminal.
+Verify:
 
-Install Node.js 18+.
-
-Then:
-
-```bash
-npm install -g @anthropic-ai/claude-code
+```powershell
 claude --version
 claude doctor
 ```
 
-**PASS:** Claude Code prints a version and the doctor command does not report a blocking problem.
+You do not need Administrator privileges for the normal native install.
 
----
+### Windows alternative
+
+If you already use WinGet:
+
+```powershell
+winget install Anthropic.ClaudeCode
+claude --version
+```
+
+Git for Windows is optional.
+
+WSL 2 is optional if you specifically want a Linux toolchain or sandboxing.
+
+**PASS:** Claude Code prints a version and `claude doctor` reports no blocking install problem.
 
 # Part 3 — Get the skill library
 
