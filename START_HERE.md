@@ -28,7 +28,7 @@ RESUME_PROJECTS.md
 
 ## If you want to try a project
 
-Open its quickstart directly on GitHub.
+Open its walkthrough directly on GitHub.
 
 | Project | Plain English | Start here |
 |---|---|---|
@@ -37,7 +37,7 @@ Open its quickstart directly on GitHub.
 | 03 Crown Jewel Triage | Rank alerts by what they threaten, not only severity | `03-crown-jewel-triage/QUICKSTART.md` |
 | 04 AWS IR Lab | Test identity-focused cloud detections | `04-identity-cloud-ir/QUICKSTART.md` |
 | 05 Agent Skills | Install one reusable instruction module into an AI agent | `05-ai-agent-skills/QUICKSTART.md` |
-| 06 Second Brain | Build a local notes system with an AI thought partner | `06-obsidian-second-brain/WALKTHROUGH.md` |
+| 06 Second Brain | Build a local notes system with an AI thought partner | `06-obsidian-second-brain/start-here/README.md` |
 
 ## When a project needs files
 
