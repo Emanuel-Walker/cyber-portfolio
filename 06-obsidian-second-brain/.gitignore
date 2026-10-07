@@ -1,6 +1,46 @@
-.upstream/
+# Obsidian workspace files - machine-local
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
+
+# Obsidian trash
+.trash/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+
+# Personal/private content conventions
+*private*
+*PRIVATE*
+Legacy/
+01-Daily-Notes/
+08-AI-History/
+09-Dreams/
+99-System/companion/
+
+# Local scratch
+scratch/
+tmp/
+
+# Optional large binaries
+# 07-Attachments/
+
+# Secrets
+*.env
+*.key
+*.pem
+secrets/
+
+# Generated personal Vault Agent charters
+# Templates are tracked under vault-agent/templates/.
 CLAUDE.md
 CODEX.md
 AGENTS.md
-99-System/skills/local/
-.DS_Store
