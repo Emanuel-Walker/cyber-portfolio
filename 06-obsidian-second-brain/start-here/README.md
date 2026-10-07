@@ -31,7 +31,7 @@ The repository is a reference library and optional accelerator.
 - an email address
 - one AI coding-agent account:
   - OpenAI/ChatGPT for Codex
-  - or Anthropic/Claude for Claude Code
+  - or an eligible Claude Code account: Pro, Max, Team, Enterprise, or Anthropic Console
 
 ## What you are building
 
@@ -217,9 +217,9 @@ You only need one worker agent.
 
 ## Choose Claude Code if
 
-- you already use Claude
+- you already use an eligible Claude plan or Anthropic Console
 - you prefer Anthropic
-- you are comfortable using Terminal, Git Bash, or WSL
+- you want a native macOS or Windows terminal workflow
 
 You do not need both.
 
@@ -352,7 +352,13 @@ Jump to **Part 6 — Build the vault**.
 
 # Part 5B — Install Claude Code
 
-## Step 7B. Confirm your Claude account
+Claude Code now has a native installer.
+
+You do **not** need Node.js just to install the recommended current version.
+
+You do **not** need WSL on Windows unless you specifically want a Linux environment or sandboxing.
+
+## Step 7B. Confirm Claude Code access
 
 Open:
 
@@ -360,132 +366,119 @@ Open:
 https://claude.ai
 ```
 
-Create an account if needed.
+Sign in.
 
-Claude Code supports Claude app subscriptions and Anthropic Console authentication.
+Claude Code requires an eligible account such as:
+
+- Claude Pro
+- Claude Max
+- Team
+- Enterprise
+- Anthropic Console
+
+A free Claude.ai account by itself does not include Claude Code access.
 
 ## Step 8B — macOS
 
-Open Terminal.
+Open **Terminal**.
 
-Check Node.js:
-
-```bash
-node --version
-npm --version
-```
-
-If Node is missing, install the current LTS release from:
-
-```text
-https://nodejs.org
-```
-
-Then install Claude Code:
+Run the official native installer:
 
 ```bash
-npm install -g @anthropic-ai/claude-code
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+Close and reopen Terminal if the installer tells you to.
+
+Verify:
+
+```bash
 claude --version
 claude doctor
 ```
 
-Do not use `sudo npm install -g`.
+**PASS:** Claude prints a version and `claude doctor` shows no blocking install problem.
 
-**PASS:** Claude prints a version and `claude doctor` does not report a blocking problem.
+### macOS alternative: Homebrew
 
-## Step 8C — Windows
+If you already use Homebrew:
 
-Anthropic currently supports Claude Code on Windows through **WSL** or **Git for Windows / Git Bash**.
+```bash
+brew install --cask claude-code
+claude --version
+```
 
-### Beginner Windows route: WSL
+Use one install method.
 
-Open **PowerShell as Administrator**.
+Do not install multiple copies unless you understand which executable your shell is using.
+
+## Step 8C — Windows PowerShell
+
+Open **PowerShell**.
+
+You do **not** need to run it as Administrator for the normal native install.
 
 Run:
 
 ```powershell
-wsl --install
+irm https://claude.ai/install.ps1 | iex
 ```
 
-Restart Windows if prompted.
+Open a new PowerShell window.
 
-Open the installed Ubuntu/WSL terminal.
+Verify:
 
-Install Node.js 18+ using your preferred supported Node installation method.
-
-Check:
-
-```bash
-node --version
-npm --version
-```
-
-Then:
-
-```bash
-npm install -g @anthropic-ai/claude-code
+```powershell
 claude --version
 claude doctor
 ```
 
-### Alternative Windows route: Git Bash
+**PASS:** Claude prints a version and `claude doctor` reports no blocking problem.
 
-Google:
+### Windows alternative: WinGet
 
-```text
-Git for Windows
-```
+If you already use WinGet:
 
-Confirm the domain is:
-
-```text
-git-scm.com
-```
-
-Install Git for Windows.
-
-Open **Git Bash**.
-
-Install Node.js 18+ if it is not already available.
-
-Then:
-
-```bash
-npm install -g @anthropic-ai/claude-code
+```powershell
+winget install Anthropic.ClaudeCode
 claude --version
-claude doctor
 ```
+
+### Optional: Git for Windows
+
+Claude Code can run natively with PowerShell.
+
+Git for Windows is optional.
+
+Install it if you specifically want Claude Code to use Git Bash/Bash tooling.
+
+### Optional: WSL 2
+
+Use WSL 2 if your projects live in a Linux environment or you specifically want Linux tooling/sandboxing.
+
+Do not install WSL just because an old Claude Code guide told you Windows required it.
 
 ## Step 9B. Open the vault folder
 
 ### macOS Terminal
+
+If you used the recommended vault location:
 
 ```bash
 cd "$HOME/Documents/Second Brain"
 pwd
 ```
 
-### WSL example
+### Windows PowerShell
 
-Your Windows Documents folder is usually available under:
-
-```text
-/mnt/c/Users/YOUR_WINDOWS_USERNAME/Documents/Second Brain
+```powershell
+Set-Location "$HOME\Documents\Second Brain"
+Get-Location
 ```
 
-Example:
+If your vault is elsewhere, use its actual path.
 
-```bash
-cd "/mnt/c/Users/YOUR_WINDOWS_USERNAME/Documents/Second Brain"
-pwd
-```
-
-### Git Bash example
-
-```bash
-cd "/c/Users/YOUR_WINDOWS_USERNAME/Documents/Second Brain"
-pwd
-```
+**PASS:** the path printed by the terminal is your **Second Brain** vault.
 
 ## Step 10B. Launch Claude Code
 
@@ -495,11 +488,9 @@ Run:
 claude
 ```
 
-Choose the authentication option that matches your Claude account.
+Follow the browser authentication prompts.
 
-**PASS:** Claude Code opens inside the vault folder.
-
----
+**PASS:** Claude Code opens while the current working directory is your vault.
 
 # Part 6 — Build the vault with the Vault Agent
 
