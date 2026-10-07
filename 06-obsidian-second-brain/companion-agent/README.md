@@ -436,3 +436,20 @@ But you should only combine those roles after you can explain:
 - what leaves your device
 
 Until then, separation is a feature.
+
+
+---
+
+# Supporting examples
+
+The README is the canonical guide.
+
+Small copyable examples live under:
+
+```text
+companion-agent/examples/
+├── CONTEXT-PACK.example.md
+└── VAULT-CAPTURE.example.md
+```
+
+Use them as shapes, not personal-data templates.
