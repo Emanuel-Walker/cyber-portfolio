@@ -1,0 +1,15 @@
+# CODEX.md - Optional Codex-specific notes
+
+Codex should normally use the root `AGENTS.md` file for vault rules.
+
+Use this file only if you want extra Codex-specific guidance.
+
+## Codex-specific preferences
+
+- Work relative to the vault root.
+- Show proposed destructive/mass file operations before executing them.
+- Prefer small, reviewable file changes.
+- Use the rules in `AGENTS.md` as the source of truth.
+- End with changed file paths and one next action.
+
+Do not duplicate the full vault permission table here.
