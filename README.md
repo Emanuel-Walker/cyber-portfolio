@@ -1,126 +1,172 @@
 ---
 title: Cyber Portfolio
 owner: Emanuel Walker, SEC+, CySA+, SecurityX (CASP+), M.S.
-updated: 2026-10-03
+updated: 2026-10-07
 ---
 
 # Cyber Portfolio
 
-**[Explore the interactive portfolio](https://emanuel-walker-cyber.walkwithemanuel.chatgpt.site)** · [Website source](website/)
+**Emanuel Walker, M.S.**  
+Cybersecurity, cloud security, and applied AI.
 
-**Emanuel Walker, SEC+, CySA+, SecurityX (CASP+), M.S.**
-Cyber + CloudSec + AI Builder
+[Interactive portfolio](https://emanuel-walker-cyber.walkwithemanuel.chatgpt.site) · [Website source](website/)
 
-> **Built by Emanuel Walker.** If this helps you, star the repo. If it changes your work, send a note.
+## What this repo is
 
-Most people don't need another security tool. They need a thought partner they can workshop with, not a stranger that knows them.
+I spent six months turning things I was learning and using into working projects.
 
-Six projects. Two audiences. One repo.
+Some focus on defensive security.
 
-I spent the last 6 months building both sides of that problem. The thought partner side (an Obsidian second brain plus AI agent setups you own on your own machine). And the security tooling side (detection content, triage frameworks, hardened LLM pipelines, cloud IR labs). Every project is runnable, honestly limited, and documented like a blog post I would want to read.
+Some focus on using AI without handing it unlimited trust.
 
-## The six
+One focuses on building a personal knowledge system you actually own.
 
-### 1. Detection-as-Code with Discipline
-`01-detection-as-code/`
+The common thread is simple:
 
-Sigma rules shipped like software. Every rule gets a written spec, a positive test, a benign test, and a CI gate. The pipeline fails if the rule misses what it claims to catch or fires on things it should not.
+**build something useful, test it, document the limits, and make it reproducible.**
 
-**You read this if:** you want to see what detection engineering looks like when it's a program, not a hobby.
+If you are new here, open:
 
-**Resume line:** Built a CI/CD pipeline for Sigma rules with Palantir ADS specs and dual-gated tests. Positive detection tests and benign non-fire tests both block merge. Converts to Elastic, Splunk, and Panther on green.
+```text
+START_HERE.md
+```
+
+## The six projects
+
+### 1. Detection-as-Code
+
+**Problem:** security rules can create noise or miss attacks if nobody tests them before deployment.
+
+**What I built:** a pipeline that treats detection rules like software. Each rule needs a written strategy, a malicious test that must fire, and a normal-use test that must stay quiet.
+
+**Try it:** `01-detection-as-code/QUICKSTART.md`
+
+**Shows:** detection engineering, Python, CI/CD, Sigma, testing.
 
 ### 2. Prompt-Injection-Hardened LLM Triage
-`02-llm-triage-hardened/`
 
-A local Ollama triage agent for SOC alerts. Then an attack harness I built against my own agent. 12 out of 16 injections blocked. 4 still slip through. Named, explained, honest. Companion engineering to "The Agent on the Desk" (Gray Space, June 2026).
+**Problem:** a SOC AI assistant may read attacker-controlled text inside logs and alerts.
 
-**You read this if:** you want to see what hardening an LLM for defensive work actually looks like, and what still breaks.
+**What I built:** a local alert-triage assistant with input sanitization, strict output validation, provenance logging, and a 16-case adversarial test harness.
 
-**Resume line:** Shipped a local LLM triage assistant with structured I/O, output schema validation, provenance logging, and a 16-payload prompt-injection test harness. Documented the four bypasses still open and why.
+The included sample run blocked 12 cases and documented four bypasses.
+
+**Try it:** `02-llm-triage-hardened/QUICKSTART.md`
+
+The first demo is offline. You do not need an LLM installed.
+
+**Shows:** applied AI security, Python, adversarial testing, structured output.
 
 ### 3. Crown Jewel Triage
-`03-crown-jewel-triage/`
 
-The signature piece. Civilian SOCs prioritize alerts by severity dropdown. The result is burnout and buried breaches. This repo rebuilds triage around the assets attackers actually want. Score your crown jewels, route alerts by what they threaten, run tier-based playbooks instead of alert-type playbooks.
+**Problem:** "High severity" does not tell an analyst whether an alert threatens something the business truly depends on.
 
-**You read this if:** you want to see a working alternative to severity-based triage.
+**What I built:** an asset-centered model that scores critical systems and changes alert priority based on what is at risk.
 
-**Resume line:** Designed and shipped an asset-tied alert prioritization model with a four-factor scoring rubric, six tier-based response playbooks, a Grafana dashboard for tier-grouped SLA tracking, and a standalone essay on why severity-based triage burns teams out.
+**Try it:** `03-crown-jewel-triage/QUICKSTART.md`
+
+**Shows:** SOC strategy, risk prioritization, Python, playbooks, business context.
 
 ### 4. Identity-First AWS Incident Response Lab
-`04-identity-cloud-ir/`
 
-Terraform spins up a cloud environment with real identity weaknesses. Five attack scripts hit it. GuardDuty catches some. Custom detections catch what GuardDuty misses. Scattered Spider tabletop included. Costs under five dollars end to end if you remember to run `terraform destroy`.
+**Problem:** cloud attacks increasingly abuse legitimate identities, roles, and API calls instead of dropping obvious malware.
 
-**You read this if:** you want to see what cloud detection looks like when identity is the attack surface.
+**What I built:** a disposable AWS lab with intentional identity weaknesses, controlled attack scenarios, GuardDuty comparison testing, and custom detections.
 
-**Resume line:** Built a Terraform-deployed AWS IR lab with five identity-centric attack scenarios, matched detections across GuardDuty, Elastic, and Panther, and a Scattered Spider tabletop. Documented the specific GuardDuty gaps the custom rules close.
+**Try it:** `04-identity-cloud-ir/QUICKSTART.md`
+
+The first demo is offline and free. AWS deployment is optional.
+
+**Shows:** AWS security, Terraform, IAM, CloudTrail, detection engineering, incident response.
 
 ### 5. AI Agent Skills
-`05-ai-agent-skills/`
 
-Ten modular skill files that teach AI assistants how to do specialized work. Content generation, voice calibration, diagram authoring, OCR, prompt optimization, more. Each one adapted from my own workflow. Fork what works.
+**Problem:** people keep rewriting the same giant prompts for work they repeat every week.
 
-**You read this if:** you want to see what prompt engineering looks like when it's organized into reusable modules instead of one giant system prompt.
+**What I built:** 15 reusable agent skills with clear triggers, scope boundaries, steps, and quality checks.
 
-**Resume line:** Published 10 modular skill files for AI assistants covering content generation, voice calibration, diagram authoring, OCR, prompt optimization, and more. Each skill scoped with trigger conditions, scope boundaries, and output contracts.
+**Try it:** `05-ai-agent-skills/QUICKSTART.md`
 
-### 6. Obsidian Second Brain Template
-`06-obsidian-second-brain/`
+**Shows:** agent design, prompt architecture, workflow automation, technical writing, guardrails.
 
-Your notes, ideas, and research live on your own laptop. An AI agent you choose helps you sort, link, and recall what matters. Setup files for Claude Code, Codex, Hermes, and Cursor. Example vaults for three companion agents (Grok, Muse, Dot). A full beginner walkthrough from installing Obsidian to running your first prompts. 8 workflows (brain dump cleanup, daily notes, document conversion, retrospective review, callouts, skills and MCP, importing past ChatGPT and Claude.ai conversations, and NotebookLM for podcasts, video overviews, mind maps, and briefing docs). 8 Obsidian templates. 6 security guides. An Obsidian tips cheat sheet.
+### 6. Obsidian Second Brain
 
-**You read this if:** you want a working second brain plus AI thought partner setup, security included, that you can set up in an afternoon.
+**Problem:** useful context gets scattered across chats, notes, tabs, and memory.
 
-**Resume line:** Published an open-source Obsidian second-brain template with agent-ready instructions (Claude Code, Codex, Hermes, Cursor), a full beginner walkthrough, 8 workflows including NotebookLM output generation and past-conversation import, 8 Obsidian templates, 6 security guides from local-first setup through encrypted sync and everyday good practices, companion-vault examples for three personal AI agents (Grok, Muse, Dot), an Obsidian tips cheat sheet, and a dedicated ADHD guide.
+**What I built:** a local-first Obsidian template with agent charters, reusable workflows, security guidance, ADHD-friendly operating rules, and beginner setup scripts.
 
-## How to read this portfolio
+**Try it:** `06-obsidian-second-brain/QUICKSTART.md`
 
-Every project has a `QUICKSTART.md` with a 5-minute demo. Start there if you want to see something run before you read the writeup.
+**Shows:** knowledge systems, agent orchestration, privacy-aware design, documentation, human-centered AI.
 
-If you want to actually run something, every project has a QUICKSTART. Project 6 has a full WALKTHROUGH that starts from installing Obsidian.
+## For hiring managers
 
-Start with whichever project speaks to the role you're hiring for. Each project has its own README that tells you what to run first. None of these need a cluster or a lab setup. A laptop and an afternoon are enough.
+If you have five minutes:
 
-## What this is not
+1. Read `03-crown-jewel-triage/ESSAY.md`.
+2. Open one `QUICKSTART.md`.
+3. Read the **What this does not prove** or limitations section.
 
-- Not a toolkit for sale
-- Not a certification cram
-- Not an advertisement for a service
-- Not a thought-leadership deck
+I care about the third step.
 
-It's a set of real things I built and the writeups I wish existed when I was learning.
+A portfolio should show judgment, not just screenshots.
 
-## About the work
+Resume-ready summaries are in:
 
-All synthetic data. All fictional scenarios. All code runs locally or in a sandboxed cloud account. No real org names, no real IPs, no real customer data.
+```text
+RESUME_PROJECTS.md
+```
+
+## For builders
+
+Clone the repo:
+
+```bash
+git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
+cd cyber-portfolio
+```
+
+Then open:
+
+```text
+START_HERE.md
+```
+
+Every project should give you:
+- a plain-English problem statement
+- a short demo
+- copy-paste commands
+- expected output
+- troubleshooting
+- an honest limit
+
+## Safety and scope
+
+- All included example data is synthetic.
+- Cloud and attack simulations belong in accounts and systems you own or are authorized to test.
+- AI model results vary by model and version.
+- Local files do not automatically mean local AI processing.
+- These projects are demonstrations and engineering artifacts, not production security guarantees.
 
 ## About me
 
 I teach what I learn. I write about what I build. I publish what I ship.
 
-- **Author of *Unshaken*** - a book on faith, resilience, and formation under pressure.
-- **"The Agent on the Desk,"** Gray Space, June 2026. An essay on AI as both tool and risk on the operator's desk. Project 2 in this repo is the engineering follow-up.
-- **M.S., Cybersecurity and Information Assurance,** Western Governors University, 2026.
-- **Certifications:** CompTIA Security+, CySA+, SecurityX (CASP+).
-- **Writing cadence:** essays on detection engineering, cloud security, and AI-in-the-loop defense. Reach out if a piece in this repo sparks something.
-- **Also on my GitHub:** *Good Deeds Coin* - a cryptocurrency project I shipped before the AI boom. Receipt for building ahead of the wave.
+- U.S. Army Cyber Warfare Officer
+- M.S. Cybersecurity and Information Assurance
+- CompTIA Security+, CySA+, SecurityX (CASP+)
+- Author of *Unshaken: Finding God's Strength When Life Trembles*
 
-## For hiring managers
-
-If you want to see how I think, read `03-crown-jewel-triage/ESSAY.md` first. It is a short piece on why severity-based triage is burning out your SOC and what to replace it with. The rest of the repo shows what the fix looks like in code.
-
-If you want to see how I ship, open any project folder. Every one has a README, a technical writeup, runnable code, and an honest "what I learned" section. No vaporware.
-
-## For LinkedIn
-
-Feel free to copy any of the resume lines above into your own evaluation notes. If you link this repo to a candidate review, mention the project that caught your attention. I like knowing which lane is working.
+GitHub and LinkedIn are linked from the interactive portfolio.
 
 ## Credits
 
-Pair-programmed with Claude Code. The brand, the voice, and the opinions are mine. The semicolons it keeps trying to add are not.
+Some projects use or learn from open-source work.
+
+Third-party attribution stays with the relevant project.
+
+AI tools helped with pair-programming and drafting. I own the project choices, testing, claims, and final published work.
 
 ## License
 
-MIT. Use it, remix it, teach from it.
+MIT unless a project or third-party file says otherwise.
