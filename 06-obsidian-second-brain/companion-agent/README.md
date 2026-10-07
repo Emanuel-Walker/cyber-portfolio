@@ -1,5 +1,21 @@
 # Companion Agent
 
+## Use this folder in this order
+
+1. Read this README for the architecture.
+2. Open `prompts/README.md` for copy-paste daily prompts.
+3. Open `sync/README.md` for the Context Pack refresh/sync pattern.
+4. Open `examples/` for small sample files.
+
+The Companion Agent is **not** the vault worker.
+
+Codex / Claude Code live in:
+
+```text
+../vault-agent/
+```
+
+
 The Companion Agent is the **daily-use assistant** that talks with you.
 
 Examples might include:
