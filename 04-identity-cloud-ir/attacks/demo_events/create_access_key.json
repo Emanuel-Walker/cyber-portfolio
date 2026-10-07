@@ -1,0 +1,15 @@
+{
+  "detail-type": "AWS API Call via CloudTrail",
+  "detail": {
+    "eventSource": "iam.amazonaws.com",
+    "eventName": "CreateAccessKey",
+    "userIdentity": {
+      "type": "IAMUser",
+      "userName": "lab-operator"
+    },
+    "requestParameters": {
+      "userName": "victim-user"
+    },
+    "sourceIPAddress": "198.51.100.42"
+  }
+}
