@@ -1,15 +1,97 @@
-# Quickstart - Detection-as-Code
+# Zero to Hero — Detection-as-Code
 
+## What you will build
 
-## Get the project files
+You are going to prove one idea:
 
-You can read this walkthrough without Git.
+**A security detection rule should be tested like software before it reaches production.**
 
-To run the demo, get the files one of two ways.
+By the end, you will:
 
-### Beginner option: Download ZIP
+- install Python
+- download the project files
+- create an isolated Python environment
+- install the project dependencies
+- run six automated tests
+- see positive and benign detection gates
+- convert a Sigma rule into Elastic KQL
+- intentionally break a rule and watch the test suite catch it
 
-On the GitHub repository page:
+You do not need Git.
+
+---
+
+# Part 1 — Install Python
+
+## Step 1. Google Python
+
+Search:
+
+```text
+Python download
+```
+
+Use the official site:
+
+```text
+https://www.python.org/downloads/
+```
+
+Install Python 3.10 or newer.
+
+### Windows
+
+Run the Python installer.
+
+If the installer shows:
+
+```text
+Add python.exe to PATH
+```
+
+enable it.
+
+Then open **PowerShell**.
+
+Run:
+
+```powershell
+py --version
+```
+
+If `py` is unavailable, try:
+
+```powershell
+python --version
+```
+
+### macOS
+
+Install the current Python 3 release from python.org.
+
+Open **Terminal**.
+
+Run:
+
+```bash
+python3 --version
+```
+
+**PASS:** Python reports version 3.10 or newer.
+
+---
+
+# Part 2 — Get the project files
+
+## Beginner method — Download ZIP
+
+Open:
+
+```text
+https://github.com/Emanuel-Walker/cyber-portfolio
+```
+
+Click:
 
 ```text
 Code -> Download ZIP
@@ -17,93 +99,339 @@ Code -> Download ZIP
 
 Extract the ZIP.
 
-Open the folder for this project.
+Open:
 
-### Developer option: Git clone
+```text
+cyber-portfolio-main/01-detection-as-code
+```
 
-If you already use Git:
+## Developer method — Git clone
+
+Optional:
 
 ```bash
 git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
-cd cyber-portfolio
+cd cyber-portfolio/01-detection-as-code
 ```
 
-Then enter this project's folder when the walkthrough tells you to.
+Git is not required.
 
-Git is optional. The project files are not.
+---
 
+# Part 3 — Open a terminal in the project folder
 
-> [!info] Plain English
-> This project treats security detection rules like software. You write a rule, write two tests (one that proves it catches the bad thing, one that proves it stays quiet on normal activity), and a pipeline blocks the merge if either test fails. You will see six tests pass and a detection rule convert into a working Elastic query. Takes about 5 minutes.
+## Windows
 
-## 5-minute demo
+Open the `01-detection-as-code` folder in File Explorer.
 
-BLUF. You will run the dual-gate pytest suite and the Sigma to Elastic converter. If the tests go green and the converter prints a KQL query, the project works.
+Click the address bar.
 
-Prerequisites.
+Type:
+
+```text
+powershell
+```
+
+Press Enter.
+
+PowerShell should open directly in that folder.
+
+Verify:
+
+```powershell
+Get-Location
+```
+
+## macOS
+
+Open Terminal.
+
+Type:
 
 ```bash
-python --version   # need 3.10 or newer
-pip install pytest pyyaml jsonschema
+cd 
 ```
 
-Step 1 - setup.
+including the space after `cd`.
+
+Drag the `01-detection-as-code` folder from Finder into Terminal.
+
+Press Enter.
+
+Verify:
 
 ```bash
-cd 01-detection-as-code
-pip install -r code/requirements.txt
+pwd
 ```
 
-What you see. Pip resolves and installs `pyyaml`, `jsonschema`, and `pytest`. The final line reads `Successfully installed ...` with no errors.
+**PASS:** the terminal path ends in `01-detection-as-code`.
 
-Step 2 - run the dual gate.
+---
+
+# Part 4 — Create an isolated Python environment
+
+This keeps this project's packages separate from the rest of your computer.
+
+## Windows PowerShell
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation for this session:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\.venv\Scripts\Activate.ps1
+```
+
+## macOS
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+**PASS:** your terminal prompt usually starts with:
+
+```text
+(.venv)
+```
+
+---
+
+# Part 5 — Install the dependencies
+
+Run:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r code/requirements.txt
+```
+
+On macOS, if `python` is unavailable inside the virtual environment, use:
+
+```bash
+python3 -m pip install -r code/requirements.txt
+```
+
+**PASS:** installation finishes without an error.
+
+---
+
+# Part 6 — Understand what you are about to test
+
+Open:
+
+```text
+code/rules/
+```
+
+You should see Sigma YAML detection rules.
+
+Open:
+
+```text
+code/tests/
+```
+
+The test suite checks three things:
+
+1. a malicious/attack-like event must fire the rule
+2. a benign event must stay quiet
+3. the written detection strategy must exist
+
+That is the dual gate.
+
+```text
+bad behavior -> MUST MATCH
+normal behavior -> MUST NOT MATCH
+```
+
+---
+
+# Part 7 — Run the tests
+
+Run:
 
 ```bash
 pytest code/tests/ -v
 ```
 
-What you see. Pytest discovers `test_detection_coverage.py` and prints one line per test. Expect `6 passed` at the bottom. Each rule has a positive test (must fire) and a benign test (must not fire). Both gates have to pass or the rule is rejected.
+Expected result:
 
-```
-test_detection_coverage.py::test_rule_fires_on_atomic[credential_dump_lsass] PASSED
-test_detection_coverage.py::test_rule_silent_on_benign[credential_dump_lsass] PASSED
-test_detection_coverage.py::test_rule_fires_on_atomic[suspicious_powershell_download] PASSED
-test_detection_coverage.py::test_rule_silent_on_benign[suspicious_powershell_download] PASSED
-test_detection_coverage.py::test_ads_spec_present[credential_dump_lsass] PASSED
-test_detection_coverage.py::test_ads_spec_present[suspicious_powershell_download] PASSED
-======= 6 passed in 0.4s =======
+```text
+6 passed
 ```
 
-Step 3 - run the converter.
+You should see tests similar to:
+
+```text
+test_rule_fires_on_atomic[...] PASSED
+test_rule_silent_on_benign[...] PASSED
+test_ads_spec_present[...] PASSED
+```
+
+**PASS:** all six tests pass.
+
+If a benign test fails, the rule is too broad.
+
+If a malicious test fails, the rule is too weak or incorrect.
+
+---
+
+# Part 8 — Convert the Sigma rule
+
+Run:
 
 ```bash
 python code/converters/sigma_to_elastic.py code/rules/suspicious_powershell_download.yml
 ```
 
-What you see. The script prints a working Elastic KQL query derived from the Sigma rule. Something like `process.name:"powershell.exe" and process.command_line:(*DownloadString* or *IEX*)`. Copy that into Kibana and it runs.
+The script should print an Elastic KQL query.
 
-Step 3b - validate.
+Example shape:
 
-Both gates green means merge is allowed. If either fails, the PR blocks. That is the whole point. Try breaking a rule in `code/rules/*.yml` and rerunning pytest. The benign test should flip red.
+```text
+process.name:"powershell.exe" and process.command_line:(...)
+```
 
-## What this proves
+**PASS:** a KQL query prints without an exception.
 
-- Detection engineering treated like software with CI gates, not a wiki page of regexes.
-- Dual-gate testing (positive + benign) catches rules that fire on legitimate admin work before prod does.
-- Sigma keeps the source detection logic portable while this project demonstrates automated conversion to Elastic KQL.
+The project currently demonstrates automated conversion to **Elastic KQL**.
 
-## Add screenshots here
+Do not describe Splunk or another backend as implemented unless a tested converter exists.
 
-Capture these while running the demo and drop them in a `screenshots/` folder next to this file.
+---
 
-- `screenshots/01-pytest-green.png` - terminal showing 6 passed
-- `screenshots/02-pytest-broken-rule.png` - benign test failing after rule is loosened
-- `screenshots/03-converted-kql.png` - converter output printed to terminal
-- `screenshots/04-ads-spec.png` - a `.ads.md` file open next to its `.yml` rule
-- `screenshots/05-pr-blocked.png` - a mocked PR view with the red CI check
+# Part 9 — Break the rule on purpose
 
-## Common issues
+This is the useful part.
 
-- `ModuleNotFoundError: No module named 'yaml'`. The `pyyaml` install did not land in the active interpreter. Run `python -m pip install pyyaml` instead of plain `pip`.
-- Pytest reports `collected 0 items`. You ran it from the repo root. Either run from `01-detection-as-code/` or pass the full path `pytest 01-detection-as-code/code/tests/ -v`.
-- Converter prints a Sigma field name with no translation. The field is not in the Elastic mapping table. Add it to the converter's `FIELD_MAP` dict and rerun.
+Open:
+
+```text
+code/rules/suspicious_powershell_download.yml
+```
+
+Make one detection condition intentionally too broad.
+
+For example, temporarily change a specific command-line condition so that normal PowerShell activity is more likely to match.
+
+Save the file.
+
+Run:
+
+```bash
+pytest code/tests/ -v
+```
+
+Expected:
+
+At least one test should turn red.
+
+That demonstrates why the benign gate exists.
+
+Undo your temporary change.
+
+Run the tests again.
+
+**PASS:**
+
+```text
+6 passed
+```
+
+---
+
+# Part 10 — What you just built
+
+You now have this pipeline:
+
+```text
+Sigma rule
+   |
+   +--> written strategy exists?
+   |
+   +--> malicious event fires?
+   |
+   +--> benign event stays quiet?
+   |
+   v
+tests pass
+   |
+   v
+Elastic KQL artifact
+```
+
+That is Detection-as-Code.
+
+---
+
+# Common problems
+
+## `python` is not recognized
+
+Windows:
+
+```powershell
+py --version
+```
+
+macOS:
+
+```bash
+python3 --version
+```
+
+If neither works, reinstall Python from python.org.
+
+## `pytest` is not found
+
+Make sure the virtual environment is activated.
+
+Then:
+
+```bash
+python -m pip install -r code/requirements.txt
+python -m pytest code/tests/ -v
+```
+
+## PowerShell will not activate the virtual environment
+
+For the current PowerShell window:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\.venv\Scripts\Activate.ps1
+```
+
+## Tests collect zero items
+
+Confirm the terminal path ends in:
+
+```text
+01-detection-as-code
+```
+
+Then run:
+
+```bash
+python -m pytest code/tests/ -v
+```
+
+---
+
+# Definition of done
+
+- [ ] Python installed
+- [ ] project files downloaded
+- [ ] virtual environment active
+- [ ] dependencies installed
+- [ ] six tests pass
+- [ ] Elastic KQL conversion works
+- [ ] you broke a rule and saw a test catch it
+- [ ] you restored the rule and returned to green
+
+You now understand the project well enough to explain it in an interview.
