@@ -1,127 +1,203 @@
-# ADHD Guide to Running This Vault
+# ADHD-friendly guide to running the vault
 
-This is the honest guide. If you have ADHD, you have probably tried a dozen systems. They worked for 11 days then collapsed under the weight of their own rules. This one is designed to collapse gracefully and rebuild in five minutes.
+## The rule
 
-Nothing here is medical advice. If you need medical help, go get it. This is just a working method for keeping an external brain alive when your internal one is not cooperating.
+The system should be easy to **restart**.
 
----
+You will miss days.
 
-## Why ADHD brains need external systems
+You will forget where a note belongs.
 
-Working memory is where ideas live while you are using them. ADHD brains have less working memory on tap than neurotypical brains, and the tap is easier to turn off by stress, mood, or a loud noise. That is not a character flaw. It is a hardware spec.
+You will get interested in rebuilding the system instead of using it.
 
-An external brain gives you three things your head cannot reliably provide:
+That is normal for any system that depends on attention and routine.
 
-1. **Persistence.** The idea you had at 11pm is still there at 9am.
-2. **Non-judgmental storage.** The file does not care how messy you were when you wrote it.
-3. **Pattern surfacing.** With an agent reading your notes, patterns show up that you would never catch by rereading.
+This vault is designed to recover without a cleanup project.
 
----
+## Minimum viable use
 
-## The hyperfixation meter
+On a rough day, do only this:
 
-Hyperfixation is one of the superpowers of an ADHD brain. It is also the reason you forget to eat. The meter is a one-line practice at the end of each day:
+1. open `00-Inbox/`
+2. write the thought
+3. close the app
 
+That counts.
+
+You do not need to:
+- tag it
+- link it
+- move it
+- format it
+- summarize it
+
+Capture first.
+
+Organize later.
+
+## The 10-second capture rule
+
+If a thought takes longer than about 10 seconds to save, your capture workflow has too much friction.
+
+A valid note can be:
+
+```text
+Ask Sam about the AWS budget alert.
 ```
-## Hyperfixation Meter
-**Primary fix today:** rebuilding the home lab network
-**Strength:** 8/10
-Notes: Lost 4 hours to tuning pfSense rules. Shipped a working VLAN. Did not eat lunch.
-Was this productive or displacement? Productive, but at the cost of the actual priority
-(the quarterly review). Tomorrow, 90 min cap on lab work before 2pm.
+
+That is enough.
+
+## One next action
+
+Do not ask the vault:
+
+> What should I do with my whole life?
+
+Ask:
+
+```text
+Read my current project note.
+
+What is the next concrete action I can finish in 20 minutes?
+
+Give me one answer.
 ```
 
-A number plus a sentence. That is all. The point is not to beat yourself up. The point is to give the agent a time series it can review with you later. After 30 days you can ask the agent: "What did I hyperfixate on this month? Where was it productive and where was it displacement?" You will be surprised.
+One next action is easier to use than a perfect priority matrix.
 
----
+## The restart protocol
 
-## Brain dump culture
+If you disappear for a day, week, or month:
 
-No shame in capture. The `00-Inbox/` folder exists so you can dump a thought in under 10 seconds and get back to what you were doing. The rules:
+1. open the vault
+2. do not reorganize anything
+3. open `02-CURRENT-SEASON.md` if you use it
+4. open your projects index
+5. update one next action
+6. continue
 
-- One thought per file is fine. Ten thoughts in one file is also fine.
-- Grammar does not matter. Spelling does not matter.
-- Date stamps help. Topics help. Neither is required.
-- The agent will not touch the Inbox unless you ask. There is no silent cleanup that mysteriously loses something.
+Do not backfill every missed day unless the missing history actually matters.
 
-When the Inbox gets too full, run the brain dump cleanup workflow in `workflows/01-brain-dump-cleanup.md`. The agent reads each file, suggests where it should go, and waits for your approval before moving anything.
+## Inbox cleanup
 
----
+When the Inbox becomes noisy, ask the agent:
 
-## The agent as a non-judgmental processor
+```text
+Read 00-Inbox.
 
-A well-configured agent will never say "you should have organized this better." It will never shame you for a messy note. It will not ask why you did not finish the project you started six weeks ago.
+Group the notes by likely destination.
 
-What it will do:
+Show me the proposed moves first.
 
-- Summarize what you wrote.
-- Suggest links to related notes.
-- Flag patterns across weeks.
-- Backfill the structured parts of a note when you only wrote the messy parts.
-- Ask one clarifying question when it genuinely cannot tell what you meant.
-
-The CLAUDE.md template in `agent-setup/` includes the voice rules that keep the agent from drifting into therapist cosplay or productivity-coach lecturing.
-
----
-
-## Daily check-in system
-
-A short morning check-in and a longer evening close is the rhythm that holds everything together.
-
-**Morning (90 seconds)**
+Do not move or delete anything until I approve.
 ```
+
+The approval step matters.
+
+You should never wonder where the agent moved something.
+
+## Keep daily notes small
+
+If you use a daily note, start with four prompts:
+
+```markdown
 ## Today
-- Mood (1-10):
-- Sleep (hours):
-- One thing I will not drop today:
-- One thing I will say no to:
+- One thing that matters:
+- One thing I can ignore:
+- Open loop I do not want to forget:
+- Note for future me:
 ```
 
-**Evening (3-5 minutes)**
+That is enough.
+
+Add fields only when you repeatedly need them.
+
+## Hyperfocus guardrail
+
+When you notice one project eating the whole day, write:
+
+```markdown
+## Focus check
+What am I working on?
+What was I supposed to be working on?
+Is this still worth the next hour?
 ```
-## Evening Close
-- What I actually did:
-- What I did not do that I thought I would:
-- What is still open:
-- Hyperfixation meter: X/10 - what was it
-- One line for future me:
+
+No score is required.
+
+The purpose is interruption, not judgment.
+
+## Do not gamify the vault
+
+Avoid:
+- streaks
+- badges
+- missed-day warnings
+- giant dashboards of personal scores
+
+A broken streak can turn a useful tool into another thing you feel behind on.
+
+The vault should still work after a gap.
+
+## Let the agent do boring maintenance
+
+Good jobs to delegate:
+- summarize yesterday
+- build a weekly review
+- find unlinked project mentions
+- propose Inbox moves
+- format a messy note
+- update a project index after you approve changes
+
+Do not delegate judgment just because organization is tedious.
+
+## Read-aloud rule
+
+If an instruction takes two reads, simplify it.
+
+Good:
+
+```text
+Open 03-Projects.
+
+Pick one active project.
+
+Write the next action.
 ```
 
-The agent can parse these fields and build a weekly or monthly rollup for you. No manual tracking required.
+Bad:
 
----
+```text
+Review your active project ecosystem, identify dependencies, assess priority alignment, and synthesize the optimal next-step sequence.
+```
 
-## Retroactive forgiveness workflow
+The vault is supposed to reduce cognitive load.
 
-Missed three days? A week? A month? Fine. You are allowed to come back.
+Its instructions should sound like a person talking.
 
-Instead of trying to reconstruct the lost days by memory, use the retroactive workflow:
+## Weekly reset
 
-1. Open the agent in the vault.
-2. Say: "I missed the last X days. Help me backfill from texts, calendar events, and git commits."
-3. Point it at whatever source you have access to. For most people this is a calendar export, a text message search, and the git log of their work projects.
-4. The agent drafts a short daily note for each missed day. You review and keep what rings true.
+Once a week, five minutes:
 
-This is not journaling. This is making sure the time series stays usable. If a trend starts to show in your health or focus, the gap days do not break the signal.
+```text
+1. What is still active?
+2. What can I archive?
+3. What is the next action for each real project?
+4. What am I pretending is still a priority?
+```
 
----
+Then stop.
 
-## Hard rule: do not gamify the vault
+Do not redesign the folder structure during the weekly reset.
 
-Streaks, badges, and dopamine hits are a trap for ADHD brains. The first time you break a streak, the whole system starts to feel like a failure and you abandon it.
+## Definition of success
 
-The vault is a tool. Tools do not keep score. If you miss a week, the vault is still there. The graph still works. The agent still reads what you have. Walk back in and keep going.
+Ask one question:
 
-The only metric that matters is: did the external brain help you make a better decision this week? If yes, keep going. If no, change one thing and try again.
+**Did this system help me remember something or make a better next decision this week?**
 
----
+If yes, keep it.
 
-## Three gentle recommendations
+If no, remove one source of friction.
 
-1. **Keep the daily note template short.** Five fields max. If it takes more than 90 seconds to fill, you will stop filling it.
-2. **Let the agent write the boring parts.** Weekly reviews, monthly rollups, meeting summaries. These are mental tax. Offload them.
-3. **Reread one random daily note from six months ago, once a month.** You will catch patterns about yourself the agent cannot catch.
-
-<!-- Source: github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain -->
----
-_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain). Credit appreciated, not required._
+Do not add three new plugins.
