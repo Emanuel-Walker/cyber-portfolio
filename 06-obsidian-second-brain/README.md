@@ -68,17 +68,19 @@ vault-agent/
   scripts/               Optional bootstrap automation
 
 companion-agent/
-  README.md              Daily-use companion architecture and prompts
+  README.md              Daily-use companion architecture
+  prompts/               Copy-paste daily prompts
+  sync/                  Context refresh/sync patterns
+  examples/              Example context and Vault Capture files
 
 guides/
   adhd-friendly-use.md
   vault-structure.md
 
-templates/               Note templates
+templates/               Note templates used by the Vault Agent
 workflows/               Repeatable Vault Agent workflows
 security/                Privacy and sync guidance
-examples/                Example use cases
-images/                  Example visuals
+images/                  Walkthrough screenshots and diagrams
 ```
 
 ## Vault Agent vs Companion Agent
