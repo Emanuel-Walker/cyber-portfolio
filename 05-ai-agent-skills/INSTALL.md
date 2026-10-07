@@ -8,6 +8,42 @@ You do not need all 15 skills.
 
 Start with one.
 
+## Fastest path
+
+### macOS or Linux
+
+Install one skill:
+
+```bash
+bash scripts/install-skill.sh claude humanizer
+```
+
+Install the builder pack:
+
+```bash
+bash scripts/install-skill.sh claude builder-pack
+```
+
+Change `claude` to `codex`, `copilot`, or `cursor` as needed.
+
+### Windows PowerShell
+
+```powershell
+.\scripts\install-skill.ps1 -Agent codex -Item builder-pack
+```
+
+Available packs:
+
+```text
+writing-pack
+builder-pack
+second-brain-pack
+```
+
+The installer stops if a target skill folder already exists.
+
+## Manual path
+
 ## 1. Clone this portfolio
 
 ```bash
