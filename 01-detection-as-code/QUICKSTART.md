@@ -1,5 +1,38 @@
 # Quickstart - Detection-as-Code
 
+
+## Get the project files
+
+You can read this walkthrough without Git.
+
+To run the demo, get the files one of two ways.
+
+### Beginner option: Download ZIP
+
+On the GitHub repository page:
+
+```text
+Code -> Download ZIP
+```
+
+Extract the ZIP.
+
+Open the folder for this project.
+
+### Developer option: Git clone
+
+If you already use Git:
+
+```bash
+git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
+cd cyber-portfolio
+```
+
+Then enter this project's folder when the walkthrough tells you to.
+
+Git is optional. The project files are not.
+
+
 > [!info] Plain English
 > This project treats security detection rules like software. You write a rule, write two tests (one that proves it catches the bad thing, one that proves it stays quiet on normal activity), and a pipeline blocks the merge if either test fails. You will see six tests pass and a detection rule convert into a working Elastic query. Takes about 5 minutes.
 
