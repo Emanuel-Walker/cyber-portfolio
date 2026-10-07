@@ -1,65 +1,216 @@
-# Install
+# Install agent skills
 
-Three paths depending on which assistant you use.
+## Goal
 
-## Claude Code
+Install one `SKILL.md` folder so your agent can load it when the task matches.
 
-Claude Code loads skills from `~/.claude/skills/<skill-name>/SKILL.md`. The front-matter `name` and `description` fields let the assistant decide when to load the file.
+You do not need all 15 skills.
 
+Start with one.
+
+## Fastest path
+
+### macOS or Linux
+
+Install one skill:
+
+```bash
+bash scripts/install-skill.sh claude humanizer
 ```
+
+Install the builder pack:
+
+```bash
+bash scripts/install-skill.sh claude builder-pack
+```
+
+Change `claude` to `codex`, `copilot`, or `cursor` as needed.
+
+### Windows PowerShell
+
+```powershell
+.\scripts\install-skill.ps1 -Agent codex -Item builder-pack
+```
+
+Available packs:
+
+```text
+writing-pack
+builder-pack
+second-brain-pack
+```
+
+The installer stops if a target skill folder already exists.
+
+## Manual path
+
+## 1. Clone this portfolio
+
+```bash
+git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
+cd cyber-portfolio/05-ai-agent-skills
+```
+
+## 2. Pick one skill
+
+Start with:
+
+```text
+skills/humanizer/
+```
+
+Every skill folder contains:
+
+```text
+SKILL.md
+```
+
+## 3. Copy it to your agent
+
+### Claude Code
+
+```bash
+mkdir -p ~/.claude/skills
 cp -r skills/humanizer ~/.claude/skills/
-cp -r skills/article-writing ~/.claude/skills/
-cp -r skills/brand-voice ~/.claude/skills/
 ```
 
-Then start a new Claude Code session. The next time your prompt matches a skill's description, the assistant will load that skill before responding.
+Verify:
 
-Verify an install:
-
-```
-ls ~/.claude/skills/humanizer/SKILL.md
+```bash
+test -f ~/.claude/skills/humanizer/SKILL.md && echo "PASS: skill installed"
 ```
 
-## Cursor
+### OpenAI Codex
 
-Cursor uses a single rules file at `.cursorrules` (project root) or Settings → Rules for AI (global). It does not load skills on demand the way Claude Code does, so you have two options:
-
-**Option 1 - pick one skill and paste it in.** If you want Cursor to always apply the humanizer rules while you write, open `skills/humanizer/SKILL.md`, strip the YAML front matter, and paste the body into `.cursorrules`.
-
-**Option 2 - index multiple skills by description.** Build a `.cursorrules` that lists each skill name and description with a one-liner that says "when the user asks for X, apply the rules in `skills/X/SKILL.md`." Then keep this repo as a sibling folder so Cursor can read the files when needed.
-
-Example `.cursorrules` header:
-
-```
-When the user asks to clean up AI writing tells, apply the rules in
-skills/humanizer/SKILL.md. When the user asks to draft a long-form
-piece, apply skills/article-writing/SKILL.md. When unsure which skill
-applies, ask.
+```bash
+mkdir -p ~/.codex/skills
+cp -r skills/humanizer ~/.codex/skills/
 ```
 
-## Any skill-aware assistant
+Verify:
 
-The pattern is universal.
+```bash
+test -f ~/.codex/skills/humanizer/SKILL.md && echo "PASS: skill installed"
+```
 
-1. Each `SKILL.md` is a self-contained instruction module.
-2. Front matter declares `name` and `description`. The description is the trigger signal.
-3. Body is the ruleset.
+### GitHub Copilot
 
-If your assistant supports a "load this file as context when the user asks about X" pattern, point it at `SKILL.md` using the description as the match condition. If it only supports a single system prompt, concatenate the skills you use most into one file and keep the rest as reference.
+Personal skills commonly live under:
 
-## Adaptation checklist before you ship
+```text
+~/.copilot/skills/
+```
 
-- [ ] Replace `<your-vault-root>` with your actual notes path.
-- [ ] Replace `<your-content-root>` with your actual content folder, or remove the skill if you do not run a content engine.
-- [ ] Replace `<your-system-folder>` with the folder you use for templates and automation.
-- [ ] Review the voice rules in `humanizer` and `brand-voice`. Mine are specific. Keep what applies, drop what does not.
-- [ ] Review the save-routing tables in `smart-ocr`, `file-organizer`, and `ship-learn-next`. Point them at your folders.
-- [ ] Check platform specifics in `content-engine`. Short-form vertical video is my lane. Yours may be a newsletter or a blog.
+Project-specific skills can live under:
+
+```text
+.github/skills/
+```
+
+### Cursor
+
+Project-level skills can live under:
+
+```text
+.cursor/skills/
+```
+
+If your Cursor version uses a different rules/skills path, use its current settings UI and point it at the same `SKILL.md` folder.
+
+## 4. Test the install
+
+Start a new agent session.
+
+Ask:
+
+```text
+Use the humanizer skill.
+
+Rewrite this:
+"In today's rapidly evolving threat landscape, organizations must leverage robust and seamless AI solutions."
+```
+
+**PASS:** the output removes the inflated AI vocabulary and sounds more direct.
+
+## Install several skills
+
+Example:
+
+```bash
+for skill in humanizer docs-readability-audit repo-onboarding-audit builder-walkthrough; do
+  cp -r "skills/$skill" ~/.claude/skills/
+done
+```
+
+Change the destination for your agent.
+
+## Recommended starter packs
+
+### Writing
+
+```text
+humanizer
+article-writing
+brand-voice
+docs-readability-audit
+```
+
+### Builder / coding agent
+
+```text
+repo-onboarding-audit
+builder-walkthrough
+web-ui-audit
+prompt-optimizer
+```
+
+### Second brain / companion
+
+```text
+obsidian
+companion-context
+file-organizer
+docs-readability-audit
+```
+
+## Adapt before trusting
+
+Review every skill for:
+- paths
+- allowed tools
+- voice preferences
+- save destinations
+- destructive actions
+- external services
+
+Do not install a skill you have not read.
 
 ## Troubleshooting
 
-**Skill does not load.** Check that the `name` field matches the folder name and that the file is at `~/.claude/skills/<name>/SKILL.md`, not nested one level deeper.
+### Skill is not detected
 
-**Skill loads but does not fire the right behavior.** Read the front-matter description. The assistant uses that to decide whether to load the skill. If the description does not clearly match the user's intent, tighten it.
+Check:
 
-**Two skills try to run at once.** Add a precedence note at the top of one. The `obsidian` skill in this set shows the pattern - it defers to more specialized skills when they apply.
+```bash
+find ~/.claude/skills -maxdepth 2 -name SKILL.md
+```
+
+Or use your agent's equivalent skills directory.
+
+### Two skills conflict
+
+Prefer the narrower skill.
+
+Example:
+
+```text
+builder-walkthrough
+```
+
+should take precedence over a generic writing skill while authoring a technical setup guide.
+
+### Skill runs but the result is wrong
+
+The skill is guidance, not a proof system.
+
+Add an acceptance test or review step instead of making the prompt longer.

@@ -1,0 +1,13 @@
+{
+  "detail-type": "AWS API Call via CloudTrail",
+  "detail": {
+    "eventSource": "s3.amazonaws.com",
+    "eventName": "ListBuckets",
+    "userIdentity": {
+      "type": "IAMUser",
+      "userName": "lab-operator"
+    },
+    "requestParameters": {},
+    "sourceIPAddress": "198.51.100.42"
+  }
+}

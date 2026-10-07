@@ -1,113 +1,113 @@
-# Install Guide
+# Agent setup
 
-Zero to a working vault with an agent plugged in. About 20 minutes if you are new to Obsidian.
+## Start with the vault bootstrap
 
----
+From the Second Brain project root:
 
-## Step 1 - Install Obsidian
+### macOS or Linux
 
-Download from [obsidian.md](https://obsidian.md) and install. Open it, click "Open folder as vault," and point it at your clone of this repo.
-
-Recommended first plugins (Settings > Community plugins):
-
-- **Templater** - makes the templates in `templates/` actually work.
-- **Dataview** - lets you query your notes like a database.
-- **Advanced Tables** - keeps markdown tables sane.
-- **Natural Language Dates** - type `@today` and get a date.
-
-You do not need more than this to start.
-
----
-
-## Step 2 - Pick an agent
-
-Three solid options. Pick one.
-
-### Option A: Claude Code (recommended)
+Codex:
 
 ```bash
-npm install -g @anthropic-ai/claude-code
+bash setup/bootstrap-vault.sh codex
 ```
 
-Then from your vault root:
+Claude Code:
 
 ```bash
-cp agent-setup/CLAUDE.md.template CLAUDE.md
-# Edit CLAUDE.md and fill in the placeholders.
-claude
+bash setup/bootstrap-vault.sh claude
 ```
 
-Claude Code reads `CLAUDE.md` at the vault root as its charter. Done.
-
-### Option B: OpenAI Codex or compatible GPT agent
+Generic / AGENTS.md-aware tool:
 
 ```bash
-cp agent-setup/CODEX.md.template CODEX.md
-# Edit the placeholders.
+bash setup/bootstrap-vault.sh generic
 ```
 
-Launch Codex with the vault as working directory. Confirm it loaded the charter by asking: "What folder is off limits?" It should answer with `Legacy/`.
+### Windows PowerShell
 
-### Option C: Any `AGENTS.md`-aware agent (Cursor, Continue.dev, Hermes)
-
-```bash
-cp agent-setup/AGENTS.md.template AGENTS.md
-# Edit the placeholders.
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\setup\bootstrap-vault.ps1 -Agent codex
 ```
 
-Point the agent at the vault root. Most of these tools pick up `AGENTS.md` automatically.
+Change the agent name as needed.
 
----
+The script creates the folders, copies templates, and places the correct charter file at the vault root.
 
-## Step 3 - Fill in the placeholders
+## Fill the placeholders
 
-Open the charter file you just copied. Replace every `<ANGLE_BRACKET>` with your real values:
+Open the generated charter:
 
-- `<YOUR_NAME>` - how you want the agent to address you
-- `<YOUR_VAULT_ROOT>` - absolute path to this folder
-- `<YOUR_PRIMARY_FOCUS>` - one line about what you are working on this quarter
-- `<YOUR_ROLE_OR_FOCUS>` - what you do, in one line
-- `<YOUR_LONG_HORIZON>` - where you want to be in two years
-
-Keep each value to one line. The charter is a reference the agent rereads often. Short is better.
-
----
-
-## Step 4 - Validate the setup
-
-Start the agent and run these three checks:
-
-1. **Charter loaded?** Ask: "Summarize the voice rules you are operating under." You should get a short list that matches your charter.
-2. **Folder permissions working?** Ask: "List the folders you are not allowed to write to." It should name `Legacy/` and either `00-Inbox/` conditionally or `01-Daily-Notes/` (append only), depending on the template.
-3. **Linking behavior?** Ask: "If I mention a person named Jamie who has no note yet, what do you do?" It should say it creates a draft stub and surfaces it.
-
-If any of these fail, the charter is not being loaded. Check the file is at the vault root and named exactly `CLAUDE.md`, `CODEX.md`, or `AGENTS.md`.
-
----
-
-## Step 5 - Drop in your first daily note
-
-```bash
-mkdir -p "01-Daily-Notes/$(date +%Y)/$(date +%m-%B)"
-# or on Windows PowerShell:
-# New-Item -ItemType Directory -Path "01-Daily-Notes\$(Get-Date -Format yyyy)\$(Get-Date -Format 'MM-MMMM')" -Force
+```text
+CODEX.md
+CLAUDE.md
+AGENTS.md
 ```
 
-Open `templates/daily-note.md`, copy its contents into a new file named `YYYY-MM-DD.md`, and start writing. That is day one.
+Replace every `<ANGLE_BRACKET>` value.
 
----
+Do not place credentials in the charter.
 
-## Troubleshooting
+## Install your agent
 
-**The agent is ignoring the voice rules.**
-Make sure `CLAUDE.md` (or your charter file) is in the vault root, not nested in a subfolder. Agents only auto-load the charter from the working directory root.
+Use the agent's current official installation instructions.
 
-**The agent wants to edit my Inbox.**
-Reread the folder permissions section in your charter. Make sure `00-Inbox/` is marked no-write without permission. Some agents need the rule stated twice to internalize it.
+This repo intentionally does not pin a third-party CLI install command that may change independently of the vault.
 
-**I want to add new behaviors.**
-Add them to your charter under a new section. Keep rules short and testable. If a rule cannot be verified by asking the agent a question, it is not a rule.
+What matters here is the working-directory contract:
 
-<!-- Source: github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain -->
----
-_Part of the obsidian-second-brain template. [Fork on GitHub](https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/06-obsidian-second-brain). Credit appreciated, not required._
+```text
+launch the agent from the vault root
+```
+
+## Validate
+
+Ask:
+
+```text
+Summarize the rules in my charter. Do not edit files.
+```
+
+Then:
+
+```text
+Which folders are protected from unrestricted writes?
+```
+
+**PASS:** the answers match the charter.
+
+## Test one controlled write
+
+Ask:
+
+```text
+Create a project note under 03-Projects called Agent Setup Test.
+
+Include:
+- goal
+- status
+- next action
+
+Do not modify any other folder.
+```
+
+Review the file yourself.
+
+## Add skills later
+
+Vault-local skills live under:
+
+```text
+99-System/skills/
+```
+
+A reusable public skill library is available in:
+
+```text
+../05-ai-agent-skills/
+```
+
+when you are using the portfolio copy.
+
+Add skills only after the base charter works.

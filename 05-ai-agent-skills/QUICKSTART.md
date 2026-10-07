@@ -17,13 +17,18 @@ mkdir -p ~/.claude/skills
 ls ~/.claude/skills
 ```
 
-Step 1 - setup. Copy the humanizer skill into your Claude Code skills directory.
+Step 1 - setup. Install the humanizer skill.
 
 ```bash
 cd 05-ai-agent-skills
-mkdir -p ~/.claude/skills/humanizer
-cp skills/humanizer/SKILL.md ~/.claude/skills/humanizer/SKILL.md
-ls ~/.claude/skills/humanizer/
+bash scripts/install-skill.sh claude humanizer
+```
+
+On Windows PowerShell:
+
+```powershell
+Set-Location 05-ai-agent-skills
+.\scripts\install-skill.ps1 -Agent claude -Item humanizer
 ```
 
 What you see. The copy succeeds silently. `ls` prints `SKILL.md`. Claude Code auto-discovers skills in `~/.claude/skills/*/SKILL.md` on next launch.
@@ -33,7 +38,7 @@ Step 2 - invoke it on a sample.
 Open Claude Code in any directory. Paste this prompt verbatim.
 
 ```
-/humanizer
+Use the humanizer skill strictly.
 
 Rewrite this paragraph:
 
@@ -82,6 +87,6 @@ Capture these while running the demo and drop them in a `screenshots/` folder ne
 
 ## Common issues
 
-- Claude Code does not recognize `/humanizer`. The file is in the wrong path. The directory name under `~/.claude/skills/` must match the skill name, and the file inside must be named `SKILL.md` exactly.
+- The agent does not appear to load the humanizer skill. The file may be in the wrong path. The directory name under `~/.claude/skills/` must match the skill name, and the file inside must be named `SKILL.md` exactly.
 - Skill loads but the output still sounds like AI. The model received the input but ignored the rules. Add "apply the humanizer skill strictly, do not paraphrase" to the prompt and rerun.
 - Windows path. On Windows, the skills directory lives at `%USERPROFILE%\.claude\skills\humanizer\SKILL.md`. Use PowerShell `Copy-Item` or Git Bash, not CMD.

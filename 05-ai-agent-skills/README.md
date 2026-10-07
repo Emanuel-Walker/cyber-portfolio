@@ -1,63 +1,131 @@
 ---
 title: AI Agent Skills
-updated: 2026-10-03
+updated: 2026-10-07
 ---
 
 # AI Agent Skills
 
-AI assistants are only as good as the instructions they load. These are mine. Fork what works.
+## Plain English
 
-## What this is
+A skill is a small instruction file that teaches an AI agent how to do one repeatable job.
 
-Ten modular skill files. Each one teaches a skill-aware AI assistant (Claude Code, Cursor, or any assistant that can load instruction modules on demand) how to do one specialized thing well.
+Instead of pasting the same giant prompt every time, you install the skill once.
 
-Each skill is a single markdown file with YAML front matter and a scoped set of rules. The assistant reads it when the trigger fires and applies the logic. No code, no runtime, no plugin install. Just text that becomes behavior.
+Then the agent can load it when the task matches.
 
-These were built for my own workflow. I am publishing them because other builders asked how I organize instructions, and because a public reference is easier to point at than a private folder. Fork, adapt, discard what does not fit.
+This repo contains **15 reusable skills**.
 
-## The ten skills
+## Try one in 5 minutes
 
-| # | Skill | What it does |
-|---|-------|--------------|
-| 1 | `content-engine` | Generates platform-native drafts from an approved seed. Enforces voice rules, hook formulas, and a never-publish contract. |
-| 2 | `humanizer` | Strips AI writing tells from text. Rewrites inflated symbolism, promotional adjectives, rule-of-three padding, filler. Genre-aware. |
-| 3 | `article-writing` | Drafts long-form writing (essays, blog posts, papers, newsletters). Leads with the artifact, explains after. |
-| 4 | `brand-voice` | Builds a reusable VOICE PROFILE from real samples so downstream skills do not re-derive style on every run. |
-| 5 | `prompt-optimizer` | Diagnoses a raw prompt and rewrites it as a clear, scoped, ready-to-paste prompt. Advisory only. |
-| 6 | `drawio` | Creates and edits draw.io diagrams in XML. Flowcharts, architecture, sequence diagrams. Export to PNG. |
-| 7 | `file-organizer` | Organizes files and folders on Windows. Finds duplicates, proposes structures, confirms before moving. |
-| 8 | `ship-learn-next` | Turns learning content into a Ship-Learn-Next rep plan. 100 reps beats 100 hours of study. |
-| 9 | `smart-ocr` | Extracts text from images and scanned PDFs with PaddleOCR 3.6 locally. Routes output to the right folder. |
-| 10 | `obsidian` | Automates an Obsidian vault with file ops and the `obsidian://` URI scheme. Offline. |
+Open:
+
+```text
+QUICKSTART.md
+```
+
+The demo installs the `humanizer` skill and uses it to rewrite an AI-sounding paragraph.
+
+## The 15 skills
+
+| Skill | What it does |
+|---|---|
+| `content-engine` | Drafts platform-specific content from an approved seed. |
+| `humanizer` | Removes common AI-writing tells while preserving meaning. |
+| `article-writing` | Drafts long-form essays, guides, posts, and papers. |
+| `brand-voice` | Builds a reusable voice profile from real writing samples. |
+| `prompt-optimizer` | Turns a vague prompt into a scoped, ready-to-paste prompt. |
+| `drawio` | Creates and edits draw.io diagrams. |
+| `file-organizer` | Proposes safe file/folder cleanup and confirms before moving files. |
+| `ship-learn-next` | Turns learning material into an action and repetition plan. |
+| `smart-ocr` | Extracts text from images and scanned documents. |
+| `obsidian` | Automates common Obsidian vault operations. |
+| `docs-readability-audit` | Checks whether a tired beginner can actually follow a README or walkthrough. |
+| `web-ui-audit` | Reviews a website for accessibility, mobile usability, interaction clarity, and basic performance. |
+| `repo-onboarding-audit` | Checks whether a new human or coding agent can understand, build, test, and safely modify a repo. |
+| `builder-walkthrough` | Converts a technical project into a buy/install/build/test guide with placeholders and checkpoints. |
+| `companion-context` | Designs personal AI systems as separate memory, reasoning, tool, and interface layers. |
 
 ## Install
 
-See `INSTALL.md` for Claude Code, Cursor, and generic skill-aware assistants.
+Open:
 
-Short version for Claude Code:
-
-```
-cp -r skills/<skill-name>/ ~/.claude/skills/
+```text
+INSTALL.md
 ```
 
-## What you would adapt
+The short version is to copy a skill folder into your agent's skills directory.
 
-These skills reference generic placeholders where my own workflow uses specific paths. Before using them you will want to swap:
+Example for Claude Code:
 
-- `<your-vault-root>` - the root path of your notes repository
-- `<your-content-root>` - where your content engine lives, if you run one
-- `<your-system-folder>` - where your templates, voice profiles, and automation configs live
-- Voice preferences - I have specific banned words and sentence-shape rules. Yours will differ.
-- Platform specifics - the content-engine skill assumes short-form video on a vertical feed. If you ship elsewhere, change the format spec.
+```bash
+mkdir -p ~/.claude/skills
+cp -r skills/humanizer ~/.claude/skills/
+```
 
-## What is not here
+Example for Codex:
 
-Skills tied to specialized domain content, personal credentials, or anything with operational sensitivity stay private. The ten published here are the reusable, generalizable ones.
+```bash
+mkdir -p ~/.codex/skills
+cp -r skills/humanizer ~/.codex/skills/
+```
 
-## Honest framing
+## How a skill should be written
 
-These are personal instruction modules, not a product. The structure is sound. The specifics are mine. You should not run them as-is unless your workflow happens to match mine. Read the logic, keep the pattern, replace the specifics.
+A useful skill answers:
+
+1. **When should the agent use this?**
+2. **When should it not use this?**
+3. **What steps should it follow?**
+4. **What is it allowed to change?**
+5. **What does a good result look like?**
+6. **What should it check before saying "done"?**
+
+That last question matters.
+
+Instructions are easy to write.
+
+Quality gates are what make them useful.
+
+## Why this belongs in a cyber portfolio
+
+Agents are becoming part of operational workflows.
+
+That creates the same engineering questions as any other automation:
+
+- scope
+- permissions
+- repeatability
+- logging
+- failure modes
+- testing
+- human approval
+
+The skill files in this project show how I turn informal prompting into repeatable operating instructions.
+
+## What this does not prove
+
+A skill does not guarantee the model will be correct.
+
+It improves:
+- consistency
+- routing
+- boundaries
+- handoff quality
+
+A human still owns the result.
+
+## Upstream inspiration
+
+Some skills were influenced by public open-source work from Vercel and Meta.
+
+See:
+
+```text
+THIRD_PARTY_ATTRIBUTION.md
+```
 
 ## License
 
-MIT. Use it, remix it, teach from it.
+My original skills are MIT.
+
+Upstream material keeps its own license requirements.

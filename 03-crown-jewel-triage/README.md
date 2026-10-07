@@ -14,13 +14,13 @@ If you lead a SOC and this reads like your Tuesday, open an issue or email me.
 - Scores alerts against that model so an alert on your payment gateway outranks a High on a marketing laptop
 - Ships a **tier-based playbook library** (Crown Jewels, High-Trust Identity, Build and Deploy, SaaS Data Paths, Lateral Stepping Stones, Noise) with concrete first-15-minute actions
 - Includes a Grafana dashboard JSON that measures **MTTD, MTTR, queue depth, and SLA conformance by tier**, not by severity (MTTD and MTTR are Mean Time to Detect and Mean Time to Respond, the two metrics SOC leaders live by)
-- Comes with synthetic data (10 assets, 6 alerts) so you can run it in two minutes
+- Comes with synthetic data (12 assets, 6 alerts) so you can run it in two minutes
 
 ## Quick start
 
 ```bash
 pip install pyyaml
-python3 code/crown_jewel_scorer.py --inventory code/example_asset_inventory.yaml --alert code/example_alerts.jsonl
+python3 code/crown_jewel_scorer.py --inventory code/example_asset_inventory.yaml --alerts code/example_alerts.jsonl
 python3 code/run_prioritization.py --inventory code/example_asset_inventory.yaml --alerts code/example_alerts.jsonl --out queue.md
 ```
 

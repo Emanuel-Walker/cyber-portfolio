@@ -1,82 +1,133 @@
 # Quickstart - Prompt-Injection-Hardened LLM Triage
 
-> [!info] Plain English
-> This project runs a local AI model (an LLM, large language model) to triage security alerts. You will also run 16 attack prompts that try to trick the AI into breaking its rules. 12 of the 16 attacks fail (as designed). 4 still slip through, and the project documents each one honestly. Takes about 5 minutes once the local model is installed.
+## Plain English
+
+This project asks one question:
+
+**What happens when a security alert contains text that tries to manipulate the AI reading it?**
+
+The first demo is fully offline. No model is required.
 
 ## 5-minute demo
 
-BLUF. You will run the triage agent on a clean alert and a poisoned alert, then run the 16-payload attack harness. The agent should return structured P-levels on both alerts and the harness should block 12 of 16 attacks.
+### 1. Install the Python dependencies
 
-Prerequisites.
-
-```bash
-# Ollama local LLM runtime
-curl -fsSL https://ollama.com/install.sh | sh
-ollama pull llama3.1:8b
-ollama serve &
-# Python deps
-pip install pydantic jsonschema requests
-```
-
-Step 1 - setup.
+From the portfolio root:
 
 ```bash
 cd 02-llm-triage-hardened
-pip install -r code/requirements.txt
+python3 -m pip install -r code/requirements.txt
 ```
 
-What you see. Pydantic, jsonschema, and the Ollama client install cleanly. `ollama list` shows `llama3.1:8b` in the local model table.
+**PASS:** the install finishes without an error.
 
-Step 2 - run the agent on a benign alert.
+### 2. Inspect a poisoned alert
+
+Run:
 
 ```bash
-python code/triage_agent.py --alert data/alerts/benign_login.json
+python3 code/demo_sanitizer.py data/sample_alerts/injected_user_agent.json
 ```
 
-What you see. Structured JSON on stdout. Priority is `P4`. The `rationale` field is one short paragraph. The `schema_valid` field is `true`. Something like:
+You should see injection signals similar to:
 
-```json
-{"priority": "P4", "rationale": "Successful login from a known...", "schema_valid": true, "provenance": {...}}
+```text
+Detected injection signals:
+  - user_agent.original: ignore_instructions
+  - user_agent.original: severity_override
 ```
 
-Step 2b - run the agent on a prompt-injected alert.
+The exact list may contain additional flags.
+
+**What this proves:** the input sanitizer recognizes obvious attempts to talk to the model through attacker-controlled log fields.
+
+### 3. See what the model would receive
+
+Run:
 
 ```bash
-python code/triage_agent.py --alert data/alerts/injected_phishing.json
+python3 code/triage_agent.py \
+  --input data/sample_alerts/injected_user_agent.json \
+  --dry-run
 ```
 
-What you see. The agent returns a valid P-level anyway (usually P2 or P3). The injection payload in the alert body does not change the output schema. The agent either refuses the injected instruction outright or reports the attempt in the rationale and still returns a well-formed P-level.
+**PASS:** the alert appears inside `<untrusted_field>` wrappers.
 
-Step 3 - run the attack harness.
+No Ollama call is made in dry-run mode.
+
+## Optional: run the real local model
+
+Install Ollama using its current official instructions.
+
+Then:
 
 ```bash
-python code/attacks/run_attacks.py
+ollama pull llama3.1:8b
+ollama serve
 ```
 
-What you see. Sixteen payloads fire against the agent one at a time. The harness prints a results table and a final tally. Expect `12/16 blocked, 4/16 bypassed`. The four bypasses are named in the output (role-play framing, nested instruction wrapper, Unicode confusable, chained-tool reference).
+Open a second terminal in this project and run:
 
-Step 3b - validate.
+```bash
+python3 code/triage_agent.py \
+  --input data/sample_alerts/suspicious_powershell.json
+```
 
-Open `code/attacks/results_sample.md` and compare it to your run. Your bypass count should match within one. If every attack succeeds, the hardening prompt did not load. Check that `code/hardening/system_prompt.md` is being read by `triage_agent.py`.
+**PASS:** the agent returns structured JSON that matches the project schema.
+
+If you see:
+
+```text
+ollama_error
+```
+
+check that `ollama serve` is still running.
+
+## Optional: run all 16 injection tests
+
+With Ollama running:
+
+```bash
+python3 code/attacks/run_attacks.py \
+  --out code/attacks/results.md
+```
+
+A sample run included with the project blocked 12 of 16 payload families.
+
+Your result may differ by model version and environment.
+
+That variability is part of the lesson.
 
 ## What this proves
 
-- Local LLM wired into a defensive workflow with schema-validated output, so a model drift or injection cannot corrupt downstream automation.
-- Honest red-team of my own system with a named list of what still breaks, not a marketing claim of full coverage.
-- Companion engineering to a published essay, showing I ship the code that backs the argument.
+- attacker-controlled strings are treated as untrusted data
+- model output is schema-validated before downstream use
+- failures are measured instead of hidden
+- prompt-injection defenses reduce risk but do not eliminate it
 
-## Add screenshots here
+## What this does not prove
 
-Capture these while running the demo and drop them in a `screenshots/` folder next to this file.
+It does **not** prove the agent is immune to prompt injection.
 
-- `screenshots/01-benign-alert-p4.png` - agent output on `benign_login.json`
-- `screenshots/02-injected-alert-held.png` - agent output on `injected_phishing.json` with injection resisted
-- `screenshots/03-attack-harness-table.png` - 12/16 blocked table
-- `screenshots/04-bypass-named.png` - one of the 4 bypasses with the rationale showing why it slipped
-- `screenshots/05-schema-validation.png` - a schema-valid output next to a schema-invalid one (force an invalid run by stripping the hardening prompt)
+The included sample results document four bypass classes.
 
-## Common issues
+Read:
 
-- `connection refused on 127.0.0.1:11434`. Ollama is not running. Start it with `ollama serve` and confirm with `curl http://127.0.0.1:11434/api/tags`.
-- First call takes 60+ seconds. The model is loading into memory. Subsequent calls return in 3 to 8 seconds on a modern laptop.
-- Attack harness reports `0/16 blocked`. The hardening prompt is not being injected. Verify the agent loads `code/hardening/system_prompt.md` before each call and that the file is not empty.
+```text
+code/attacks/results_sample.md
+```
+
+## Next
+
+Read:
+
+```text
+README.md
+WRITEUP.md
+```
+
+Then inspect:
+
+```text
+code/hardening/
+```
