@@ -19,24 +19,28 @@ Do not force one document to do both jobs.
 
 ### Human README
 
-Must explain:
+The README is the default human front door.
+
+It should explain:
 - what the project is
 - who it is for
 - first useful result
 - prerequisites
-- one copy-paste start
+- the complete beginner walkthrough
+- copy-paste commands
+- PASS / STOP checks
+- cleanup
+- limitations
 - where to go next
 
-### QUICKSTART or START_HERE
+Do **not** create a separate `QUICKSTART.md`, `START_HERE.md`, or `WALKTHROUGH.md` when the README can carry the flow clearly.
 
-Must be executable.
+Create a separate guide only when it is genuinely a different artifact, such as:
+- a hardware assembly manual
+- a cloud-provider-specific branch
+- a long reference that would make the root README unusable
 
-Use:
-- numbered steps
-- commands
-- PASS checks
-- STOP checks
-- cleanup
+If you create one, the README must still explain the first useful path without making the reader bounce between files.
 
 ### AGENTS.md
 
@@ -53,7 +57,7 @@ Use for the technical operating contract:
 
 ## Audit questions
 
-- Is there one obvious first file?
+- Is the root README the one obvious first file?
 - Are supported platforms explicit?
 - Are exact versions pinned where version drift breaks builds?
 - Can the project be tested without hardware?
