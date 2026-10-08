@@ -5,7 +5,7 @@ This file is for coding agents working on this public portfolio.
 Human entry point:
 
 ```text
-START_HERE.md
+README.md
 ```
 
 ## Purpose
@@ -90,11 +90,11 @@ Useful review skills:
 - `builder-walkthrough`
 - `companion-context`
 
-## Before changing a quickstart
+## Before changing a project README
 
 Verify every referenced path.
 
-A quickstart must not contain:
+A project README walkthrough must not contain:
 - nonexistent files
 - unsupported command flags
 - stale counts
