@@ -657,4 +657,4 @@ A skill does not make an AI model automatically correct. Human review still matt
 
 - `skills/<name>/SKILL.md` = the actual reusable skill
 - `scripts/` = optional installers
-- `THIRD_PARTY_ATTRIBUTION.md` = upstream inspiration and licensing notes
+- `skills/THIRD_PARTY_ATTRIBUTION.md` = upstream inspiration and licensing notes
