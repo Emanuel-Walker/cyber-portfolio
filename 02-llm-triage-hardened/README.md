@@ -393,11 +393,12 @@ Expected result:
 
 The model returns structured JSON that passes the project's output schema.
 
-Look for fields such as:
-- severity
-- reasoning
-- recommended action
-- or the equivalent schema fields implemented by the project
+Look for the exact schema fields implemented by the project:
+- `severity`
+- `attack_patterns`
+- `confidence`
+- `suggested_actions`
+- `similar_cases`
 
 **PASS:** the command returns validated structured output instead of free-form prose.
 
