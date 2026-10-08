@@ -15,14 +15,7 @@ By the end you will have:
 
 ## The system in one picture
 
-```mermaid
-flowchart TD
-    A[Obsidian Vault<br/>Your Markdown source of truth] --> B[Vault Agent<br/>Codex or Claude Code]
-    B --> C[Curated Context Pack]
-    C --> D[Companion Agent<br/>Muse / Dot / ChatGPT / Claude]
-    D --> E[Vault Capture]
-    E --> B
-```
+![Second Brain architecture](images/system-architecture.svg)
 
 **Vault Agent = worker.** It reads and maintains files.
 
@@ -699,6 +692,8 @@ Second Brain/
 
 **PASS:** those folders and files exist.
 
+![Expected finished vault](images/finished-vault.svg)
+
 ---
 
 # Part 7 — Fill the minimum context
@@ -828,6 +823,8 @@ If it moves files without asking, strengthen the rule file before adding sensiti
 ---
 
 # Part 9 — Use the system for real work
+
+![Daily capture and companion loop](images/daily-loop.svg)
 
 ## Step 20. Capture a real note
 
@@ -1159,17 +1156,146 @@ Not when the graph looks impressive.
 
 ---
 
-# After the walkthrough: optional template library
+# After the walkthrough — keep it simple
 
-The walkthrough above is complete by itself.
+You already have a working Second Brain.
 
-If you want my reusable templates, workflows, security guides, Vault Agent prompts, and Companion Agent examples, use the standalone project:
+This repository now has only two concepts you may want to inspect later:
 
-https://github.com/Emanuel-Walker/obsidian-second-brain
+```text
+vault-agent/
+companion-agent/
+```
 
-That repository is the reusable toolkit.
+## Vault Agent
 
-This portfolio folder stays intentionally small so a recruiter or builder can understand the project from one README.
+`vault-agent/` contains optional copyable assets for Codex / Claude Code:
+
+- agent rule templates
+- note templates
+- workflow prompts
+- security reference
+- example automations
+- optional setup scripts
+
+You do **not** need to read those files to complete the walkthrough above.
+
+## Companion Agent
+
+`companion-agent/` contains the daily-use companion pattern:
+
+- Context Pack example
+- Vault Capture example
+- companion interaction patterns
+
+Again, the full setup instructions are already in this README.
+
+# Keep the system ADHD-friendly
+
+The vault should be easy to **restart**, not impressive to maintain.
+
+Use these rules:
+
+- If you do not know where something belongs, put it in `00-Inbox/`.
+- If capture takes more than about 10 seconds, simplify it.
+- On a bad day, one sentence in Inbox counts.
+- Do not backfill missed daily notes just to protect a streak.
+- Ask the Vault Agent for **one next action**, not a giant life plan.
+- When you return after a gap, open `CURRENT-SEASON.md`, check active projects, and continue.
+- Do not redesign the folder structure during a weekly review.
+
+A useful prompt:
+
+```text
+Read my current project note.
+
+What is the next concrete action I can finish in 20 minutes?
+
+Give me one answer.
+```
+
+# Security rules that matter
+
+Your notes may be local.
+
+Your AI agent may not be.
+
+Assume any file a hosted agent reads could be sent to that provider during the task.
+
+Never store these casually in the vault:
+
+- passwords
+- API keys
+- private keys
+- recovery codes
+- bank or credit-card credentials
+- government identification numbers
+
+Use a password manager for secrets.
+
+Enable your operating system's full-disk encryption:
+
+- macOS: FileVault
+- Windows: BitLocker when available
+
+Obsidian Sync is optional.
+
+Sync is not a backup.
+
+Keep at least one independent backup of the vault.
+
+# Four useful ways to use the system
+
+You do not need a fancy graph to justify the project.
+
+### 1. Turn rough notes into structured reading notes
+
+Capture the messy note in Inbox.
+
+Ask the Vault Agent to propose a structured resource note, links, and questions.
+
+### 2. Maintain active projects
+
+Each active project should answer:
+
+```text
+What is the goal?
+What is the current status?
+What is the next action?
+```
+
+### 3. Create reusable study material
+
+Store source material in `10-Study/`.
+
+Ask the Vault Agent to produce quizzes, summaries, review sheets, or lesson material.
+
+### 4. Use the Companion Agent for daily orientation
+
+Give the companion only the curated Context Pack.
+
+Let it help you plan and capture.
+
+Send durable information back as a Vault Capture for the Vault Agent to review.
+
+# What the repository itself looks like
+
+```text
+obsidian-second-brain/
+├── README.md
+├── vault-agent/
+├── companion-agent/
+├── images/
+└── LICENSE
+```
+
+That is intentional.
+
+The README teaches the system.
+
+The two folders contain optional reusable assets.
+
+The images support the walkthrough.
 
 ## Use this on a resume
 
