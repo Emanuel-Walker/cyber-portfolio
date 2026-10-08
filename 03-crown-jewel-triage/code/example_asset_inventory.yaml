@@ -1,6 +1,6 @@
 # Example Asset Inventory
 #
-# 10 synthetic assets for demonstration. All names, IDs, and owners are fictional.
+# 12 synthetic assets for demonstration. All names, IDs, and owners are fictional.
 # Scores are illustrative. In production you would walk every asset with the
 # business owner before publishing a tier.
 
@@ -220,4 +220,4 @@ assets:
       data_sensitivity: 1
       blast_radius: 1
       recovery_cost: 1
-    # total: 4 -> tier 6, but any alert on this asset escalates (deception rule)
+    # total: 4 -> tier 6. This prototype does not apply a separate deception override.
