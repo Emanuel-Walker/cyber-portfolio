@@ -1159,63 +1159,17 @@ Not when the graph looks impressive.
 
 ---
 
-# After the walkthrough: use the optional library
+# After the walkthrough: optional template library
 
-Once your basic vault works, this repository gives you extra building blocks.
+The walkthrough above is complete by itself.
 
-## Vault Agent
+If you want my reusable templates, workflows, security guides, Vault Agent prompts, and Companion Agent examples, use the standalone project:
 
-Open:
+https://github.com/Emanuel-Walker/obsidian-second-brain
 
-```text
-vault-agent/README.md
-```
+That repository is the reusable toolkit.
 
-That page contains:
-- worker-agent architecture
-- permission model
-- copy-paste maintenance prompts
-- optional bootstrap scripts
-- agent-rule templates
-
-## Companion Agent
-
-Open:
-
-```text
-companion-agent/README.md
-```
-
-That page contains:
-- the companion architecture
-- daily prompts
-- context refresh/sync patterns
-- Vault Capture workflow
-- Muse / Dot / lean-context examples
-
-## Other optional folders
-
-- `templates/` = copyable Obsidian note templates
-- `workflows/` = repeatable Vault Agent jobs
-- `security/` = privacy, PII, local-first, and sync guidance
-- `guides/` = ADHD-friendly use and vault-structure reference
-- `examples/` = example use cases
-- `images/` = visual examples used by the walkthrough
-
-## A note about screenshots
-
-This guide uses visuals where they add value and text instructions where product UIs change frequently.
-
-When adding future screenshots, prefer the confusing checkpoints:
-- Obsidian first launch
-- Create new vault
-- Obsidian account sign-in
-- PowerShell / Terminal in the vault folder
-- Codex first launch
-- Claude Code first launch
-- final vault tree
-
-The written steps should still work even after a screenshot becomes outdated.
+This portfolio folder stays intentionally small so a recruiter or builder can understand the project from one README.
 
 ## Use this on a resume
 
