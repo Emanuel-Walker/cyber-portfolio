@@ -27,6 +27,8 @@ That README explains:
 
 No separate quickstart. No separate "start here." No separate resume guide.
 
+Supporting Markdown remains only when it is part of the project itself, such as a detection strategy, playbook, prompt, sample result, or skill definition. You should never need to hunt through those files to find the build instructions.
+
 ## Projects
 
 | Project | What it demonstrates | Open |

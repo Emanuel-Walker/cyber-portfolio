@@ -15,7 +15,7 @@ By the end you will have:
 
 ## The system in one picture
 
-![Second Brain architecture](images/system-architecture.svg)
+![Second Brain architecture](assets/system-architecture.svg)
 
 **Vault Agent = worker.** It reads and maintains files.
 
@@ -23,7 +23,7 @@ By the end you will have:
 
 ## What a mature vault can look like
 
-![Example Obsidian vault graph](images/vault-graph-example.png)
+![Example Obsidian vault graph](assets/vault-graph-example.png)
 
 The graph is not the goal. The goal is being able to remember, decide, and resume work more easily.
 
@@ -692,7 +692,7 @@ Second Brain/
 
 **PASS:** those folders and files exist.
 
-![Expected finished vault](images/finished-vault.svg)
+![Expected finished vault](assets/finished-vault.svg)
 
 ---
 
@@ -824,7 +824,7 @@ If it moves files without asking, strengthen the rule file before adding sensiti
 
 # Part 9 — Use the system for real work
 
-![Daily capture and companion loop](images/daily-loop.svg)
+![Daily capture and companion loop](assets/daily-loop.svg)
 
 ## Step 20. Capture a real note
 
@@ -1160,35 +1160,19 @@ Not when the graph looks impressive.
 
 You already have a working Second Brain.
 
-This repository now has only two concepts you may want to inspect later:
+This repository keeps the beginner path simple.
+
+The full walkthrough, Vault Agent instructions, Companion Agent pattern, Context Pack flow, and Vault Capture flow are all in this README.
+
+The only optional implementation folder you may want to inspect later is:
 
 ```text
 vault-agent/
-companion-agent/
 ```
 
-## Vault Agent
+It contains reusable scripts and rule-file templates for Codex / Claude Code.
 
-`vault-agent/` contains optional copyable assets for Codex / Claude Code:
-
-- agent rule templates
-- note templates
-- workflow prompts
-- security reference
-- example automations
-- optional setup scripts
-
-You do **not** need to read those files to complete the walkthrough above.
-
-## Companion Agent
-
-`companion-agent/` contains the daily-use companion pattern:
-
-- Context Pack example
-- Vault Capture example
-- companion interaction patterns
-
-Again, the full setup instructions are already in this README.
+You do **not** need to open that folder to complete the walkthrough above.
 
 # Keep the system ADHD-friendly
 
@@ -1283,10 +1267,8 @@ Send durable information back as a Vault Capture for the Vault Agent to review.
 ```text
 obsidian-second-brain/
 ├── README.md
-├── vault-agent/
-├── companion-agent/
-├── images/
-└── LICENSE
+├── assets/
+└── vault-agent/
 ```
 
 That is intentional.

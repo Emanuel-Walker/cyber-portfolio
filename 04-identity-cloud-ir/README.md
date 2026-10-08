@@ -573,22 +573,118 @@ Do not run an attack scenario until you know what resources were created.
 
 # Part 17 — Walk the attack scenarios
 
-Open:
+You do not need to open five more README files. The scenario guide is here.
 
-```text
-attacks/
+Each scenario folder contains the runnable lab files. Use only the disposable lab resources created for this project.
+
+## Scenario 01 — OAuth token theft
+
+**Pattern:** leaked token or SaaS credential abuse.
+
+**What happens:**
+1. A fake OAuth refresh token is retrieved from SSM.
+2. An access key is minted for the lab SaaS-style IAM user.
+3. The stolen identity calls `iam:ListUsers` outside its intended scope.
+
+**CloudTrail:** `ssm:GetParameter`, `iam:CreateAccessKey`, `iam:ListUsers`
+
+**Detection:** Elastic `oauth_token_abuse.yml`, Panther `oauth_token_abuse.py`, Athena query 1.
+
+Run:
+
+```bash
+cd attacks/01-oauth-token-theft
+./run.sh
 ```
 
-Each scenario should explain:
-- what it changes or calls
-- what telemetry it should generate
-- what GuardDuty may or may not surface
-- what custom detection should see it
-- how to clean up
+## Scenario 02 — NHI privilege escalation
 
-Use only the lab resources created for this project.
+**Pattern:** over-privileged non-human identity and role chaining.
 
-Do not point the scripts at another account, employer environment, or third-party system.
+**What happens:**
+1. The lab assumes the over-privileged data-pipeline role.
+2. It enumerates roles.
+3. It retrieves the lab ExternalId from SSM.
+4. It assumes the cross-account reader role.
+
+**CloudTrail:** `sts:AssumeRole`, `ssm:GetParameter`, another `sts:AssumeRole`
+
+**Detection:** Elastic `nhi_privesc_passrole.yml`, Panther `nhi_privesc_passrole.py`, Athena query 2.
+
+Run:
+
+```bash
+cd attacks/02-nhi-privilege-escalation
+./run.sh
+```
+
+## Scenario 03 — Cross-tenant session anomaly
+
+**Pattern:** a valid session behaves unlike the identity's normal environment.
+
+**What happens:** the lab assumes a role with an unusual user-agent and performs harmless enumeration.
+
+**CloudTrail:** `sts:AssumeRole`, `iam:ListRoles`, `s3:ListBuckets`, `sts:GetCallerIdentity`
+
+**Detection:** Elastic `cross_tenant_session_anomaly.yml`, Panther `cross_tenant_session_anomaly.py`, Athena query 3.
+
+Run:
+
+```bash
+cd attacks/03-cross-tenant-session-anomaly
+./run.sh
+```
+
+## Scenario 04 — SaaS-to-S3 exfiltration pattern
+
+**Pattern:** valid credentials and valid API calls used to read an abnormal amount of data.
+
+**What happens:** the lab role repeatedly reads the synthetic customer-data objects to create a measurable burst of `s3:GetObject` events.
+
+**CloudTrail:** repeated `s3:GetObject`
+
+**Detection:** Elastic `saas_exfil_api_pattern.yml`, Panther `saas_exfil_api_pattern.py`, Athena query 4.
+
+Run:
+
+```bash
+cd attacks/04-saas-to-s3-exfiltration
+./run.sh
+```
+
+## Scenario 05 — IAM persistence activity
+
+**Pattern:** access-key creation and policy changes that can be used to maintain access.
+
+**What happens:**
+1. A lab IAM user is created.
+2. An access key is created.
+3. A read-only managed policy is attached as a safe stand-in for a dangerous privilege change.
+4. The account password policy is queried.
+5. The scenario cleans up its changes.
+
+**CloudTrail:** `iam:CreateAccessKey`, `iam:AttachUserPolicy`, `iam:GetAccountPasswordPolicy`
+
+**Detection:** Elastic `iam_access_key_creation.yml`, Panther `iam_access_key_creation.py`, Athena query 5.
+
+Run:
+
+```bash
+cd attacks/05-guardduty-silent-iam
+./run.sh
+```
+
+## What to record
+
+For every scenario, capture:
+
+- what identity performed the action
+- which CloudTrail events appeared
+- whether GuardDuty surfaced anything
+- whether the custom rule matched
+- what cleanup occurred
+
+That comparison is the actual lab result.
 
 ---
 
