@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520">
+<rect width="1100" height="520" rx="26" fill="#0d1117"/>
+<style>.t{font:700 26px Arial,sans-serif;fill:#f0f6fc}.s{font:400 18px Arial,sans-serif;fill:#b1bac4}.b{fill:#161b22;stroke:#30363d;stroke-width:2}.a{stroke:#3fb950;stroke-width:4;fill:none;marker-end:url(#m)}</style>
+<defs><marker id="m" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#3fb950"/></marker></defs>
+<text class="t" x="550" y="65" text-anchor="middle">The daily loop</text>
+<rect class="b" x="55" y="160" width="210" height="130" rx="18"/><text class="t" x="160" y="205" text-anchor="middle">Capture</text><text class="s" x="160" y="240" text-anchor="middle">00-Inbox</text>
+<rect class="b" x="325" y="160" width="210" height="130" rx="18"/><text class="t" x="430" y="205" text-anchor="middle">Vault Agent</text><text class="s" x="430" y="240" text-anchor="middle">proposes organization</text>
+<rect class="b" x="595" y="160" width="210" height="130" rx="18"/><text class="t" x="700" y="205" text-anchor="middle">You approve</text><text class="s" x="700" y="240" text-anchor="middle">files change</text>
+<rect class="b" x="865" y="160" width="180" height="130" rx="18"/><text class="t" x="955" y="205" text-anchor="middle">Companion</text><text class="s" x="955" y="240" text-anchor="middle">daily use</text>
+<path class="a" d="M265 225 H315"/><path class="a" d="M535 225 H585"/><path class="a" d="M805 225 H855"/>
+<path class="a" d="M955 305 C955 430 430 430 430 305"/>
+<text class="s" x="700" y="430" text-anchor="middle">Useful conversation returns as a Vault Capture</text>
+</svg>
