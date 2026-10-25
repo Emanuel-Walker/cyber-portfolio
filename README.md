@@ -106,7 +106,7 @@ A lab result is not a production guarantee.
 
 ## About me
 
-- U.S. Army Cyber Warfare Officer
+- Emanuel Walker, AI cybersecurity builder
 - M.S. Cybersecurity and Information Assurance
 - CompTIA Security+
 - CompTIA CySA+
