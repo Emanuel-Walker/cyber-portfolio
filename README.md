@@ -106,7 +106,7 @@ A lab result is not a production guarantee.
 
 ## About me
 
-- U.S. Army Cyber Warfare Officer
+- Cybersecurity Professional, Defensive Cyber Operations
 - M.S. Cybersecurity and Information Assurance
 - CompTIA Security+
 - CompTIA CySA+
