@@ -106,7 +106,7 @@ A lab result is not a production guarantee.
 
 ## About me
 
-- Government Cybersecurity Professional, Defensive Cyber Operations
+- Cybersecurity Professional, Defensive Cyber Operations
 - M.S. Cybersecurity and Information Assurance
 - CompTIA Security+
 - CompTIA CySA+
