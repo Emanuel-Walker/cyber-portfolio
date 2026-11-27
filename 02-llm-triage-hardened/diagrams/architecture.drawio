@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-09-21T12:00:00.000Z" agent="portfolio" version="24.0.0">
+  <diagram name="architecture" id="triage-architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Prompt-Injection-Hardened LLM SOC Triage Agent" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="alert" value="Alert JSON&#10;(Elastic-style)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sanitizer" value="Input Sanitizer&#10;- length cap&#10;- unicode normalize&#10;- strip markdown&#10;- flag injections" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="240" y="130" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="wrap" value="Prompt Builder&#10;static system prompt +&#10;&lt;untrusted_field&gt;...&lt;/untrusted_field&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="460" y="130" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ollama" value="Ollama&#10;llama3.1:8b&#10;/api/generate&#10;format=json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="700" y="130" width="160" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="validator" value="Output Validator&#10;JSON schema&#10;reject on drift" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="900" y="130" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prov" value="Provenance Logger (JSONL)&#10;input_hash | prompt_version | model | flags | raw_output | validation | verdict" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="240" y="340" width="640" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="analyst" value="Analyst stdout&#10;strict JSON verdict&#10;severity, ATT&amp;CK, actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="920" y="340" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="attack" value="Attack Harness&#10;16 named payloads&#10;pass/fail table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="340" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="endArrow=classic;html=1;" edge="1" parent="1" source="alert" target="sanitizer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="endArrow=classic;html=1;" edge="1" parent="1" source="sanitizer" target="wrap">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="endArrow=classic;html=1;" edge="1" parent="1" source="wrap" target="ollama">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="endArrow=classic;html=1;" edge="1" parent="1" source="ollama" target="validator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="endArrow=classic;html=1;" edge="1" parent="1" source="validator" target="analyst">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1" source="sanitizer" target="prov">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1" source="validator" target="prov">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1" source="attack" target="alert">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

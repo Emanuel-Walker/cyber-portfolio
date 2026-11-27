@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" modified="2026-10-03T00:00:00.000Z" agent="crown-jewel" version="22.1.0">
+  <diagram name="Asset Tier Pyramid" id="crown-jewel-pyramid">
+    <mxGraphModel dx="1422" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="t1" value="Tier 1 - Crown Jewels&#10;Payments, core customer DB, source code, signing keys&#10;SLA: 15m / 2h" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fillColor=#b85450;strokeColor=#6c1d1d;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="80" width="170" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t2" value="Tier 2 - High-Trust Identity&#10;SSO, cloud admin, domain controllers, PAM&#10;SLA: 15m / 2h" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fillColor=#d79b00;strokeColor=#b46504;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="170" width="250" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t3" value="Tier 3 - Build and Deploy&#10;CI/CD, package registries, container registries, signing systems&#10;SLA: 30m / 4h" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#8f7f00;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="260" width="330" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t4" value="Tier 4 - SaaS Data Paths&#10;Snowflake, Workday, Salesforce, email gateways&#10;SLA: 1h / 8h" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fillColor=#82b366;strokeColor=#36622b;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="350" width="410" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t5" value="Tier 5 - Lateral Stepping Stones&#10;Jump hosts, bastions, VPN, shared service accounts&#10;SLA: 1h / 8h" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#23445d;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="440" width="490" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t6" value="Tier 6 - Noise&#10;Marketing laptops, dev sandboxes, honeypots, internal wikis&#10;Batch review every 4h / 24h MTTR" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fillColor=#9673a6;strokeColor=#432d57;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="530" width="570" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label-left" value="Attacker reaches toward the top&#10;Defender watches the top first" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="90" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label-right" value="More assets, less value&#10;per alert as you go down" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="720" y="300" width="90" height="60" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

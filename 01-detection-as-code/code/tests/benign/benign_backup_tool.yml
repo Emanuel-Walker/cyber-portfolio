@@ -1,0 +1,43 @@
+# Benign fixture focused on backup and config-management tooling.
+# These are the real-world patterns that generated the 10,000-alert weekend.
+description: >
+  Enterprise backup agents, SCCM, and dev-workstation module installs. The
+  paired rules MUST NOT fire on any event. If they do, the rule is unsafe to
+  ship.
+events:
+  - name: sccm_module_pull
+    process.name: powershell.exe
+    process.command_line: "powershell.exe -ExecutionPolicy Bypass -Command (New-Object Net.WebClient).DownloadString('https://internal-artifacts.corp.local/sccm/apps.ps1')"
+    process.parent.name: ccmexec.exe
+    user.name: SYSTEM
+    host.name: WIN-ENDPOINT-055
+
+  - name: internal_repo_pull_second_host
+    process.name: powershell.exe
+    process.command_line: "powershell -Command Invoke-WebRequest 'https://repo.internal.corp.local/baseline/v1.ps1' -OutFile baseline.ps1"
+    process.parent.name: ccmexec.exe
+    user.name: SYSTEM
+    host.name: WIN-ENDPOINT-131
+
+  - name: crowdstrike_lsass_telemetry
+    winlog.event_data.SourceImage: "C:\\Program Files\\CrowdStrike\\CSFalconService.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1438"
+    winlog.event_data.SourceProcessId: "612"
+    host.name: WIN-ENDPOINT-200
+    user.name: SYSTEM
+
+  - name: sentinelone_lsass_telemetry
+    winlog.event_data.SourceImage: "C:\\Program Files\\SentinelOne\\Sentinel Agent 23.1\\SentinelAgent.exe"
+    winlog.event_data.TargetImage: "C:\\Windows\\System32\\lsass.exe"
+    winlog.event_data.GrantedAccess: "0x1fffff"
+    winlog.event_data.SourceProcessId: "988"
+    host.name: WIN-ENDPOINT-201
+    user.name: SYSTEM
+
+  - name: admin_remote_session
+    process.name: powershell.exe
+    process.command_line: "powershell -Command Enter-PSSession -ComputerName dc01 -Credential admin"
+    process.parent.name: explorer.exe
+    user.name: admin
+    host.name: WIN-ADMIN-02

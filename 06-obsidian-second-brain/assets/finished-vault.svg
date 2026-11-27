@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="680" viewBox="0 0 1100 680">
+<rect width="1100" height="680" rx="26" fill="#0d1117"/>
+<rect x="45" y="55" width="1010" height="570" rx="18" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+<style>.h{font:700 30px Arial,sans-serif;fill:#f0f6fc}.f{font:500 22px ui-monospace,Menlo,monospace;fill:#c9d1d9}.a{fill:#58a6ff}.m{fill:#8b949e}</style>
+<text class="h" x="80" y="105">Expected vault after the setup prompt</text>
+<text class="f a" x="90" y="155">📁 00-Inbox</text><text class="f" x="90" y="195">📁 01-Daily-Notes</text><text class="f" x="90" y="235">📁 02-People</text><text class="f a" x="90" y="275">📁 03-Projects</text><text class="f m" x="135" y="312">└─ Second Brain Setup.md</text>
+<text class="f" x="90" y="352">📁 04-Areas</text><text class="f" x="90" y="392">📁 05-Resources</text><text class="f" x="90" y="432">📁 06-Archive</text><text class="f" x="90" y="472">📁 07-Attachments</text>
+<text class="f" x="570" y="155">📁 08-AI-History</text><text class="f" x="570" y="195">📁 09-Dreams</text><text class="f" x="570" y="235">📁 10-Study</text><text class="f" x="570" y="275">📁 99-MOC</text><text class="f a" x="570" y="315">📁 99-System</text>
+<text class="f m" x="615" y="352">├─ companion/</text><text class="f m" x="615" y="389">├─ skills/</text><text class="f m" x="615" y="426">└─ templates/</text><text class="f" x="570" y="476">📁 Legacy</text><text class="f a" x="570" y="526">📄 AGENTS.md / CLAUDE.md</text>
+<text class="f m" x="90" y="585">PASS = folders appear in Obsidian and the rule file exists.</text>
+</svg>

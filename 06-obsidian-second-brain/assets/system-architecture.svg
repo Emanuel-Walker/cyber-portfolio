@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460">
+<rect width="1200" height="460" rx="28" fill="#0d1117"/>
+<style>
+  .t{font:700 28px Arial,sans-serif;fill:#f0f6fc}.s{font:400 18px Arial,sans-serif;fill:#b1bac4}.b{fill:#161b22;stroke:#30363d;stroke-width:2}.a{stroke:#58a6ff;stroke-width:4;fill:none;marker-end:url(#m)}
+</style>
+<defs><marker id="m" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#58a6ff"/></marker></defs>
+<rect class="b" x="40" y="135" width="240" height="150" rx="20"/><text class="t" x="160" y="190" text-anchor="middle">Obsidian Vault</text><text class="s" x="160" y="225" text-anchor="middle">Markdown source of truth</text>
+<rect class="b" x="340" y="135" width="240" height="150" rx="20"/><text class="t" x="460" y="190" text-anchor="middle">Vault Agent</text><text class="s" x="460" y="225" text-anchor="middle">Codex / Claude Code</text>
+<rect class="b" x="640" y="135" width="240" height="150" rx="20"/><text class="t" x="760" y="190" text-anchor="middle">Context Pack</text><text class="s" x="760" y="225" text-anchor="middle">Curated, reviewable context</text>
+<rect class="b" x="940" y="135" width="220" height="150" rx="20"/><text class="t" x="1050" y="190" text-anchor="middle">Companion</text><text class="s" x="1050" y="220" text-anchor="middle">Muse / Dot / ChatGPT</text><text class="s" x="1050" y="247" text-anchor="middle">daily conversation</text>
+<path class="a" d="M280 210 H330"/><path class="a" d="M580 210 H630"/><path class="a" d="M880 210 H930"/>
+<path class="a" d="M1050 300 C1050 395 460 400 460 300"/>
+<text class="s" x="750" y="390" text-anchor="middle">Vault Capture returns useful context to the worker</text>
+<text class="t" x="600" y="70" text-anchor="middle">Second Brain Architecture</text>
+</svg>

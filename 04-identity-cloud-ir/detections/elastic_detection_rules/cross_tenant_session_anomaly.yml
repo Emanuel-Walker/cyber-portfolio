@@ -1,0 +1,48 @@
+---
+# Why: Scattered Spider logs in with a fresh browser from a residential
+# proxy. The user-agent + ASN combo has never been seen for the
+# principal. Behavioral, not signature.
+# Tuning: this rule needs an EQL-style sequence or a baseline. The
+# simplest implementation: alert on any AssumeRole where the UA has
+# not been observed for the role in the last 30 days. Elastic ML
+# jobs do this cleanly; the kuery version below is a simpler proxy
+# that keys off known-bad UA markers plus session_issuer.
+rule:
+  name: "AssumeRole with first-seen user agent for principal"
+  description: |
+    sts:AssumeRole where the user-agent is new for the role in the
+    last 30 days, or matches a known commodity-attacker fingerprint.
+  risk_score: 70
+  severity: medium
+  type: query
+  language: kuery
+  index:
+    - "logs-aws.cloudtrail-*"
+  query: |
+    event.dataset:"aws.cloudtrail"
+    and event.action:"AssumeRole"
+    and (
+      user_agent.original: (*attacker-session* or *masscan* or *curl/7* or *python-requests/2*)
+      or (
+        user_agent.original: (*Chrome* or *Firefox*)
+        and not aws.cloudtrail.user_identity.session_context.session_issuer.user_name: ("console-admin" or "sso-engineering")
+      )
+    )
+  references:
+    - "https://www.mandiant.com/resources/blog/unc3944-sms-phishing-sim-swapping-ransomware"
+  threat:
+    - framework: "MITRE ATT&CK"
+      tactic:
+        id: "TA0001"
+        name: "Initial Access"
+      technique:
+        - id: "T1078"
+          name: "Valid Accounts"
+          subtechnique:
+            - id: "T1078.004"
+              name: "Cloud Accounts"
+  false_positives:
+    - "Developer using a new workstation. Enrich with endpoint context."
+    - "Browser-based admin console login. Allowlist SSO-mediated UAs."
+  interval: "5m"
+  from: "now-10m"

@@ -1,0 +1,43 @@
+---
+# Why: data exfil in 2026 does not look like egress. It looks like
+# GetObject in a loop under a legitimate NHI. The pattern is: single
+# principal, many GetObject on a sensitive bucket, short window.
+# Tuning: the threshold here is deliberately low for a lab. In
+# production tune to your 95th percentile legitimate-batch size.
+rule:
+  name: "S3 high-volume GetObject on sensitive bucket by single principal"
+  description: |
+    A single principal issues more than 100 GetObject calls against a
+    bucket matching the customer-data pattern within 60 minutes.
+  risk_score: 80
+  severity: high
+  type: threshold
+  language: kuery
+  index:
+    - "logs-aws.cloudtrail-*"
+  query: |
+    event.dataset:"aws.cloudtrail"
+    and event.action:"GetObject"
+    and aws.cloudtrail.event_source:"s3.amazonaws.com"
+    and aws.s3.bucket.name: (*customer-data* or *pii* or *finance*)
+  threshold:
+    field:
+      - "user.name"
+      - "source.ip"
+    value: 100
+  references:
+    - "https://attack.mitre.org/techniques/T1537/"
+    - "https://cloud.google.com/blog/topics/threat-intelligence/snowflake-customer-breach-un5537"
+  threat:
+    - framework: "MITRE ATT&CK"
+      tactic:
+        id: "TA0010"
+        name: "Exfiltration"
+      technique:
+        - id: "T1537"
+          name: "Transfer Data to Cloud Account"
+  false_positives:
+    - "Scheduled batch ETL. Allowlist by principal + bucket."
+    - "Backup job. Allowlist by principal."
+  interval: "15m"
+  from: "now-60m"

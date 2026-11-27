@@ -1,0 +1,182 @@
+# Key Asset Scoring Rubric
+#
+# Why this exists:
+# A score is only useful if two different people would score the same asset
+# the same way. This rubric is the shared answer key.
+#
+# How to use it:
+# For each asset, pick the score (1 to 5) on each of the four factors that
+# best matches the asset. Sum. The sum maps to a tier.
+#
+# Rule of thumb when stuck between two scores: pick the higher one.
+# The cost of over-tiering an asset is a slightly louder playbook.
+# The cost of under-tiering an asset is a buried breach.
+
+factors:
+
+  business_impact:
+    description: "If this asset is unavailable for 4 hours, what breaks."
+    scores:
+      1:
+        label: "Negligible"
+        examples:
+          - "Internal wiki page nobody reads"
+          - "Dev sandbox"
+          - "Honeypot"
+      2:
+        label: "Minor"
+        examples:
+          - "Internal tool used by one team"
+          - "Marketing laptop"
+      3:
+        label: "Moderate"
+        examples:
+          - "HR system during non-payroll week"
+          - "Internal ticketing system"
+      4:
+        label: "Major"
+        examples:
+          - "Email gateway"
+          - "Customer-facing website (marketing)"
+          - "VPN concentrator"
+      5:
+        label: "Critical"
+        examples:
+          - "Payment processor"
+          - "Core banking ledger"
+          - "Customer authentication service"
+          - "Production database serving live customers"
+
+  data_sensitivity:
+    description: "Most sensitive data this asset touches, processes, or has credentials to reach. Credentials count."
+    scores:
+      1:
+        label: "Public"
+        examples:
+          - "Marketing site content"
+          - "Press releases"
+      2:
+        label: "Internal"
+        examples:
+          - "Employee directory"
+          - "Internal wiki"
+      3:
+        label: "Confidential (business)"
+        examples:
+          - "Sales pipeline data"
+          - "Unreleased product plans"
+      4:
+        label: "Confidential (customer)"
+        examples:
+          - "Customer PII"
+          - "Support ticket contents"
+      5:
+        label: "Regulated"
+        examples:
+          - "PCI cardholder data"
+          - "PHI / HIPAA"
+          - "Credentials to any of the above"
+          - "Source code or signing keys"
+
+  blast_radius:
+    description: "If this asset is fully compromised, how many other assets fall with it."
+    scores:
+      1:
+        label: "Isolated"
+        examples:
+          - "Standalone contractor laptop with no persistent access"
+          - "Air-gapped research system"
+      2:
+        label: "Small"
+        examples:
+          - "Single-purpose service account used by one app"
+      3:
+        label: "Team-wide"
+        examples:
+          - "Shared build server for one team"
+          - "Team file share"
+      4:
+        label: "Business-unit-wide"
+        examples:
+          - "SSO scoped to one BU"
+          - "Regional VPN concentrator"
+      5:
+        label: "Enterprise"
+        examples:
+          - "Global SSO / IdP"
+          - "Domain controller"
+          - "CI/CD orchestrator with prod deploy rights"
+          - "Cloud org admin"
+
+  recovery_cost:
+    description: "If this asset is destroyed or ransomed, cost to restore to known-good state. Includes rebuild time, data loss window, legal, notification."
+    scores:
+      1:
+        label: "Trivial"
+        examples:
+          - "Stateless container, auto-rebuilt from image"
+          - "Dev sandbox with no persistent data"
+      2:
+        label: "Low"
+        examples:
+          - "Reimage a laptop, restore user profile from backup"
+      3:
+        label: "Moderate"
+        examples:
+          - "Rebuild an internal app server with weekly backups"
+      4:
+        label: "High"
+        examples:
+          - "Rebuild a production database with 1-hour RPO backups"
+          - "Rotate SSO signing keys and reauth every user"
+      5:
+        label: "Severe"
+        examples:
+          - "Customer data warehouse with weekly backups, no replica"
+          - "Source code repo compromise requiring full supply chain audit"
+          - "Signing key compromise requiring key ceremony and customer notification"
+
+tier_mapping:
+  description: "Sum of the four factor scores maps to a tier. Minimum 4, maximum 20."
+  bands:
+    tier_1_crown_jewels:
+      score_range: [18, 20]
+      playbook: "tier1-crown-jewels.md"
+    tier_2_high_trust_identity:
+      score_range: [15, 17]
+      filter: "asset is an identity/auth system"
+      playbook: "tier2-high-trust-identity.md"
+    tier_3_build_and_deploy:
+      score_range: [15, 17]
+      filter: "asset is CI/CD, package registry, or container platform"
+      playbook: "tier3-build-and-deploy.md"
+    tier_4_saas_data_paths:
+      score_range: [11, 14]
+      filter: "asset is a SaaS tenant with regulated data egress capability"
+      playbook: "tier4-saas-data-paths.md"
+    tier_5_lateral_stepping_stones:
+      score_range: [8, 10]
+      filter: "jump host, bastion, VPN, service account"
+      playbook: "tier5-lateral-stepping-stones.md"
+    tier_6_noise:
+      score_range: [4, 7]
+      playbook: "tier6-noise.md"
+
+tier_multipliers:
+  description: "Multiplier applied to base alert severity to produce final priority."
+  values:
+    1: 10.0
+    2: 6.0
+    3: 5.0
+    4: 3.0
+    5: 2.0
+    6: 1.0
+
+severity_base:
+  description: "Starting numeric value for each raw alert severity."
+  values:
+    critical: 10
+    high: 7
+    medium: 4
+    low: 2
+    informational: 1

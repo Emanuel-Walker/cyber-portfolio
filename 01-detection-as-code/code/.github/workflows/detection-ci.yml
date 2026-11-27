@@ -1,0 +1,60 @@
+name: detection-ci
+
+# Run on every pull request against main and on direct pushes to main.
+# Pull requests are where new detections arrive. Pushes to main catch the
+# case where someone bypasses PR and commits a bad rule directly.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "code/rules/**"
+      - "code/tests/**"
+      - "code/converters/**"
+      - ".github/workflows/detection-ci.yml"
+  push:
+    branches: [main]
+
+jobs:
+  gate:
+    name: Detection gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        working-directory: code
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate YAML syntax on every rule
+        working-directory: code
+        run: |
+          python -c "import glob, yaml; [yaml.safe_load(open(f)) for f in glob.glob('rules/*.yml')]"
+
+      - name: Run the detection coverage gate
+        working-directory: code
+        run: pytest tests/ -v --tb=short
+
+      - name: Convert validated rules to Elastic KQL
+        working-directory: code
+        run: |
+          mkdir -p ../build
+          for rule in rules/*.yml; do
+            name=$(basename "$rule" .yml)
+            python converters/sigma_to_elastic.py "$rule" > "../build/${name}.kql"
+          done
+
+      - name: Upload converter artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: elastic-kql-queries
+          path: build/
+          retention-days: 14

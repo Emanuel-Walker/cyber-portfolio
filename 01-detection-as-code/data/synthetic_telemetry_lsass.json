@@ -1,0 +1,122 @@
+[
+  {
+    "@timestamp": "2026-09-15T01:02:14.112Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Users\\Public\\mimikatz.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1438",
+    "winlog.event_data.SourceProcessId": "4852",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:02:48.900Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Users\\Public\\procdump.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1fffff",
+    "winlog.event_data.SourceProcessId": "7320",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:10:03.300Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-089",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.24090.11-0\\MsMpEng.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1410",
+    "winlog.event_data.SourceProcessId": "844",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:11:55.421Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-200",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Program Files\\CrowdStrike\\CSFalconService.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1438",
+    "winlog.event_data.SourceProcessId": "612",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:14:11.000Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Users\\Public\\dumper.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1010",
+    "winlog.event_data.SourceProcessId": "1024",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:22:48.880Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-201",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Program Files\\SentinelOne\\Sentinel Agent 23.1\\SentinelAgent.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1fffff",
+    "winlog.event_data.SourceProcessId": "988",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:30:40.004Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Users\\Public\\redteam.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1410",
+    "winlog.event_data.SourceProcessId": "2048",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:40:19.555Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-089",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Program Files\\Windows Defender Advanced Threat Protection\\MsSense.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1fffff",
+    "winlog.event_data.SourceProcessId": "920",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T01:50:00.112Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Users\\Public\\mk.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x143a",
+    "winlog.event_data.SourceProcessId": "3131",
+    "winlog.event_data.TargetProcessId": "720"
+  },
+  {
+    "@timestamp": "2026-09-15T02:01:17.001Z",
+    "event.code": "10",
+    "event.action": "process_access",
+    "host.name": "WIN-WORKSTATION-055",
+    "user.name": "SYSTEM",
+    "winlog.event_data.SourceImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "winlog.event_data.TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "winlog.event_data.GrantedAccess": "0x1010",
+    "winlog.event_data.SourceProcessId": "5050",
+    "winlog.event_data.TargetProcessId": "720"
+  }
+]
