@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use or reference this portfolio, please cite it as below."
 title: "Cyber Portfolio: Thought Partner + Cybersecurity Tooling"
-abstract: "Six projects: an Obsidian second brain template with AI agent setups, detection-as-code, prompt-injection-hardened LLM triage, crown jewel alert prioritization, identity-first AWS incident response lab, and reusable AI agent skills."
+abstract: "Seven projects: an Obsidian second brain template with AI agent setups, detection-as-code, prompt-injection-hardened LLM triage, crown jewel alert prioritization, identity-first AWS incident response lab, reusable AI agent skills, and a write-up of a self-hosted multi-agent AI home lab."
 authors:
   - family-names: "Walker"
     given-names: "Emanuel"
@@ -18,3 +18,5 @@ keywords:
   - second-brain
   - threat-detection
   - llm-security
+  - zero-trust
+  - homelab

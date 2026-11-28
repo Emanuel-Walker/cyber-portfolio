@@ -10,7 +10,7 @@ README.md
 
 ## Purpose
 
-This repository is a public portfolio of completed cybersecurity, cloud, AI, and knowledge-system projects.
+This repository is a public portfolio of completed cybersecurity, cloud, AI, and knowledge-system projects. Project 7 is a write-up of a live home lab. Its code is private, so its claims rest on screenshots and a written account.
 
 Do not mix private R&D into the public portfolio.
 
@@ -25,6 +25,7 @@ A project belongs here only when the artifact exists and the claim can be demons
 04-identity-cloud-ir/
 05-ai-agent-skills/
 06-obsidian-second-brain/
+07-maniverse-ai-lab/
 website/
 ```
 
@@ -70,6 +71,8 @@ The public Second Brain is:
 - security guidance
 - ADHD-friendly usage rules
 - companion-memory patterns
+
+Project 7 is a write-up only. Its Azure section is planned and must stay labeled as planned until real screenshots exist. Never add results, counts or screenshots for work that has not been done. The write-up also leaves out the voice robot because it is not built.
 
 Private Muse hardware, StackChan, Raspberry Pi gadget bridges, projection mapping, and unfinished experiments do not belong here until they are independently built, tested, and intentionally published.
 

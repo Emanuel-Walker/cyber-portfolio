@@ -1,13 +1,13 @@
 # Cyber Portfolio
 
-**Emanuel Walker, M.S.**  
-Cybersecurity · Cloud Security · Detection Engineering · Applied AI
+**Emanuel Walker, AI cybersecurity builder**  
+Cybersecurity · AI Security · Detection Engineering · Home Lab · Cloud Security (in progress)
 
 [Interactive portfolio](https://emanuel-walker-cyber.walkwithemanuel.chatgpt.site)
 
 ## What this is
 
-Six completed projects.
+Seven projects. Six are finished and you can reproduce them. One is a write-up of my live home lab, with a cloud piece that is planned and not built yet.
 
 Each project has **one human front door**:
 
@@ -39,6 +39,11 @@ Supporting Markdown remains only when it is part of the project itself, such as 
 | **4. AWS Identity IR Lab** | Reproduce identity-focused cloud detections in a disposable lab | [README](04-identity-cloud-ir/README.md) |
 | **5. AI Agent Skills** | Turn repeated prompting into reusable, scoped agent workflows | [README](05-ai-agent-skills/README.md) |
 | **6. Obsidian Second Brain** | Build a local-first knowledge system with worker and companion agents | [README](06-obsidian-second-brain/README.md) |
+| **7. Maniverse AI Lab** | A private home server where three AI helpers work in a chat room I built, locked down and tested | [README](07-maniverse-ai-lab/README.md) |
+
+## Start here: the Maniverse AI Lab
+
+If you read one project, read [Project 7](07-maniverse-ai-lab/README.md). It is my live home lab. It has screenshots, a plain-English tour and a list of the skills I used. The live code stays private. The Azure cloud part at the end is a plan, and it is labeled that way.
 
 ## If you are a recruiter
 
@@ -51,7 +56,7 @@ For each project, read:
 3. the **Resume starter**
 4. the **What this proves / does not prove** section
 
-If you want one technical sample, start with **Crown Jewel Triage** or **Detection-as-Code**.
+If you want one technical sample, start with **Crown Jewel Triage** or **Detection-as-Code**. The interactive website below shows projects 1 to 6.
 
 ## If you want to build one
 
@@ -106,7 +111,7 @@ A lab result is not a production guarantee.
 
 ## About me
 
-- Cybersecurity Professional, Defensive Cyber Operations
+- AI cybersecurity builder
 - M.S. Cybersecurity and Information Assurance
 - CompTIA Security+
 - CompTIA CySA+
