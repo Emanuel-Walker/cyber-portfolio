@@ -10,7 +10,7 @@ README.md
 
 ## Purpose
 
-This repository is a public portfolio of completed cybersecurity, cloud, AI, and knowledge-system projects. Project 7 is a write-up of a live home lab. Its code is private, so its claims rest on screenshots and a written account.
+This repository is a public portfolio of completed cybersecurity, cloud, AI, and knowledge-system projects. Project 1 (Maniverse AI Lab), Project 4 (Neuply) and Project 5 (Pip) are write-ups. Their code is not in this repo, so their claims rest on screenshots, test results and a written account.
 
 Do not mix private R&D into the public portfolio.
 
@@ -19,13 +19,15 @@ A project belongs here only when the artifact exists and the claim can be demons
 ## Project map
 
 ```text
-01-detection-as-code/
-02-llm-triage-hardened/
-03-crown-jewel-triage/
-04-identity-cloud-ir/
-05-ai-agent-skills/
-06-obsidian-second-brain/
-07-maniverse-ai-lab/
+01-maniverse-ai-lab/
+02-ai-agent-skills/
+03-obsidian-second-brain/
+04-neuply/
+05-pip/
+06-detection-as-code/
+07-llm-triage-hardened/
+08-crown-jewel-triage/
+09-identity-cloud-ir/
 website/
 ```
 
@@ -59,7 +61,7 @@ Before adding a claim:
 
 Examples:
 - do not claim Splunk conversion if only Elastic conversion exists
-- do not claim private Muse hardware integrations in Project 6
+- do not claim private Muse hardware integrations in Project 3
 - do not turn a documented test result into a universal security guarantee
 
 ## Public/private boundary
@@ -72,16 +74,18 @@ The public Second Brain is:
 - ADHD-friendly usage rules
 - companion-memory patterns
 
-Project 7 is a write-up only. Its Azure section is planned and must stay labeled as planned until real screenshots exist. Never add results, counts or screenshots for work that has not been done. The write-up also leaves out the voice robot because it is not built.
+Project 1 is a write-up only. Its Azure section is planned and must stay labeled as planned until real screenshots exist. Never add results, counts or screenshots for work that has not been done. The write-up also leaves out the voice robot because it is not built.
+
+Neuply and Pip are write-ups only. Do not publish their source code here unless the owner says so. Do not claim a real iPhone test, App Store release, real users or live AI features until they exist.
 
 Private Muse hardware, StackChan, Raspberry Pi gadget bridges, projection mapping, and unfinished experiments do not belong here until they are independently built, tested, and intentionally published.
 
-## Project 5 skills
+## Project 2 skills
 
 Reusable skills live at:
 
 ```text
-05-ai-agent-skills/skills/<skill-name>/SKILL.md
+02-ai-agent-skills/skills/<skill-name>/SKILL.md
 ```
 
 Read the matching skill when relevant.
