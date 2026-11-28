@@ -17,9 +17,10 @@ switch ($Agent) {
 }
 
 $packs = @{
-  "writing-pack" = @("humanizer","article-writing","brand-voice","docs-readability-audit")
-  "builder-pack" = @("repo-onboarding-audit","builder-walkthrough","web-ui-audit","prompt-optimizer")
-  "second-brain-pack" = @("obsidian","companion-context","file-organizer","docs-readability-audit")
+  "writing-pack" = @("humanizer","article-writing","brand-voice","docs-readability-audit","voice-and-post-desk")
+  "builder-pack" = @("repo-onboarding-audit","builder-walkthrough","web-ui-audit","prompt-optimizer","plain-english-code","product-build-and-release")
+  "second-brain-pack" = @("obsidian","companion-context","file-organizer","docs-readability-audit","vault-companion","source-to-study-pack")
+  "security-pack" = @("bug-bounty-hunter","packet-capture-analyst","single-question-security-check","mcp-and-plugin-integration-proof")
 }
 
 if ($packs.ContainsKey($Item)) {

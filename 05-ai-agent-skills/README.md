@@ -1,5 +1,7 @@
 # AI Agent Skills
 
+**Emanuel Walker, AI cybersecurity builder**
+
 A skill is a small instruction package that teaches an AI agent one repeatable job.
 
 Instead of rewriting one giant prompt every time, this project turns repeated work into scoped skills with triggers, boundaries, output contracts, and handoff checks.
@@ -13,9 +15,65 @@ flowchart LR
     E --> F[Handoff]
 ```
 
-The library includes skills for writing, documentation, UI review, repo onboarding, prompt optimization, Obsidian workflows, file organization, diagrams, OCR, and companion context.
+## Skill library
 
-**Skills shown:** agent design, prompt architecture, technical writing, workflow automation, tool governance.
+Each skill lives in `skills/<name>/SKILL.md`.
+
+This library is a set of reusable instruction modules I wrote for coding agents.
+
+### Writing and voice
+
+| Skill | What it does |
+|---|---|
+| [article-writing](skills/article-writing/SKILL.md) | Write long-form essays, guides, and posts in a distinctive voice. |
+| [brand-voice](skills/brand-voice/SKILL.md) | Build a reusable voice profile from your own writing samples. |
+| [content-engine](skills/content-engine/SKILL.md) | Draft platform-native content from a seed bank. Never auto-publishes. |
+| [humanizer](skills/humanizer/SKILL.md) | Remove common AI-writing tells and make the text more direct. |
+| [prompt-optimizer](skills/prompt-optimizer/SKILL.md) | Diagnose a raw prompt and rewrite it as a clear, ready-to-paste version. |
+| [voice-and-post-desk](skills/voice-and-post-desk/SKILL.md) | Build a voice profile, edit a draft, or prepare an approved social post. |
+| [write-like-you-getting-started](skills/write-like-you-getting-started/SKILL.md) | Set up a Write Like You voice profile and edit drafts to match it. |
+
+### Building and shipping
+
+| Skill | What it does |
+|---|---|
+| [builder-walkthrough](skills/builder-walkthrough/SKILL.md) | Turn a technical project into a beginner build guide with checkpoints. |
+| [docs-readability-audit](skills/docs-readability-audit/SKILL.md) | Review technical docs for plain English and followability. |
+| [drawio](skills/drawio/SKILL.md) | Create and edit draw.io diagrams in XML. |
+| [file-organizer](skills/file-organizer/SKILL.md) | Organize files, find duplicates, and propose a cleanup structure. |
+| [plain-english-code](skills/plain-english-code/SKILL.md) | Write clear code with short functions and comments that explain why. |
+| [product-build-and-release](skills/product-build-and-release/SKILL.md) | Build or audit a PDF, workbook, skill, or ZIP before release. |
+| [repo-onboarding-audit](skills/repo-onboarding-audit/SKILL.md) | Audit a repository so a new person or agent can build and change it safely. |
+| [ship-learn-next](skills/ship-learn-next/SKILL.md) | Turn lectures and tutorials into concrete practice reps. |
+| [startup-product-playbook](skills/startup-product-playbook/SKILL.md) | Help a startup with product decisions, writing, secure builds, and launch, without inventing proof. |
+| [verified-visual-production](skills/verified-visual-production/SKILL.md) | Place or produce images that match the real source, then inspect every asset. |
+| [web-ui-audit](skills/web-ui-audit/SKILL.md) | Review a site for accessibility, mobile use, navigation, and clarity. |
+
+### Second brain and research
+
+| Skill | What it does |
+|---|---|
+| [briefing-and-edition](skills/briefing-and-edition/SKILL.md) | Build a morning brief or personal newspaper from approved mail, calendar, and news. |
+| [companion-context](skills/companion-context/SKILL.md) | Design a personal companion agent with separate memory, tools, and interface layers. |
+| [evidence-to-experiment](skills/evidence-to-experiment/SKILL.md) | Turn researched evidence into a decision or one small test. |
+| [obsidian](skills/obsidian/SKILL.md) | Automate an Obsidian vault with file operations and URI control. |
+| [second-brain-starter-getting-started](skills/second-brain-starter-getting-started/SKILL.md) | Guide a new owner through first-time Second Brain Starter setup. |
+| [smart-ocr](skills/smart-ocr/SKILL.md) | Extract text from images, scans, and photos with local OCR. |
+| [source-to-study-pack](skills/source-to-study-pack/SKILL.md) | Convert approved documents and scans into searchable notes with source links. |
+| [statement-reconciliation-report](skills/statement-reconciliation-report/SKILL.md) | Reconcile bank or payment statements into a verified workbook and PDF. |
+| [vault-companion](skills/vault-companion/SKILL.md) | Review notes, prepare a companion context pack, and close a vault session. |
+
+### Security and delivery
+
+| Skill | What it does |
+|---|---|
+| [bounded-team-delivery](skills/bounded-team-delivery/SKILL.md) | Coordinate agents on a shared task with clear scope, ownership, and stopping rules. |
+| [bug-bounty-hunter](skills/bug-bounty-hunter/SKILL.md) | Plan legal bug bounty or VDP work from written scope, then draft a careful report. |
+| [mcp-and-plugin-integration-proof](skills/mcp-and-plugin-integration-proof/SKILL.md) | Prove an MCP, plugin, or connector works end to end, layer by layer. |
+| [packet-capture-analyst](skills/packet-capture-analyst/SKILL.md) | Give exact Wireshark filters and clicks to answer a question about a PCAP. |
+| [single-question-security-check](skills/single-question-security-check/SKILL.md) | Ask one clear question about an unexpected sign-in, password, or payment alert. |
+
+This folder publishes reusable public skills I wrote. Private workflows and third-party packs are not included as original work. Earlier inspiration notes live in [`skills/THIRD_PARTY_ATTRIBUTION.md`](skills/THIRD_PARTY_ATTRIBUTION.md).
 
 ## Resume starter
 
@@ -60,15 +118,15 @@ You do not need Git.
 
 ---
 
-# Part 1 — Choose one coding agent
+# Part 1. Choose one coding agent
 
 Pick one.
 
-## Option A — Codex
+## Option A. Codex
 
 Use this if you already use ChatGPT/OpenAI.
 
-## Option B — Claude Code
+## Option B. Claude Code
 
 Use this if you already use Claude/Anthropic.
 
@@ -76,7 +134,7 @@ Do not install both just to complete this walkthrough.
 
 ---
 
-# Part 2A — Install Codex
+# Part 2A. Install Codex
 
 ## Step 1A. Create or confirm your ChatGPT account
 
@@ -140,7 +198,7 @@ codex --version
 
 ---
 
-# Part 2B — Install Claude Code
+# Part 2B. Install Claude Code
 
 Claude Code's recommended path is the native installer.
 
@@ -199,7 +257,7 @@ WSL 2 is optional if you specifically want a Linux toolchain or sandboxing.
 
 **PASS:** Claude Code prints a version and `claude doctor` reports no blocking install problem.
 
-# Part 3 — Get the skill library
+# Part 3. Get the skill library
 
 ## Beginner method
 
@@ -234,7 +292,7 @@ cd cyber-portfolio/05-ai-agent-skills
 
 ---
 
-# Part 4 — Open a terminal in the skill project
+# Part 4. Open a terminal in the skill project
 
 ## Windows
 
@@ -268,7 +326,7 @@ Press Enter.
 
 ---
 
-# Part 5 — Inspect one skill before using it
+# Part 5. Inspect one skill before using it
 
 Open:
 
@@ -304,7 +362,7 @@ Treat them like code.
 
 ---
 
-# Part 6 — Run the skill explicitly
+# Part 6. Run the skill explicitly
 
 This is the most reliable first test.
 
@@ -359,7 +417,7 @@ This proves the skill itself works before you worry about automatic discovery.
 
 ---
 
-# Part 7 — Install one skill
+# Part 7. Install one skill
 
 This repo includes helper scripts.
 
@@ -401,7 +459,7 @@ PASS: install complete.
 
 ---
 
-# Part 8 — Verify the installed files
+# Part 8. Verify the installed files
 
 ## Codex example
 
@@ -439,9 +497,9 @@ Those are separate questions.
 
 ---
 
-# Part 9 — Install a starter pack
+# Part 9. Install a starter pack
 
-The project includes three packs.
+The project includes four packs.
 
 ## Builder pack
 
@@ -450,6 +508,8 @@ repo-onboarding-audit
 builder-walkthrough
 web-ui-audit
 prompt-optimizer
+plain-english-code
+product-build-and-release
 ```
 
 Install:
@@ -466,7 +526,7 @@ or:
 
 ## Writing pack
 
-Includes writing/humanization skills.
+Includes writing and voice skills, including Humanizer and voice-and-post-desk.
 
 ## Second Brain pack
 
@@ -475,6 +535,22 @@ Includes:
 - companion-context skill
 - file organizer
 - docs readability audit
+- vault-companion
+- source-to-study-pack
+
+## Security pack
+
+Includes:
+- bug-bounty-hunter
+- packet-capture-analyst
+- single-question-security-check
+- mcp-and-plugin-integration-proof
+
+Install:
+
+```bash
+bash scripts/install-skill.sh claude security-pack
+```
 
 Do not install every skill just because it exists.
 
@@ -482,7 +558,7 @@ Install what you will actually use.
 
 ---
 
-# Part 10 — Build your first skill
+# Part 10. Build your first skill
 
 Create:
 
@@ -524,7 +600,7 @@ Save it.
 
 ---
 
-# Part 11 — Test your new skill
+# Part 11. Test your new skill
 
 In Codex or Claude Code:
 
@@ -559,7 +635,7 @@ Definition of done:
 
 ---
 
-# Part 12 — Improve the skill
+# Part 12. Improve the skill
 
 Ask:
 
