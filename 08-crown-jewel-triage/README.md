@@ -75,7 +75,7 @@ Priority is the alert's severity points times the tier multiplier. Severity poin
 You need Python 3.10 or newer and one package, PyYAML. Git is optional.
 
 ```bash
-cd 03-crown-jewel-triage
+cd 08-crown-jewel-triage
 python3 -m venv .venv
 source .venv/bin/activate        # Windows: .\.venv\Scripts\Activate.ps1
 python -m pip install pyyaml

@@ -56,7 +56,7 @@ Good first skills:
 - meeting-prep
 
 Reusable public skills:
-https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/05-ai-agent-skills
+https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/02-ai-agent-skills
 EOF
 fi
 

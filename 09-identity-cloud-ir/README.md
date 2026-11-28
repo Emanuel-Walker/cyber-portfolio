@@ -58,7 +58,7 @@ Scenario 05 attaches the read-only policy `ReadOnlyAccess` as a safe stand-in fo
 You need Python 3.10 or newer. No packages to install.
 
 ```bash
-cd 04-identity-cloud-ir
+cd 09-identity-cloud-ir
 python3 detections/demo_iam_detection.py attacks/demo_events/create_access_key.json
 python3 detections/demo_iam_detection.py attacks/demo_events/list_buckets.json
 ```

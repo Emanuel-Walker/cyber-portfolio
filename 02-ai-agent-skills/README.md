@@ -278,7 +278,7 @@ Extract it.
 Open:
 
 ```text
-cyber-portfolio-main/05-ai-agent-skills
+cyber-portfolio-main/02-ai-agent-skills
 ```
 
 ## Developer method
@@ -287,7 +287,7 @@ Optional:
 
 ```bash
 git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
-cd cyber-portfolio/05-ai-agent-skills
+cd cyber-portfolio/02-ai-agent-skills
 ```
 
 ---
@@ -296,7 +296,7 @@ cd cyber-portfolio/05-ai-agent-skills
 
 ## Windows
 
-Open the `05-ai-agent-skills` folder.
+Open the `02-ai-agent-skills` folder.
 
 Click the File Explorer address bar.
 
@@ -322,7 +322,7 @@ Drag the folder into Terminal.
 
 Press Enter.
 
-**PASS:** the terminal is inside `05-ai-agent-skills`.
+**PASS:** the terminal is inside `02-ai-agent-skills`.
 
 ---
 
@@ -366,7 +366,7 @@ Treat them like code.
 
 This is the most reliable first test.
 
-Launch your agent from the `05-ai-agent-skills` folder.
+Launch your agent from the `02-ai-agent-skills` folder.
 
 ## Codex
 

@@ -34,7 +34,7 @@ AI helpers read text from many places. They also run code and touch real files. 
 | **Agent Room** | The chat room I built, where Claude, Codex and Muse work together. |
 | **Phone app** | The same room, installed on my phone's home screen. |
 | **agent-vault** | A private Git folder of shared notes and instructions for the AI helpers, checked automatically. |
-| **Agent skills** | Reusable step-by-step guides the AI helpers follow for tasks like debugging and security review. A public set lives in [Project 5](../05-ai-agent-skills/README.md). |
+| **Agent skills** | Reusable step-by-step guides the AI helpers follow for tasks like debugging and security review. A public set lives in [Project 2](../02-ai-agent-skills/README.md). |
 | **harden.sh** | My script that locks down the server's settings. It only shows what it would change unless I tell it to apply. |
 
 ## The app I built, on my phone and my computer

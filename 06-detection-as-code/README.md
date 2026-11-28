@@ -52,7 +52,7 @@ You need Python 3.10 or newer. Git is optional. You can use Code → Download ZI
 macOS or Linux:
 
 ```bash
-cd 01-detection-as-code
+cd 06-detection-as-code
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r code/requirements.txt
@@ -62,7 +62,7 @@ pytest code/tests/ -v
 Windows PowerShell:
 
 ```powershell
-cd 01-detection-as-code
+cd 06-detection-as-code
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r code/requirements.txt

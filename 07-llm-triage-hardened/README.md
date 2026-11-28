@@ -55,7 +55,7 @@ Companies are putting AI helpers in front of real alerts. If the helper believes
 You need Python 3.10 or newer. The first two steps need no model.
 
 ```bash
-cd 02-llm-triage-hardened
+cd 07-llm-triage-hardened
 python3 -m venv .venv
 source .venv/bin/activate        # Windows: .\.venv\Scripts\Activate.ps1
 python -m pip install -r code/requirements.txt

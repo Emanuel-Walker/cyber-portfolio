@@ -55,7 +55,7 @@ if (-not (Test-Path "99-System/skills/INDEX.md")) {
 Put vault-specific agent skills here.
 
 Reusable public skills:
-https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/05-ai-agent-skills
+https://github.com/Emanuel-Walker/cyber-portfolio/tree/main/02-ai-agent-skills
 "@ | Set-Content "99-System/skills/INDEX.md"
 }
 
