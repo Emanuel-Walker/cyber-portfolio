@@ -1,481 +1,103 @@
 # Detection-as-Code
 
-Security detection rules are software. They should be tested like software.
+**Emanuel Walker, AI cybersecurity builder**
+Detection Engineering · Python · Testing
 
-This project requires three things before a rule is considered ready:
+## The short version
 
-1. a written Alerting and Detection Strategy (ADS)
-2. malicious telemetry that **must** trigger
-3. benign telemetry that **must not** trigger
+A security detection rule is software, so it should be tested like software. This project is a small pipeline that checks every rule before it ships.
 
-It then converts the validated Sigma rule to Elastic KQL.
+A rule only counts as ready when it passes three gates:
+
+1. **A written strategy.** Each rule has a plain document that says what it catches and why.
+2. **Attack events must fire.** Made-up attack events must trigger the rule.
+3. **Normal events must stay quiet.** Made-up everyday events must not trigger it.
+
+If a rule passes, a small converter turns it from Sigma, a shared rule format, into an Elastic KQL search query.
 
 ```mermaid
 flowchart LR
-    A[Sigma rule] --> B[ADS exists?]
-    B --> C[Malicious test fires?]
-    C --> D[Benign test stays quiet?]
-    D --> E[CI passes]
-    E --> F[Elastic KQL]
+    A[Sigma rule] --> B[Strategy document exists?]
+    B --> C[Attack events fire?]
+    C --> D[Normal events stay quiet?]
+    D --> E[Tests pass]
+    E --> F[Elastic KQL query]
 ```
 
-**Skills shown:** detection engineering, Python, CI/CD, Sigma, testing, technical documentation.
+*A rule moves left to right and stops at the first gate it fails.*
 
-## Resume starter
+## Why it matters
 
-> Built a CI-tested detection pipeline that blocks security rules from merging unless they catch malicious test events, ignore benign events, and include a written detection strategy.
+A rule that misses attacks is useless. A rule that fires on normal work buries analysts in false alarms. The benign gate is there so a loud rule fails before it reaches production.
 
-Adapt that only after you run the project and can explain what you changed or tested yourself.
+## What's in the folder
 
+| Path | What it is |
+|---|---|
+| `code/rules/` | Two Sigma rules, one for credential dumping from Windows memory (LSASS) and one for PowerShell download-and-run commands. Each has a strategy document next to it. |
+| `code/tests/atomic_tests/` | 12 made-up attack events, 6 per rule. Every one must fire. |
+| `code/tests/benign/` | 10 made-up normal events, 5 per rule. None may fire. |
+| `code/tests/test_detection_coverage.py` | The three gates, written as 6 automated tests. |
+| `code/converters/sigma_to_elastic.py` | A small converter from Sigma to Elastic KQL. It is about 150 lines, so you can read it in one sitting. |
+| `code/.github/workflows/detection-ci.yml` | A CI file that runs the gates on every pull request. See the note below. |
+| `data/` | Two extra sample telemetry files. The tests do not use them. |
+| `diagrams/detection_pipeline.drawio` | The pipeline diagram. Open it in diagrams.net. |
 
----
+**CI note.** GitHub only runs workflow files from the top-level `.github` folder of a repository. This one sits inside the project, so it does not run from here. Copy it to the top of a repo that holds this project's files to use it.
 
-# Build it from zero
+## Run it
 
-## What you will build
+You need Python 3.10 or newer. Git is optional. You can use Code → Download ZIP instead.
 
-You are going to prove one idea:
-
-**A security detection rule should be tested like software before it reaches production.**
-
-By the end, you will:
-
-- install Python
-- download the project files
-- create an isolated Python environment
-- install the project dependencies
-- run six automated tests
-- see positive and benign detection gates
-- convert a Sigma rule into Elastic KQL
-- intentionally break a rule and watch the test suite catch it
-
-You do not need Git.
-
----
-
-# Part 1 — Install Python
-
-## Step 1. Google Python
-
-Search:
-
-```text
-Python download
-```
-
-Use the official site:
-
-```text
-https://www.python.org/downloads/
-```
-
-Install Python 3.10 or newer.
-
-### Windows
-
-Run the Python installer.
-
-If the installer shows:
-
-```text
-Add python.exe to PATH
-```
-
-enable it.
-
-Then open **PowerShell**.
-
-Run:
-
-```powershell
-py --version
-```
-
-If `py` is unavailable, try:
-
-```powershell
-python --version
-```
-
-### macOS
-
-Install the current Python 3 release from python.org.
-
-Open **Terminal**.
-
-Run:
+macOS or Linux:
 
 ```bash
-python3 --version
-```
-
-**PASS:** Python reports version 3.10 or newer.
-
----
-
-# Part 2 — Get the project files
-
-## Beginner method — Download ZIP
-
-Open:
-
-```text
-https://github.com/Emanuel-Walker/cyber-portfolio
-```
-
-Click:
-
-```text
-Code -> Download ZIP
-```
-
-Extract the ZIP.
-
-Open:
-
-```text
-cyber-portfolio-main/01-detection-as-code
-```
-
-## Developer method — Git clone
-
-Optional:
-
-```bash
-git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
-cd cyber-portfolio/01-detection-as-code
-```
-
-Git is not required.
-
----
-
-# Part 3 — Open a terminal in the project folder
-
-## Windows
-
-Open the `01-detection-as-code` folder in File Explorer.
-
-Click the address bar.
-
-Type:
-
-```text
-powershell
-```
-
-Press Enter.
-
-PowerShell should open directly in that folder.
-
-Verify:
-
-```powershell
-Get-Location
-```
-
-## macOS
-
-Open Terminal.
-
-Type:
-
-```bash
-cd 
-```
-
-including the space after `cd`.
-
-Drag the `01-detection-as-code` folder from Finder into Terminal.
-
-Press Enter.
-
-Verify:
-
-```bash
-pwd
-```
-
-**PASS:** the terminal path ends in `01-detection-as-code`.
-
----
-
-# Part 4 — Create an isolated Python environment
-
-This keeps this project's packages separate from the rest of your computer.
-
-## Windows PowerShell
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-If PowerShell blocks activation for this session:
-
-```powershell
-Set-ExecutionPolicy -Scope Process Bypass
-.\.venv\Scripts\Activate.ps1
-```
-
-## macOS
-
-```bash
+cd 01-detection-as-code
 python3 -m venv .venv
 source .venv/bin/activate
-```
-
-**PASS:** your terminal prompt usually starts with:
-
-```text
-(.venv)
-```
-
----
-
-# Part 5 — Install the dependencies
-
-Run:
-
-```bash
-python -m pip install --upgrade pip
 python -m pip install -r code/requirements.txt
-```
-
-On macOS, if `python` is unavailable inside the virtual environment, use:
-
-```bash
-python3 -m pip install -r code/requirements.txt
-```
-
-**PASS:** installation finishes without an error.
-
----
-
-# Part 6 — Understand what you are about to test
-
-Open:
-
-```text
-code/rules/
-```
-
-You should see Sigma YAML detection rules.
-
-Open:
-
-```text
-code/tests/
-```
-
-The test suite checks three things:
-
-1. a malicious/attack-like event must fire the rule
-2. a benign event must stay quiet
-3. the written detection strategy must exist
-
-That is the dual gate.
-
-```text
-bad behavior -> MUST MATCH
-normal behavior -> MUST NOT MATCH
-```
-
----
-
-# Part 7 — Run the tests
-
-Run:
-
-```bash
 pytest code/tests/ -v
 ```
 
-Expected result:
+Windows PowerShell:
 
-```text
-6 passed
+```powershell
+cd 01-detection-as-code
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r code/requirements.txt
+pytest code/tests/ -v
 ```
 
-You should see tests similar to:
+You should see `6 passed`. Last checked on Nov 28, 2026: 6 passed.
 
-```text
-test_rule_fires_on_atomic[...] PASSED
-test_rule_silent_on_benign[...] PASSED
-test_ads_spec_present[...] PASSED
-```
-
-**PASS:** all six tests pass.
-
-If a benign test fails, the rule is too broad.
-
-If a malicious test fails, the rule is too weak or incorrect.
-
----
-
-# Part 8 — Convert the Sigma rule
-
-Run:
+Convert a rule to a KQL query:
 
 ```bash
 python code/converters/sigma_to_elastic.py code/rules/suspicious_powershell_download.yml
 ```
 
-The script should print an Elastic KQL query.
+It prints one Elastic KQL query. Only Elastic is supported. There is no Splunk converter.
 
-Example shape:
+## Try breaking it
 
-```text
-process.name:"powershell.exe" and process.command_line:(...)
-```
+Open `code/rules/suspicious_powershell_download.yml`. In the `condition` line, delete `and not filter_internal_artifact_server`. The rule now fires on the made-up internal software pulls too. Run the tests again. A benign test should fail. Undo the change and the tests go green again.
 
-**PASS:** a KQL query prints without an exception.
+## What I built and why it matters
 
-The project currently demonstrates automated conversion to **Elastic KQL**.
+- I built a test gate that checks every detection rule against 12 attack events and 10 normal events, so a rule that is too weak or too loud fails before it ships.
+- I wrote a strategy document for each of the 2 rules, and the tests fail if one is missing or empty. Every rule has a written reason to exist.
 
-Do not describe Splunk or another backend as implemented unless a tested converter exists.
+## Skills Learned and Used
 
----
+| Security | Software |
+|---|---|
+| Detection engineering | Python and pytest |
+| Sigma rules | CI/CD with GitHub Actions |
+| MITRE ATT&CK mapping | YAML and JSON data |
+| Elastic KQL | Technical writing |
 
-# Part 9 — Break the rule on purpose
+## What this proves and what it doesn't
 
-This is the useful part.
-
-Open:
-
-```text
-code/rules/suspicious_powershell_download.yml
-```
-
-Make one detection condition intentionally too broad.
-
-For example, temporarily change a specific command-line condition so that normal PowerShell activity is more likely to match.
-
-Save the file.
-
-Run:
-
-```bash
-pytest code/tests/ -v
-```
-
-Expected:
-
-At least one test should turn red.
-
-That demonstrates why the benign gate exists.
-
-Undo your temporary change.
-
-Run the tests again.
-
-**PASS:**
-
-```text
-6 passed
-```
-
----
-
-# Part 10 — What you just built
-
-You now have this pipeline:
-
-```text
-Sigma rule
-   |
-   +--> written strategy exists?
-   |
-   +--> malicious event fires?
-   |
-   +--> benign event stays quiet?
-   |
-   v
-tests pass
-   |
-   v
-Elastic KQL artifact
-```
-
-That is Detection-as-Code.
-
----
-
-# Common problems
-
-## `python` is not recognized
-
-Windows:
-
-```powershell
-py --version
-```
-
-macOS:
-
-```bash
-python3 --version
-```
-
-If neither works, reinstall Python from python.org.
-
-## `pytest` is not found
-
-Make sure the virtual environment is activated.
-
-Then:
-
-```bash
-python -m pip install -r code/requirements.txt
-python -m pytest code/tests/ -v
-```
-
-## PowerShell will not activate the virtual environment
-
-For the current PowerShell window:
-
-```powershell
-Set-ExecutionPolicy -Scope Process Bypass
-.\.venv\Scripts\Activate.ps1
-```
-
-## Tests collect zero items
-
-Confirm the terminal path ends in:
-
-```text
-01-detection-as-code
-```
-
-Then run:
-
-```bash
-python -m pytest code/tests/ -v
-```
-
----
-
-# Definition of done
-
-- [ ] Python installed
-- [ ] project files downloaded
-- [ ] virtual environment active
-- [ ] dependencies installed
-- [ ] six tests pass
-- [ ] Elastic KQL conversion works
-- [ ] you broke a rule and saw a test catch it
-- [ ] you restored the rule and returned to green
-
-You now understand the project well enough to explain it in an interview.
-
----
-
-## What this project proves
-
-This repository gives you an inspectable implementation, synthetic data, and a repeatable walkthrough.
-
-It does **not** turn a lab result into a production guarantee. Read the limitations in the walkthrough and inspect the implementation before reusing it elsewhere.
-
-## Key artifacts
-
-Use the folders and source files directly. Supporting Markdown is kept only when it is itself part of the project, such as ADS documents, playbooks, detection matrices, or skill definitions.
+- **What it proves.** You can test detection rules automatically and block weak or noisy ones.
+- **What it doesn't prove.** The events are made up. Two rules and 22 events are a small sample, and a pass is not a production guarantee. The converter handles only the Sigma features these two rules use.

@@ -1,491 +1,109 @@
 # Crown Jewel Triage
 
-A SIEM severity label does not tell an analyst how much the threatened asset matters to the business.
+**Emanuel Walker, AI cybersecurity builder**
+SOC Strategy · Risk Prioritization · Python
 
-This project adds asset context before prioritization.
+## The short version
+
+Most alert queues sort by one thing: how severe the alert says it is. That misses a bigger question. How much does the thing under attack matter to the business?
+
+This project adds that missing piece. It scores each asset on four factors, groups assets into six tiers, and multiplies the alert's severity by the tier. The result is a ranked queue with a response playbook attached to every alert.
 
 ```mermaid
 flowchart LR
     A[Alert] --> C[Priority engine]
     B[Asset inventory] --> C
     C --> D[Priority score]
-    D --> E[Tier-specific playbook]
+    D --> E[Playbook for that tier]
 ```
 
-The model scores four visible factors:
+*An alert and the asset it hit go in, and a ranked queue with a playbook comes out.*
 
-- business impact
-- data sensitivity
-- blast radius
-- recovery cost
+## What the sample run shows
 
-**Skills shown:** SOC strategy, risk prioritization, Python, playbooks, business context.
+I ran six made-up alerts against a made-up inventory of 12 assets. The two "high" severity alerts landed near the bottom. A "medium" alert on the payment system landed on top.
 
-## Resume starter
+| Rank | Priority | Alert severity | Asset | Why |
+|---|---:|---|---|---|
+| 1 | 40.0 | medium | Payment settlement server | Tier 1, the top tier, so 4 × 10 |
+| 2 | 24.0 | medium | Single sign-on tenant | Tier 2, so 4 × 6 |
+| 3 | 10.0 | low | Build server | Tier 3, so 2 × 5 |
+| 4 | 7.0 | high | Marketing laptop | Tier 6, so 7 × 1 |
+| 5 | 7.0 | high | Dev sandbox cluster | Tier 6, so 7 × 1 |
+| 6 | 1.0 | informational | Honeypot | Tier 6, so 1 × 1 |
 
-> Designed an asset-centered alert prioritization model that ranks security events by business impact and routes them to tier-specific response playbooks.
+*Same alerts, ranked by what they threaten instead of by severity alone.*
 
-Adapt it after you run the scorer and can explain the model.
+## How the score works
 
+Each asset gets 1 to 5 points on four factors:
 
----
+- **Business impact.** What breaks if it is down for 4 hours?
+- **Data sensitivity.** How private is the data on it?
+- **Blast radius.** How far can an attacker go from it?
+- **Recovery cost.** What does it take to rebuild it?
 
-# Build it from zero
+The four points add up to a number from 4 to 20. That number picks the tier:
 
-## What you will learn
+| Tier | Points | What it covers |
+|---|---|---|
+| 1 | 18 to 20 | Crown jewels |
+| 2 | 15 to 17 | High-trust identity systems |
+| 3 | 15 to 17 | Build and deploy systems |
+| 4 | 11 to 14 | SaaS data paths |
+| 5 | 8 to 10 | Stepping stones like jump hosts and VPNs |
+| 6 | 4 to 7 | Noise |
 
-Most alert queues start with:
+Priority is the alert's severity points times the tier multiplier. Severity points run from 10 for critical down to 1 for informational. Tier multipliers run from 10 for tier 1 down to 1 for tier 6. The full rubric, with examples for each score, is in `code/models/scoring_rubric.yaml`. It is plain YAML so a non-programmer can read it.
 
-```text
-How severe is the alert?
-```
+## What's in the folder
 
-This project adds:
+| Path | What it is |
+|---|---|
+| `code/crown_jewel_scorer.py` | Scores alerts and prints ranked JSON. |
+| `code/run_prioritization.py` | Builds the ranked queue as a Markdown table. |
+| `code/example_asset_inventory.yaml` | 12 made-up assets with their four scores. |
+| `code/example_alerts.jsonl` | 6 made-up alerts. |
+| `code/models/` | The scoring rubric and the asset schema. |
+| `playbooks/` | A tier definitions file and one response playbook for each of the 6 tiers. |
+| `examples/queue.sample.md` | A saved copy of the queue the tool produces. |
+| `dashboards/` | A Grafana dashboard file with 5 panels and notes on each panel. I have not tested it against live data. |
+| `diagrams/` | Two diagrams in `.drawio` format. Open them in diagrams.net. |
 
-```text
-What asset does the alert threaten?
-```
+## Run it
 
-By the end, you will:
-
-- install Python
-- download the project
-- score a synthetic asset inventory
-- prioritize six sample alerts
-- generate a human-readable analyst queue
-- inspect the four scoring factors
-- change an asset's business impact
-- watch alert priority change
-
-You do not need Git.
-
-You do not need a SIEM.
-
----
-
-# Part 1 — Install Python
-
-Google:
-
-```text
-Python download
-```
-
-Use:
-
-```text
-https://www.python.org/downloads/
-```
-
-Install Python 3.10 or newer.
-
-## Windows
-
-Open PowerShell:
-
-```powershell
-py --version
-```
-
-## macOS
-
-Open Terminal:
+You need Python 3.10 or newer and one package, PyYAML. Git is optional.
 
 ```bash
-python3 --version
-```
-
-**PASS:** Python 3.10+ prints.
-
----
-
-# Part 2 — Get the project files
-
-## Beginner method
-
-Open:
-
-```text
-https://github.com/Emanuel-Walker/cyber-portfolio
-```
-
-Choose:
-
-```text
-Code -> Download ZIP
-```
-
-Extract it.
-
-Open:
-
-```text
-cyber-portfolio-main/03-crown-jewel-triage
-```
-
-## Developer method
-
-Optional:
-
-```bash
-git clone https://github.com/Emanuel-Walker/cyber-portfolio.git
-cd cyber-portfolio/03-crown-jewel-triage
-```
-
----
-
-# Part 3 — Open a terminal in the project
-
-## Windows
-
-Open the project folder in File Explorer.
-
-Click the address bar.
-
-Type:
-
-```text
-powershell
-```
-
-Press Enter.
-
-## macOS
-
-Open Terminal.
-
-Type:
-
-```bash
-cd 
-```
-
-Drag the project folder into Terminal.
-
-Press Enter.
-
-Verify:
-
-```bash
-pwd
-```
-
-or:
-
-```powershell
-Get-Location
-```
-
-**PASS:** the path ends in `03-crown-jewel-triage`.
-
----
-
-# Part 4 — Create an isolated environment
-
-## Windows
-
-```powershell
-py -m venv .venv
-Set-ExecutionPolicy -Scope Process Bypass
-.\.venv\Scripts\Activate.ps1
-```
-
-## macOS
-
-```bash
+cd 03-crown-jewel-triage
 python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Install PyYAML:
-
-```bash
+source .venv/bin/activate        # Windows: .\.venv\Scripts\Activate.ps1
 python -m pip install pyyaml
+python code/crown_jewel_scorer.py --inventory code/example_asset_inventory.yaml --alerts code/example_alerts.jsonl
+python code/run_prioritization.py --inventory code/example_asset_inventory.yaml --alerts code/example_alerts.jsonl --out queue.md
 ```
 
-**PASS:** installation finishes without an error.
+The first command prints the ranked results. The second writes `queue.md`. On Nov 28, 2026, both ran cleanly and the queue matched the table above.
 
----
+## Try changing it
 
-# Part 5 — Look at the asset inventory
+Open `code/example_asset_inventory.yaml`. Pick the marketing laptop and raise its `business_impact` from 1 to 3. Run the queue command again. When I tried it, the laptop moved from tier 6 to tier 5. Its priority went from 7.0 to 14.0 and its rank went from 4 to 3. Undo the edit when you finish.
 
-Open:
+## What I built and why it matters
 
-```text
-code/example_asset_inventory.yaml
-```
+- I built a scoring model that ranks alerts by what they threaten. In the sample run, a medium alert on the payment system ranks above two high alerts on a laptop and a sandbox.
+- I wrote 6 playbooks, one for each tier, so the queue says what to do next and not only what to look at first.
 
-Each asset has four scoring factors:
+## Skills Learned and Used
 
-- business impact
-- data sensitivity
-- blast radius
-- recovery cost
+| Security | Software |
+|---|---|
+| SOC strategy and alert triage | Python |
+| Risk scoring and asset tiering | YAML data models |
+| Incident response playbooks | Grafana dashboards |
+| Business impact analysis | Technical writing |
 
-Those values determine the asset tier.
+## What this proves and what it doesn't
 
-Open:
-
-```text
-code/models/scoring_rubric.yaml
-```
-
-That file explains how the scores map to tiers.
-
-The model is intentionally visible.
-
-A non-programmer should be able to inspect it.
-
----
-
-# Part 6 — Look at the alerts
-
-Open:
-
-```text
-code/example_alerts.jsonl
-```
-
-The file contains six synthetic alerts.
-
-Look for examples involving:
-
-```text
-prod-payment-settlement-01
-mkt-laptop-chen-l
-```
-
-The raw alert severity is not enough to determine business priority.
-
-That is what you are about to prove.
-
----
-
-# Part 7 — Score the alerts
-
-Run:
-
-```bash
-python code/crown_jewel_scorer.py \
-  --inventory code/example_asset_inventory.yaml \
-  --alerts code/example_alerts.jsonl
-```
-
-Expected:
-
-The script prints JSON results with a computed `priority_score`.
-
-**PASS:** the payment-system alert receives a much stronger priority score than a lower-value endpoint even when the raw alert severity alone would not tell the whole story.
-
----
-
-# Part 8 — Generate the analyst queue
-
-Run:
-
-```bash
-python code/run_prioritization.py \
-  --inventory code/example_asset_inventory.yaml \
-  --alerts code/example_alerts.jsonl \
-  --out queue.md
-```
-
-Open:
-
-```text
-queue.md
-```
-
-Or print it:
-
-### macOS
-
-```bash
-cat queue.md
-```
-
-### Windows PowerShell
-
-```powershell
-Get-Content queue.md
-```
-
-**PASS:** the queue is ordered by computed priority and includes playbook guidance.
-
----
-
-# Part 9 — Understand the model
-
-The asset score is built from:
-
-```text
-business impact
-+ data sensitivity
-+ blast radius
-+ recovery cost
-```
-
-Then the score maps to a tier.
-
-Some asset types may route to a more appropriate response playbook.
-
-That lets the project separate:
-
-```text
-How important is the asset?
-```
-
-from:
-
-```text
-What should the analyst do next?
-```
-
----
-
-# Part 10 — Change one factor
-
-Now prove the model is understandable.
-
-Open:
-
-```text
-code/example_asset_inventory.yaml
-```
-
-Pick one non-critical asset.
-
-Increase its:
-
-```text
-business_impact
-```
-
-by one or two points.
-
-Save the file.
-
-Run the scorer again:
-
-```bash
-python code/crown_jewel_scorer.py \
-  --inventory code/example_asset_inventory.yaml \
-  --alerts code/example_alerts.jsonl
-```
-
-Then rebuild the queue:
-
-```bash
-python code/run_prioritization.py \
-  --inventory code/example_asset_inventory.yaml \
-  --alerts code/example_alerts.jsonl \
-  --out queue.md
-```
-
-Compare the result.
-
-**PASS:** the asset's priority changes in a way you can explain.
-
-Undo your temporary change afterward.
-
----
-
-# Part 11 — Read the playbooks
-
-Open:
-
-```text
-playbooks/
-```
-
-The scorer answers:
-
-```text
-How important is this threatened asset?
-```
-
-The playbook answers:
-
-```text
-What should the analyst do?
-```
-
-That separation is intentional.
-
----
-
-# Part 12 — What this model does not know
-
-The sample inventory is synthetic.
-
-A real organization would need owners to validate:
-
-- business impact
-- dependencies
-- recovery requirements
-- data sensitivity
-- regulatory importance
-
-The model is only as useful as the inventory behind it.
-
-Do not call a score "objective" just because Python calculated it.
-
----
-
-# Common problems
-
-## `No module named yaml`
-
-Run:
-
-```bash
-python -m pip install pyyaml
-```
-
-## The terminal cannot find the input files
-
-Check your current location.
-
-You should be inside:
-
-```text
-03-crown-jewel-triage
-```
-
-## You changed the inventory and the result looks strange
-
-Open:
-
-```text
-code/models/scoring_rubric.yaml
-```
-
-Confirm the factor values stay inside the expected range.
-
----
-
-# Definition of done
-
-- [ ] Python installed
-- [ ] PyYAML installed
-- [ ] sample inventory inspected
-- [ ] six alerts scored
-- [ ] queue.md generated
-- [ ] playbook links visible
-- [ ] one asset factor changed
-- [ ] priority changed in a way you can explain
-- [ ] temporary change restored
-
-You now understand the project beyond the screenshot.
-
----
-
-## What this project proves
-
-This repository gives you an inspectable implementation, synthetic data, and a repeatable walkthrough.
-
-It does **not** turn a lab result into a production guarantee. Read the limitations in the walkthrough and inspect the implementation before reusing it elsewhere.
-
-## Key artifacts
-
-Use the folders and source files directly. Supporting Markdown is kept only when it is itself part of the project, such as ADS documents, playbooks, detection matrices, or skill definitions.
+- **What it proves.** You can turn business context into a clear, explainable ranking.
+- **What it doesn't prove.** The inventory and alerts are made up. A real company would need system owners to check every score. A number from Python is not automatically objective, and the model is only as good as the inventory behind it.
