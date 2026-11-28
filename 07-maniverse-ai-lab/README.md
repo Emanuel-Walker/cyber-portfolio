@@ -53,6 +53,20 @@ I designed the Agent Room's look and feel. It is a web app made of HTML, CSS and
 </tr>
 </table>
 
+### The phone app
+
+The Agent Room also runs as an app on my phone. I added it to my home screen, so it opens full screen with its own robot icon. From there I can ask the AI helpers a question, read their answers and approve or reject anything they want to do outside the room. That matters because the helpers can't act on their own, and I can give my yes or no from my pocket. Only my own devices can open it, over my private network.
+
+<table>
+<tr>
+<td width="33%" align="center"><img src="assets/15-phone-login.png" alt="Agent Room login screen at phone size" width="240"><br><em>The phone login asks for the room key before it shows anything.</em></td>
+<td width="33%" align="center"><img src="assets/16-phone-room.png" alt="Agent Room chat at phone size with helper replies and a message box" width="240"><br><em>The room shows each helper as a card, with their replies and a message box at the bottom.</em></td>
+<td width="33%" align="center"><img src="assets/17-phone-approvals.png" alt="Approvals panel on a phone with Approve and Reject buttons" width="240"><br><em>The Approvals panel lists each outside action with Approve and Reject buttons.</em></td>
+</tr>
+</table>
+
+*The three screens above are from a test copy of the app at phone size, running the same code with sample messages. The photos earlier in this section are from my real phone.*
+
 ## How it fits together
 
 ![Architecture diagram](assets/10-architecture.png)
