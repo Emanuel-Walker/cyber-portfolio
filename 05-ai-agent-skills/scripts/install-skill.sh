@@ -12,6 +12,7 @@ Usage:
   bash scripts/install-skill.sh codex builder-pack
   bash scripts/install-skill.sh copilot writing-pack
   bash scripts/install-skill.sh cursor second-brain-pack
+  bash scripts/install-skill.sh claude security-pack
 
 Agents:
   claude  -> ~/.claude/skills
@@ -23,6 +24,7 @@ Packs:
   writing-pack
   builder-pack
   second-brain-pack
+  security-pack
 EOF
 }
 
@@ -40,15 +42,19 @@ skills_for_item() {
   case "$1" in
     writing-pack)
       printf '%s
-' humanizer article-writing brand-voice docs-readability-audit
+' humanizer article-writing brand-voice docs-readability-audit voice-and-post-desk
       ;;
     builder-pack)
       printf '%s
-' repo-onboarding-audit builder-walkthrough web-ui-audit prompt-optimizer
+' repo-onboarding-audit builder-walkthrough web-ui-audit prompt-optimizer plain-english-code product-build-and-release
       ;;
     second-brain-pack)
       printf '%s
-' obsidian companion-context file-organizer docs-readability-audit
+' obsidian companion-context file-organizer docs-readability-audit vault-companion source-to-study-pack
+      ;;
+    security-pack)
+      printf '%s
+' bug-bounty-hunter packet-capture-analyst single-question-security-check mcp-and-plugin-integration-proof
       ;;
     *)
       printf '%s
